@@ -615,3 +615,170 @@
                 </div>
             </div>
         </section>
+<!-- ================= PAGE 5: WANTED LIST ================= -->
+        <section id="view-wanted" class="page-view">
+            <div class="max-w-container-max mx-auto px-gutter py-xl">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
+                    <div>
+                        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Wanted List</h1>
+                        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Help your fellow students find what they need. Fulfill a wanted ad and earn cash for items you no longer use.</p>
+                    </div>
+                    <button onclick="alert('Post a Wanted Ad modal opened!')" class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2 whitespace-nowrap">
+                        <span class="material-symbols-outlined filled text-sm">post_add</span> Post a Wanted Ad
+                    </button>
+                </div>
+
+                <!-- Filter Bar -->
+                <div class="bg-surface rounded-xl p-md shadow-sm border border-outline-variant/30 mb-xl flex flex-wrap gap-md items-center">
+                    <div class="flex items-center gap-2 text-on-surface-variant">
+                        <span class="material-symbols-outlined">filter_list</span>
+                        <span class="font-label-md text-label-md">Filters:</span>
+                    </div>
+                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
+                        <option value="">All Colleges</option>
+                        <option value="outr">OUTR Bhubaneswar</option>
+                        <option value="cet">CET Bhubaneswar</option>
+                    </select>
+                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
+                        <option value="">All Categories</option>
+                        <option value="books">Textbooks</option>
+                        <option value="electronics">Electronics</option>
+                    </select>
+                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
+                        <option value="">Any Budget</option>
+                        <option value="under500">Under ₹500</option>
+                        <option value="500to1000">₹500 - ₹1000</option>
+                    </select>
+                </div>
+
+                <!-- Wanted Feed -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+                    <!-- Card 1 -->
+                    <article class="bg-surface rounded-xl p-lg shadow-sm flex flex-col justify-between border border-surface-container-low hover:border-primary-fixed transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-[#ECFDF5] text-[#10B981] font-label-md text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">school</span> Verified Student
+                                </span>
+                                <span class="text-on-surface-variant font-body-md text-sm">2 hrs ago</span>
+                            </div>
+                            <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Wanted: Engineering Mathematics Book</h2>
+                            <div class="space-y-2 mb-6 text-on-surface-variant font-body-md text-sm">
+                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">menu_book</span> Course: B.Tech (1st Semester)</div>
+                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span> College: OUTR Bhubaneswar</div>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-surface-container-low">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">RD</div>
+                                    <span class="font-label-md text-label-md text-on-surface">Rahul D.</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="block text-xs text-on-surface-variant">Willing to pay</span>
+                                    <span class="font-price-display text-price-display text-primary">₹300</span>
+                                </div>
+                            </div>
+                            <button onclick="navigateTo('messages')" class="w-full bg-white border border-[#E2E8F0] text-slate-700 font-label-md text-label-md py-3 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm flex justify-center items-center gap-2">
+                                <span class="material-symbols-outlined filled text-sm">handshake</span> I Have This
+                            </button>
+                        </div>
+                    </article>
+
+                    <!-- Card 2 -->
+                    <article class="bg-surface rounded-xl p-lg shadow-sm flex flex-col justify-between border border-surface-container-low hover:border-primary-fixed transition-colors">
+                        <div>
+                            <div class="flex justify-between items-start mb-4">
+                                <span class="bg-[#ECFDF5] text-[#10B981] font-label-md text-xs px-3 py-1 rounded-full flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[14px]">school</span> Verified Student
+                                </span>
+                                <span class="text-on-surface-variant font-body-md text-sm">5 hrs ago</span>
+                            </div>
+                            <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Wanted: Mechanical Drafter Set</h2>
+                            <div class="space-y-2 mb-6 text-on-surface-variant font-body-md text-sm">
+                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">architecture</span> Category: Supplies &amp; Tools</div>
+                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span> College: CET Bhubaneswar</div>
+                            </div>
+                        </div>
+                        <div class="mt-auto pt-4 border-t border-surface-container-low">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center gap-2">
+                                    <div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold text-xs">AP</div>
+                                    <span class="font-label-md text-label-md text-on-surface">Ananya P.</span>
+                                </div>
+                                <div class="text-right">
+                                    <span class="block text-xs text-on-surface-variant">Willing to pay</span>
+                                    <span class="font-price-display text-price-display text-primary">₹400</span>
+                                </div>
+                            </div>
+                            <button onclick="navigateTo('messages')" class="w-full bg-white border border-[#E2E8F0] text-slate-700 font-label-md text-label-md py-3 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm flex justify-center items-center gap-2">
+                                <span class="material-symbols-outlined filled text-sm">handshake</span> I Have This
+                            </button>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 6: MESSAGES ================= -->
+        <section id="view-messages" class="page-view">
+            <div class="h-[calc(100vh-80px)] flex w-full max-w-container-max mx-auto overflow-hidden bg-surface relative">
+                <!-- Chat List Sidebar -->
+                <aside class="w-full md:w-1/3 border-r border-outline-variant flex flex-col h-full bg-surface-container-lowest">
+                    <div class="p-lg border-b border-outline-variant">
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-sm">Messages</h2>
+                        <div class="relative">
+                            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-sm">search</span>
+                            <input class="w-full pl-10 pr-4 py-2 bg-surface-container-low rounded-lg border-none focus:ring-2 focus:ring-primary font-body-md text-body-md" placeholder="Search chats..." type="text"/>
+                        </div>
+                    </div>
+                    
+                    <div class="flex-grow overflow-y-auto no-scrollbar">
+                        <div class="p-md border-b border-outline-variant bg-surface-container-low cursor-pointer flex gap-sm">
+                            <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 relative">
+                                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBh1Gz2kGX4MQH4cmnW_bInvmzVwOUfhtoelwGB0ex30mbV9XFxCQY_s0ZEXLsJBVriZ-3emKuL37KzMUD-IoMyKmk0Mkc8sBDy7HM-U_ZqkopFxi3yPFVLvdIx91uBZiPMVJiAm9m9FqXHgooCer1KoAVqDFEc4-gDwldVL1HbOSV2BL4aIy3S82wKcGRn2824FrQ65cAsPpVL9cIgg2mHgMOWnydvqIEv3b6_oXVhocMVXglh2gZBIQ"/>
+                                <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex justify-between items-baseline mb-base">
+                                    <h3 class="font-label-md text-label-md text-on-surface truncate">Aditya S.</h3>
+                                    <span class="text-xs text-secondary whitespace-nowrap ml-2">Just now</span>
+                                </div>
+                                <p class="font-label-md text-xs text-on-surface-variant truncate">Casio fx-991EX</p>
+                                <p class="font-body-md text-secondary truncate text-sm">Yes, I'm at the library right now.</p>
+                            </div>
+                        </div>
+
+                        <div class="p-md border-b border-outline-variant cursor-pointer hover:bg-surface-container-low transition-colors flex gap-sm">
+                            <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                                <img class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCAb1lv1Y5eS8_-SYwqeXZPVRGILeHbPic83MUPFCzMlTkvLCQSZc3Jr23Z4z2i7xmX5survXEMH2J4PtUKpFeE7C0_MWwbDn44KEhXOOAZ5dc3EmddiDOAXtF9RHchBZC9ELpQwRnu9oem_FhpFQQPTbJCngg8S18ypq51WSZttRJBNW0gwSUPz7Ovc76PeAv6xIjFFowK7MunwZHQBRV88WkhVs6xmd_qE88ZTCzKUTZwCWzz6QP34w"/>
+                            </div>
+                            <div class="flex-grow min-w-0">
+                                <div class="flex justify-between items-baseline mb-base">
+                                    <h3 class="font-label-md text-label-md text-on-surface truncate">Sarah M.</h3>
+                                    <span class="text-xs text-secondary whitespace-nowrap ml-2">2h ago</span>
+                                </div>
+                                <p class="font-body-md text-on-surface-variant truncate text-sm">DSA C++ Book</p>
+                                <p class="font-body-md text-secondary truncate text-sm">Is price negotiable?</p>
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Active Chat Canvas -->
+                <section class="flex-grow flex flex-col h-full bg-surface-bright">
+                    <div class="h-20 px-lg border-b border-outline-variant flex items-center justify-between bg-surface-container-lowest flex-shrink-0">
+                        <div class="flex items-center gap-md">
+                            <div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-headline-md text-headline-md">AS</div>
+                            <div>
+                                <div class="flex items-center gap-2">
+                                    <h2 class="font-label-md text-label-md text-on-surface">Aditya S.</h2>
+                                    <span class="bg-[#ECFDF5] text-[#10B981] text-xs px-2 py-0.5 rounded-full flex items-center gap-1 font-semibold">
+                                        <span class="material-symbols-outlined text-[14px]">verified</span> Verified Student
+                                    </span>
+                                </div>
+                                <p class="text-xs text-secondary font-body-md">Casio fx-991EX • <span class="font-bold text-on-surface">₹1,200</span></p>
+                            </div>
+                        </div>
+                    </div>
