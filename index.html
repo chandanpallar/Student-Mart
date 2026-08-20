@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html class="light h-full" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>CampusMart - Student Marketplace</title>
+    
+    <!-- Google Fonts & Material Symbols -->
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    
+    <!-- Tailwind CSS with custom theme extension -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary": "#ffffff",
+                        "secondary-container": "#d0e1fb",
+                        "surface": "#fcf8ff",
+                        "surface-container-low": "#f5f2ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-container-high": "#eae6f4",
+                        "surface-container": "#f0ecf9",
+                        "primary-fixed": "#e2dfff",
+                        "secondary": "#505f76",
+                        "on-primary-container": "#dad7ff",
+                        "surface-dim": "#dcd8e5",
+                        "inverse-surface": "#302f39",
+                        "surface-variant": "#e4e1ee",
+                        "error-container": "#ffdad6",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#c3c0ff",
+                        "primary": "#3525cd",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-fixed": "#0f0069",
+                        "on-surface-variant": "#464555",
+                        "outline-variant": "#c7c4d8",
+                        "on-error": "#ffffff",
+                        "surface-container-highest": "#e4e1ee",
+                        "tertiary-container": "#a44100",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-secondary-container": "#54647a",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-secondary": "#ffffff",
+                        "background": "#fcf8ff",
+                        "tertiary": "#7e3000",
+                        "on-error-container": "#93000a",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-bright": "#fcf8ff",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffd2be",
+                        "outline": "#777587",
+                        "on-background": "#1b1b24",
+                        "on-surface": "#1b1b24",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-fixed": "#351000",
+                        "surface-container-lowest": "#ffffff",
+                        "inverse-on-surface": "#f3effc",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed": "#ffdbcc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "20px",
+                        "xl": "32px",
+                        "lg": "24px",
+                        "sm": "12px",
+                        "md": "16px",
+                        "base": "4px",
+                        "xs": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Plus Jakarta Sans"],
+                        "headline-lg-mobile": ["Plus Jakarta Sans"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Plus Jakarta Sans"],
+                        "headline-md": ["Plus Jakarta Sans"],
+                        "price-display": ["Plus Jakarta Sans"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-md": ["14px", { "lineHeight": "1", "letterSpacing": "0.01em", "fontWeight": "600" }],
+                        "headline-lg": ["32px", { "lineHeight": "1.25", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-md": ["20px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "price-display": ["20px", { "lineHeight": "1", "fontWeight": "700" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #fcf8ff; color: #1b1b24; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        .card-shadow { box-shadow: 0px 4px 20px rgba(15, 23, 42, 0.05); }
+        .page-view { display: none; }
+        .page-view.active { display: block; }
+        .nav-link.active-link {
+            color: #3525cd !important;
+            border-bottom: 2px solid #3525cd;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
+
+    <!-- Global Top Header Navigation -->
+    <header class="bg-surface shadow-sm border-b border-outline-variant sticky top-0 z-50">
+        <div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">
+            <!-- Brand & Location -->
+            <div class="flex items-center gap-md">
+                <a class="font-display-lg text-headline-lg text-primary tracking-tight cursor-pointer" onclick="navigateTo('home')">CampusMart</a>
+                <a onclick="navigateTo('college')" class="hidden md:flex items-center gap-xs px-sm py-xs bg-surface-container-low rounded-full border border-outline-variant/40 hover:bg-surface-container transition-colors cursor-pointer">
+                    <span class="material-symbols-outlined text-secondary" style="font-size: 18px;">location_on</span>
+                    <span class="font-label-md text-label-md text-secondary">OUTR Bhubaneswar</span>
+                </a>
+            </div>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex gap-lg items-center h-full">
+                <a onclick="navigateTo('home')" id="nav-home" class="nav-link font-label-md text-label-md text-secondary hover:text-primary transition-colors py-1 cursor-pointer">Home</a>
+                <a onclick="navigateTo('browse')" id="nav-browse" class="nav-link font-label-md text-label-md text-secondary hover:text-primary transition-colors py-1 cursor-pointer">Browse</a>
+                <a onclick="navigateTo('wanted')" id="nav-wanted" class="nav-link font-label-md text-label-md text-secondary hover:text-primary transition-colors py-1 cursor-pointer">Wanted</a>
+                <a onclick="navigateTo('messages')" id="nav-messages" class="nav-link font-label-md text-label-md text-secondary hover:text-primary transition-colors py-1 cursor-pointer">Messages</a>
+                <a onclick="navigateTo('college')" id="nav-college" class="nav-link font-label-md text-label-md text-secondary hover:text-primary transition-colors py-1 cursor-pointer">College Hub</a>
+            </nav>
+
+            <!-- Actions & Search -->
+            <div class="flex items-center gap-md">
+                <div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-md py-xs border border-outline-variant">
+                    <span class="material-symbols-outlined text-secondary mr-xs">search</span>
+                    <input class="bg-transparent border-none focus:ring-0 text-body-md p-0 w-36 text-on-surface placeholder-secondary" placeholder="Search campus..." type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
+                </div>
+                
+                <a onclick="navigateTo('profile')" class="flex items-center gap-2 font-label-md text-label-md text-secondary hover:text-primary transition-colors cursor-pointer">
+                    <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-bold flex items-center justify-center text-xs">SK</div>
+                    <span class="hidden xl:inline">Sneha K.</span>
+                </a>
+
+                <button onclick="navigateTo('sell')" class="font-label-md text-label-md bg-primary text-on-primary px-lg py-sm rounded-xl hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-1">
+                    <span class="material-symbols-outlined text-[18px]">add</span>
+                    <span>Sell an Item</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN VIEW CONTAINER -->
+    <main class="flex-grow w-full">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="view-home" class="page-view active">
+            <div class="pt-8 pb-xl">
+                <!-- Hero Section -->
+                <section class="max-w-container-max mx-auto px-gutter py-xl md:py-16 flex flex-col items-center text-center">
+                    <div class="inline-flex items-center gap-2 bg-surface-container-low px-4 py-1.5 rounded-full mb-6 border border-outline-variant/50">
+                        <span class="material-symbols-outlined text-primary text-sm filled">verified_user</span>
+                        <span class="font-label-md text-xs text-primary">Student-to-Student Campus Marketplace</span>
+                    </div>
+                    <h1 class="font-display-lg text-display-lg text-on-surface mb-md">The Student Marketplace.</h1>
+                    <p class="font-body-lg text-body-lg text-secondary mb-lg max-w-2xl">Buy &amp; Sell textbooks, calculators, drafters, and hostel gear securely with peers on your campus.</p>
+                    
+                    <div class="w-full max-w-3xl flex bg-surface p-base rounded-full shadow-[0px_10px_30px_rgba(15,23,42,0.1)] border border-outline-variant">
+                        <div class="flex-1 flex items-center pl-lg">
+                            <span class="material-symbols-outlined text-secondary mr-sm">search</span>
+                            <input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface p-0 placeholder-secondary" placeholder="What are you looking for? (e.g. Scientific Calculator)" type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
+                        </div>
+                        <button onclick="navigateTo('browse')" class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-full ml-sm hover:bg-surface-tint transition-colors">Search</button>
+                    </div>
+  </section>
