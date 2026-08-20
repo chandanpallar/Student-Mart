@@ -782,3 +782,202 @@
                             </div>
                         </div>
                     </div>
+<!-- Chat Messages Canvas -->
+                    <div id="chat-messages-container" class="flex-grow overflow-y-auto p-lg flex flex-col gap-md bg-background no-scrollbar">
+                        <div class="flex justify-center my-2">
+                            <span class="bg-surface-container px-3 py-1 rounded-full text-xs text-secondary font-label-md">Today, 10:42 AM</span>
+                        </div>
+                        <div class="flex justify-end max-w-[85%] self-end">
+                            <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-4 py-3 shadow-sm">
+                                <p class="font-body-md text-body-md">Hi Aditya, is this still available?</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-start max-w-[85%] self-start">
+                            <div class="bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-outline-variant/30">
+                                <p class="font-body-md text-body-md">Hey! Yes it is.</p>
+                            </div>
+                        </div>
+                        <div class="flex justify-start max-w-[85%] self-start">
+                            <div class="bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-outline-variant/30">
+                                <p class="font-body-md text-body-md">I'm at the library right now if you want to pick it up.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Chat Input Area -->
+                    <div class="p-4 border-t border-outline-variant bg-surface-container-lowest flex-shrink-0">
+                        <form onsubmit="sendMessage(event)" class="flex items-center gap-sm bg-surface-container-low rounded-xl px-2 py-2 border border-transparent focus-within:border-primary focus-within:bg-surface focus-within:ring-2 focus-within:ring-primary/20 transition-all">
+                            <button type="button" class="p-2 text-secondary hover:text-primary transition-colors">
+                                <span class="material-symbols-outlined">add_circle</span>
+                            </button>
+                            <input id="chat-input-field" class="flex-grow bg-transparent border-none focus:ring-0 font-body-md text-body-md text-on-surface placeholder-secondary" placeholder="Type a message..." type="text"/>
+                            <button type="submit" class="p-2 bg-primary text-on-primary rounded-lg hover:bg-surface-tint transition-colors shadow-sm flex items-center justify-center">
+                                <span class="material-symbols-outlined text-sm">send</span>
+                            </button>
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 7: STUDENT PROFILE & LISTINGS ================= -->
+        <section id="view-profile" class="page-view">
+            <div class="max-w-container-max mx-auto px-gutter py-xl flex flex-col md:flex-row gap-xl">
+                <aside class="w-full md:w-64 flex-shrink-0">
+                    <nav class="flex flex-col gap-sm">
+                        <a class="flex items-center gap-sm p-sm rounded-lg bg-surface-container text-primary font-label-md text-label-md shadow-sm">
+                            <span class="material-symbols-outlined filled">inventory_2</span> My Listings
+                        </a>
+                        <a onclick="navigateTo('messages')" class="flex items-center gap-sm p-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-colors font-label-md text-label-md cursor-pointer">
+                            <span class="material-symbols-outlined">forum</span> Messages
+                        </a>
+                        <a class="flex items-center gap-sm p-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-colors font-label-md text-label-md cursor-pointer">
+                            <span class="material-symbols-outlined">favorite</span> Saved Items
+                        </a>
+                    </nav>
+                </aside>
+
+                <main class="flex-grow flex flex-col gap-lg">
+                    <div class="bg-surface rounded-xl p-lg shadow-sm border border-outline-variant/30 flex items-center gap-lg">
+                        <div class="w-20 h-20 rounded-full bg-primary-container text-on-primary text-2xl font-bold flex items-center justify-center">SK</div>
+                        <div>
+                            <div class="flex items-center gap-sm mb-1">
+                                <h1 class="font-headline-lg text-headline-lg text-on-surface">Sneha K.</h1>
+                                <span class="bg-[#ECFDF5] text-[#10B981] font-label-md text-xs px-2 py-1 rounded-full flex items-center gap-1 font-semibold">
+                                    <span class="material-symbols-outlined text-[16px] filled">verified</span> Verified Student
+                                </span>
+                            </div>
+                            <p class="font-body-md text-body-md text-secondary">OUTR University</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-surface rounded-xl shadow-sm border border-outline-variant/30 flex-grow p-lg">
+                        <h2 class="font-headline-md text-headline-md text-on-surface mb-md">My Listings</h2>
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-md">
+                            <div class="border border-surface-variant rounded-xl overflow-hidden flex flex-col bg-surface">
+                                <img class="w-full h-40 object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgLP-iPEFt-UBwNcV7xJ8Iuel-BwasXFWrWODO2YuBVjKLsUMkagh8upK-_SLgNiYejDhwFdVdZZRlmD4bkmZY8fd9SIsBLXRNrB0BAyTBCP7yA5rrLSh_5pXHUfp295qWPbAtyoV626-DDj2O0gguvIOm7wtaphaAF6zHU6iElRJJ2Qr3gHqlEp6c1qfhrAoepOL1DrljtLMDzQdWDY5vQgnyiCYh8JoWUEdhR5uZXrB1oPQ0OHWc4Q"/>
+                                <div class="p-md flex flex-col flex-grow">
+                                    <h3 class="font-headline-md text-headline-md text-on-surface mb-1">Calculator fx-82MS</h3>
+                                    <p class="font-price-display text-price-display text-primary mb-md">₹450</p>
+                                    <button onclick="alert('Marked as Sold!')" class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors">Mark Sold</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </section>
+
+
+        <!-- ================= PAGE 8: COLLEGE MARKETPLACE (OUTR HUB) ================= -->
+        <section id="view-college" class="page-view">
+            <section class="relative w-full h-[220px] overflow-hidden flex items-end pb-lg bg-surface-container">
+                <div class="relative z-20 w-full px-gutter max-w-container-max mx-auto">
+                    <span class="bg-surface/90 text-primary font-label-md text-xs px-3 py-1 rounded-full border border-surface-variant">Verified Campus Hub</span>
+                    <h1 class="font-display-lg text-headline-lg md:text-display-lg text-on-background mt-2">OUTR Bhubaneswar Hub</h1>
+                </div>
+            </section>
+            <div class="w-full px-gutter max-w-container-max mx-auto py-xl">
+                <h2 class="font-display-lg text-headline-md text-on-background mb-md">Latest from OUTR Campus</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-md">
+                    <div onclick="navigateTo('product-detail')" class="bg-surface rounded-xl shadow-sm border border-surface-variant overflow-hidden cursor-pointer hover:shadow-md transition-all p-md">
+                        <h3 class="font-display-lg text-headline-sm text-on-surface">Mini Drafter & Board</h3>
+                        <p class="font-price-display text-price-display text-primary mt-1">₹450</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="bg-surface-container border-t border-outline-variant w-full mt-auto py-xl">
+        <div class="w-full px-gutter max-w-container-max mx-auto flex flex-col md:flex-row justify-between gap-lg items-center">
+            <div>
+                <a onclick="navigateTo('home')" class="font-display-lg text-headline-md text-on-surface block mb-1 cursor-pointer">CampusMart</a>
+                <p class="font-body-md text-sm text-secondary">© 2026 CampusMart. Buy less. Save more. Student to student.</p>
+            </div>
+            <nav class="flex flex-wrap gap-lg font-label-md text-label-md text-secondary">
+                <a onclick="navigateTo('browse')" class="hover:text-primary transition-colors cursor-pointer">Categories</a>
+                <a onclick="navigateTo('college')" class="hover:text-primary transition-colors cursor-pointer">College Hub</a>
+                <a onclick="navigateTo('wanted')" class="hover:text-primary transition-colors cursor-pointer">Wanted Board</a>
+            </nav>
+        </div>
+    </footer>
+
+    <!-- Mobile Bottom Navigation Bar -->
+    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant md:hidden shadow-lg">
+        <button onclick="navigateTo('home')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-md text-[10px]">Home</span></button>
+        <button onclick="navigateTo('browse')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">search</span><span class="font-label-md text-[10px]">Browse</span></button>
+        <button onclick="navigateTo('sell')" class="flex flex-col items-center text-primary font-bold"><span class="material-symbols-outlined text-[20px]">add_circle</span><span class="font-label-md text-[10px]">Sell</span></button>
+        <button onclick="navigateTo('wanted')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">format_list_bulleted</span><span class="font-label-md text-[10px]">Wanted</span></button>
+        <button onclick="navigateTo('profile')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-md text-[10px]">Profile</span></button>
+    </nav>
+
+    <!-- SPA JavaScript Router & Interactivity -->
+    <script>
+        function navigateTo(pageId) {
+            const pages = document.querySelectorAll('.page-view');
+            pages.forEach(p => p.classList.remove('active'));
+
+            const targetPage = document.getElementById('view-' + pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            }
+
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active-link'));
+            const activeNav = document.getElementById('nav-' + pageId);
+            if (activeNav) {
+                activeNav.classList.add('active-link');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function changeMainImage(src) {
+            const mainImg = document.getElementById('product-main-img');
+            if (mainImg) {
+                mainImg.src = src;
+            }
+        }
+
+        function sendMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('chat-input-field');
+            const container = document.getElementById('chat-messages-container');
+            
+            if (input && input.value.trim() !== '' && container) {
+                const messageText = input.value.trim();
+                const msgBubble = document.createElement('div');
+                msgBubble.className = 'flex justify-end max-w-[85%] self-end mt-2';
+                msgBubble.innerHTML = `
+                    <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-4 py-3 shadow-sm">
+                        <p class="font-body-md text-body-md">${messageText}</p>
+                    </div>
+                `;
+                container.appendChild(msgBubble);
+                input.value = '';
+                container.scrollTop = container.scrollHeight;
+
+                setTimeout(() => {
+                    const replyBubble = document.createElement('div');
+                    replyBubble.className = 'flex justify-start max-w-[85%] self-start mt-2';
+                    replyBubble.innerHTML = `
+                        <div class="bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-outline-variant/30">
+                            <p class="font-body-md text-body-md">Sounds good! Let's meet near the central library.</p>
+                        </div>
+                    `;
+                    container.appendChild(replyBubble);
+                    container.scrollTop = container.scrollHeight;
+                }, 1000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            navigateTo('home');
+        });
+    </script>
+</body>
+                        </html>
