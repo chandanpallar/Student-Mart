@@ -1280,7 +1280,7 @@
 }
 
 function requireLogin(page) {
-    const isLoggedIn = false; // Abhi temporary
+    const isLoggedIn = false;
 
     if (!isLoggedIn) {
         alert("Please login or sign up to continue.");
@@ -1289,11 +1289,7 @@ function requireLogin(page) {
     }
 
     navigateTo(page);
-        }
-        function requireLogin(destination) {
-    alert("Please login or sign up to continue.");
-    navigateTo("login");
-                }
+}
         function fakeLogin() {
     alert("Login system will be connected later.");
         }
