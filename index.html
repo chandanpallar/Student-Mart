@@ -1267,21 +1267,18 @@
             navigateTo('home');
         });
         function navigateTo(page) {
-    const pages = document.querySelectorAll(".page-view");
-
-    pages.forEach(section => {
+    document.querySelectorAll(".page-view").forEach(section => {
         section.classList.add("hidden");
+        section.style.display = "";
     });
 
     const target = document.getElementById("view-" + page);
 
     if (target) {
         target.classList.remove("hidden");
-        target.style.display = "block";
         window.scrollTo(0, 0);
     }
-}
-
+        }
 function requireLogin(page) {
     alert("Please login or sign up to continue.");
     navigateTo("login");
