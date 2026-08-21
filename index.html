@@ -1281,10 +1281,15 @@
         }
 function requireLogin(page) {
     alert("Please login or sign up to continue.");
-    navigateTo("login");
-}
 
-function fakeLogin() {
+    const loginPage = document.getElementById("view-login");
+
+    if (loginPage) {
+        loginPage.classList.remove("hidden");
+        loginPage.style.display = "block";
+    }
+}
+        function fakeLogin() {
     alert("Login system will be connected later.");
 }
 
