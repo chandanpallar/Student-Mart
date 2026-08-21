@@ -1267,7 +1267,6 @@
             navigateTo('home');
         });
         function navigateTo(page) {
-    docufunction navigateTo(page) {
     const pages = document.querySelectorAll(".page-view");
 
     pages.forEach(section => {
@@ -1281,21 +1280,29 @@
         target.style.display = "block";
         window.scrollTo(0, 0);
     }
-    }
-        function fakeLogin() {
+}
+
+function requireLogin(page) {
+    alert("Please login or sign up to continue.");
+    navigateTo("login");
+}
+
+function fakeLogin() {
     alert("Login system will be connected later.");
-        }
-        function fakeSignup() {
+}
+
+function fakeSignup() {
     const password = document.getElementById("signupPassword").value;
     const confirmPassword = document.getElementById("signupConfirmPassword").value;
 
     if (password !== confirmPassword) {
-        alert("Passwords and Confirm Password must be the same.");
+        alert("Password and Confirm Password must match.");
         return;
     }
 
     alert("Account created successfully!");
-        }
+}
+
         function submitFeedback(event){
 
   event.preventDefault();
@@ -1333,9 +1340,7 @@
     .querySelector(".feedback-form")
     .reset();
                     }
-            function requireLogin(page) {
-    alert("requireLogin is working!");
-        }
+
     </script>
 </body>
                         </html>
