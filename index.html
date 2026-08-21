@@ -890,6 +890,84 @@
                 </div>
             </div>
         </section>
+        <!-- ================= PAGE: LOGIN ================= -->
+<section id="view-login" class="page-view">
+    <div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-gutter py-xl">
+        
+        <div class="w-full max-w-md bg-surface rounded-2xl shadow-md border border-outline-variant/30 p-xl">
+            
+            <div class="text-center mb-xl">
+                <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+                    Welcome to StudentMart
+                </h1>
+                <p class="font-body-md text-secondary">
+                    Login or create an account to continue
+                </p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); fakeLogin();" class="space-y-lg">
+
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Email
+                    </label>
+
+                    <input
+                        id="loginEmail"
+                        type="email"
+                        required
+                        placeholder="Enter your email"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Password
+                    </label>
+
+                    <input
+                        id="loginPassword"
+                        type="password"
+                        required
+                        placeholder="Enter your password"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <button
+                    type="submit"
+                    class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-colors"
+                >
+                    Login
+                </button>
+
+                <div class="text-center">
+                    <span class="text-secondary text-sm">
+                        Don't have an account?
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="navigateTo('signup')"
+                        class="text-primary font-semibold text-sm ml-1"
+                    >
+                        Sign Up
+                    </button>
+                </div>
+
+                <button
+                    type="button"
+                    onclick="navigateTo('home')"
+                    class="w-full border border-outline-variant py-3 rounded-xl text-secondary font-label-md text-label-md"
+                >
+                    Continue Browsing
+                </button>
+
+            </form>
+        </div>
+    </div>
+    </section>
 
     </main>
 
@@ -984,6 +1062,9 @@
     alert("Please login or sign up to continue.");
     navigateTo("login");
                 }
+        function fakeLogin() {
+    alert("Login system will be connected later.");
+        }
     </script>
 </body>
                         </html>
