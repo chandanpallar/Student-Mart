@@ -1276,7 +1276,15 @@
     alert("Login system will be connected later.");
         }
         function fakeSignup() {
-    alert("Sign Up system will be connected later.");
+    const password = document.getElementById("signupPassword").value;
+    const confirmPassword = document.getElementById("signupConfirmPassword").value;
+
+    if (password !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    alert("Account created successfully!");
         }
         function submitFeedback(event){
 
