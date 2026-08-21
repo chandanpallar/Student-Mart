@@ -1268,6 +1268,30 @@
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
+        function navigateTo(page) {
+    document.querySelectorAll(".page-view").forEach(section => {
+        section.classList.add("hidden");
+    });
+
+    const target = document.getElementById("view-" + page);
+
+    if (target) {
+        target.classList.remove("hidden");
+        window.scrollTo(0, 0);
+    }
+}
+
+function requireLogin(page) {
+    const isLoggedIn = false; // Abhi temporary
+
+    if (!isLoggedIn) {
+        alert("Please login or sign up to continue.");
+        navigateTo("login");
+        return;
+    }
+
+    navigateTo(page);
+        }
         function requireLogin(destination) {
     alert("Please login or sign up to continue.");
     navigateTo("login");
