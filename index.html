@@ -1267,7 +1267,10 @@
             navigateTo('home');
         });
         function navigateTo(page) {
-    document.querySelectorAll(".page-view").forEach(section => {
+    docufunction navigateTo(page) {
+    const pages = document.querySelectorAll(".page-view");
+
+    pages.forEach(section => {
         section.classList.add("hidden");
     });
 
@@ -1275,20 +1278,20 @@
 
     if (target) {
         target.classList.remove("hidden");
+        target.style.display = "block";
         window.scrollTo(0, 0);
     }
-}
-function requireLogin(page) {
-    alert("Please login or sign up to continue.");
-
-    const target = document.getElementById("view-login");
-
-    if (target) {
-        alert("Login section found!");
-        navigateTo("login");
-    } else {
-        alert("ERROR: view-login not found!");
     }
+function requireLogin(page) {
+    const isLoggedIn = false;
+
+    if (!isLoggedIn) {
+        alert("Please login or sign up to continue.");
+        navigateTo("login");
+        return;
+    }
+
+    navigateTo(page);
 }
         function fakeLogin() {
     alert("Login system will be connected later.");
