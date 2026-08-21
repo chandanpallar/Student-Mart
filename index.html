@@ -154,15 +154,16 @@
                     <input class="bg-transparent border-none focus:ring-0 text-body-md p-0 w-36 text-on-surface placeholder-secondary" placeholder="Search campus..." type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
                 </div>
                 
-                <a onclick="navigateTo('profile')" class="flex items-center gap-2 font-label-md text-label-md text-secondary hover:text-primary transition-colors cursor-pointer">
-                    <div class="w-8 h-8 rounded-full bg-primary-container text-on-primary font-bold flex items-center justify-center text-xs">SK</div>
-                    <span class="hidden xl:inline">Sneha K.</span>
-                </a>
+                <a onclick="navigateTo('login')" 
+   class="font-label-md text-label-md text-secondary hover:text-primary transition-colors cursor-pointer">
+    Login / Sign Up
+</a>
 
-                <button onclick="navigateTo('sell')" class="font-label-md text-label-md bg-primary text-on-primary px-lg py-sm rounded-xl hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-1">
-                    <span class="material-symbols-outlined text-[18px]">add</span>
-                    <span>Sell an Item</span>
-                </button>
+                <button onclick="requireLogin('sell')" 
+        class="font-label-md text-label-md bg-primary text-on-primary px-lg py-sm rounded-xl hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-1">
+    <span class="material-symbols-outlined text-[18px]">add</span>
+    <span>Sell an Item</span>
+</button>
             </div>
         </div>
     </header>
@@ -979,6 +980,10 @@
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
+        function requireLogin(destination) {
+    alert("Please login or sign up to continue.");
+    navigateTo("login");
+                }
     </script>
 </body>
                         </html>
