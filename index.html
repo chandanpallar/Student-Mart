@@ -1063,6 +1063,120 @@
         </div>
     </div>
     </section>
+    <!-- ================= PAGE: SIGN UP ================= -->
+<section id="view-signup" class="page-view">
+    <div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-gutter py-xl">
+
+        <div class="w-full max-w-md bg-surface rounded-2xl shadow-md border border-outline-variant/30 p-xl">
+
+            <div class="text-center mb-xl">
+                <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+                    Create Your Account
+                </h1>
+
+                <p class="font-body-md text-secondary">
+                    Join StudentMart and start buying or selling
+                </p>
+            </div>
+
+            <form onsubmit="event.preventDefault(); fakeSignup();" class="space-y-lg">
+
+                <!-- Full Name -->
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Full Name
+                    </label>
+
+                    <input
+                        id="signupName"
+                        type="text"
+                        required
+                        placeholder="Enter your full name"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Email
+                    </label>
+
+                    <input
+                        id="signupEmail"
+                        type="email"
+                        required
+                        placeholder="Enter your email"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Password
+                    </label>
+
+                    <input
+                        id="signupPassword"
+                        type="password"
+                        required
+                        placeholder="Create a password"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label class="block font-label-md text-label-md text-on-surface mb-2">
+                        Confirm Password
+                    </label>
+
+                    <input
+                        id="signupConfirmPassword"
+                        type="password"
+                        required
+                        placeholder="Confirm your password"
+                        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                    >
+                </div>
+
+                <!-- Create Account -->
+                <button
+                    type="submit"
+                    class="w-full bg-primary text-on-primary py-3 rounded-xl font-label-md text-label-md hover:bg-surface-tint transition-colors"
+                >
+                    Create Account
+                </button>
+
+                <!-- Login -->
+                <div class="text-center">
+                    <span class="text-secondary text-sm">
+                        Already have an account?
+                    </span>
+
+                    <button
+                        type="button"
+                        onclick="navigateTo('login')"
+                        class="text-primary font-semibold text-sm ml-1"
+                    >
+                        Login
+                    </button>
+                </div>
+
+                <!-- Continue Browsing -->
+                <button
+                    type="button"
+                    onclick="navigateTo('home')"
+                    class="w-full border border-outline-variant py-3 rounded-xl text-secondary font-label-md text-label-md"
+                >
+                    Continue Browsing
+                </button>
+
+            </form>
+        </div>
+    </div>
+                </section>    
 
     </main>
 
@@ -1159,6 +1273,9 @@
                 }
         function fakeLogin() {
     alert("Login system will be connected later.");
+        }
+        function fakeSignup() {
+    alert("Sign Up system will be connected later.");
         }
         function submitFeedback(event){
 
