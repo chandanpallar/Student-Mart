@@ -1281,13 +1281,7 @@
         }
 function requireLogin(page) {
     alert("Please login or sign up to continue.");
-
-    const loginPage = document.getElementById("view-login");
-
-    if (loginPage) {
-        loginPage.classList.remove("hidden");
-        loginPage.style.display = "block";
-    }
+    navigateTo("login");
 }
         function fakeLogin() {
     alert("Login system will be connected later.");
