@@ -1205,25 +1205,6 @@
 
     <!-- SPA JavaScript Router & Interactivity -->
     <script>
-        function navigateTo(pageId) {
-            const pages = document.querySelectorAll('.page-view');
-            pages.forEach(p => p.classList.remove('active'));
-
-            const targetPage = document.getElementById('view-' + pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-            }
-
-            const navLinks = document.querySelectorAll('.nav-link');
-            navLinks.forEach(link => link.classList.remove('active-link'));
-            const activeNav = document.getElementById('nav-' + pageId);
-            if (activeNav) {
-                activeNav.classList.add('active-link');
-            }
-
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
         function changeMainImage(src) {
             const mainImg = document.getElementById('product-main-img');
             if (mainImg) {
@@ -1267,18 +1248,25 @@
             navigateTo('home');
         });
         function navigateTo(page) {
-    document.querySelectorAll(".page-view").forEach(section => {
+    const pages = document.querySelectorAll(".page-view");
+
+    pages.forEach(section => {
+        section.classList.remove("active");
         section.classList.add("hidden");
-        section.style.display = "";
     });
 
     const target = document.getElementById("view-" + page);
 
     if (target) {
         target.classList.remove("hidden");
-        window.scrollTo(0, 0);
+        target.classList.add("active");
     }
-        }
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
 function requireLogin(page) {
     alert("Please login or sign up to continue.");
     navigateTo("login");
@@ -1336,7 +1324,10 @@ function fakeSignup() {
     .querySelector(".feedback-form")
     .reset();
                     }
-
+        // Website load hone ke baad Home page open hoga
+document.addEventListener('DOMContentLoaded', () => {
+    navigateTo('home');
+});
     </script>
 </body>
                         </html>
