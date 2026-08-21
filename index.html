@@ -1278,17 +1278,17 @@
         window.scrollTo(0, 0);
     }
 }
-
 function requireLogin(page) {
-    const isLoggedIn = false;
+    alert("Please login or sign up to continue.");
 
-    if (!isLoggedIn) {
-        alert("Please login or sign up to continue.");
+    const target = document.getElementById("view-login");
+
+    if (target) {
+        alert("Login section found!");
         navigateTo("login");
-        return;
+    } else {
+        alert("ERROR: view-login not found!");
     }
-
-    navigateTo(page);
 }
         function fakeLogin() {
     alert("Login system will be connected later.");
