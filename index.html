@@ -202,17 +202,19 @@
                     <span class="material-symbols-outlined text-secondary mr-xs">search</span>
                     <input class="bg-transparent border-none focus:ring-0 text-body-md p-0 w-36 text-on-surface placeholder-secondary" placeholder="Search campus..." type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
                 </div>
-                
+                <section id="view-login" class="page-view">
                 <button onclick="navigateTo('login')"
     class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-semibold shadow-sm hover:opacity-90 transition-all cursor-pointer">
     Login / Sign Up
                 </button>
-
+                </section>
+<section id="view-sell" class="page-view">
                 <button onclick="requireLogin('sell')" 
         class="font-label-md text-label-md bg-primary text-on-primary px-lg py-sm rounded-xl hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-1">
     <span class="material-symbols-outlined text-[18px]">add</span>
     <span>Sell an Item</span>
 </button>
+</section>
             </div>
         </div>
     </header>
