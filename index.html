@@ -1291,10 +1291,13 @@ function requireLogin(page) {
         });
 
         if (error) {
-            alert(error.message);
-            return;
+    if (error.message.toLowerCase().includes("email not confirmed")) {
+        alert("Please check your email and verify your account before logging in.");
+    } else {
+        alert(error.message);
+    }
+    return;
         }
-
         alert("Login successful!");
 
         navigateTo("home");
