@@ -1273,7 +1273,9 @@ const supabaseClient = supabase.createClient(
         target.classList.remove("hidden");
         target.classList.add("active");
     }
-
+if (page === "profile") {
+    updateProfile();
+}
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -1319,6 +1321,45 @@ function requireLogin(page) {
     } else {
         button.textContent = "Login / Sign Up";
         button.onclick = () => navigateTo("login");
+    }
+        }
+        async function updateProfile() {
+    const { data, error } = await supabaseClient.auth.getUser();
+
+    if (error || !data.user) {
+        navigateTo("login");
+        return;
+    }
+
+    const user = data.user;
+
+    const name =
+        user.user_metadata?.full_name ||
+        user.email ||
+        "User";
+
+    const initials = name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
+
+    const avatar = document.getElementById("profile-avatar");
+    const profileName = document.getElementById("profile-name");
+    const profileCollege = document.getElementById("profile-college");
+
+    if (avatar) {
+        avatar.textContent = initials;
+    }
+
+    if (profileName) {
+        profileName.textContent = name;
+    }
+
+    if (profileCollege) {
+        profileCollege.textContent =
+            user.user_metadata?.college || "Student";
     }
         }
         async function fakeLogin() {
