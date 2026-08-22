@@ -1406,6 +1406,10 @@ function requireLogin(page) {
         }
         supabaseClient.auth.onAuthStateChange((event, session) => {
     updateHeaderAuth();
+
+    if (event === "PASSWORD_RECOVERY") {
+        navigateTo("reset-password");
+    }
 });
         async function updateProfile() {
     const { data, error } = await supabaseClient.auth.getUser();
