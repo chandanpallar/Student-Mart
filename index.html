@@ -1309,7 +1309,8 @@ function requireLogin(page) {
         }
         alert("Login successful!");
 
-        navigateTo("home");
+navigateTo(pendingPage);
+pendingPage = "home";
 
     } catch (error) {
         alert("Something went wrong. Please try again.");
