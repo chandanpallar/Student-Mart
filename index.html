@@ -1430,7 +1430,11 @@ pendingPage = "home";
 
 async function fakeSignup() {
     const name = document.getElementById("signupName").value.trim();
-    const college = document.getElementById("signupCollege").value.trim();
+    let college = document.getElementById("signupCollege").value;
+
+if (college === "Other") {
+    college = document.getElementById("otherCollege").value.trim();
+        }
     const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value;
     const confirmPassword = document.getElementById("signupConfirmPassword").value;
@@ -1503,6 +1507,20 @@ navigateTo("login");
     .querySelector(".feedback-form")
     .reset();
                     }
+        function toggleOtherCollege() {
+    const collegeSelect = document.getElementById("signupCollege");
+    const otherField = document.getElementById("otherCollegeField");
+    const otherInput = document.getElementById("otherCollege");
+
+    if (collegeSelect.value === "Other") {
+        otherField.classList.remove("hidden");
+        otherInput.required = true;
+    } else {
+        otherField.classList.add("hidden");
+        otherInput.required = false;
+        otherInput.value = "";
+    }
+      }
         // Website load hone ke baad Home page open hoga
 document.addEventListener('DOMContentLoaded', () => {
     navigateTo('home');
