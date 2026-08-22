@@ -1420,6 +1420,52 @@ navigateTo("login");
         otherInput.value = "";
     }
       }
+        async function submitSuggestion(event) {
+    event.preventDefault();
+
+    const suggestionInput = document.getElementById("suggestionText");
+    const suggestion = suggestionInput.value.trim();
+
+    if (!suggestion) {
+        alert("Please write a suggestion.");
+        return;
+    }
+
+    try {
+        const { data: userData, error: userError } =
+            await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+            alert("Please login to submit a suggestion.");
+            navigateTo("login");
+            return;
+        }
+
+        const user = userData.user;
+
+        const { error } = await supabaseClient
+            .from("suggestions")
+            .insert({
+                user_id: user.id,
+                user_email: user.email,
+                suggestion: suggestion
+            });
+
+        if (error) {
+            console.error(error);
+            alert("Could not submit your suggestion. Please try again.");
+            return;
+        }
+
+        alert("Thank you! Your suggestion has been submitted.");
+
+        suggestionInput.value = "";
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+    }
+        }
         // Website load hone ke baad Home page open hoga
 document.addEventListener('DOMContentLoaded', () => {
     navigateTo('home');
