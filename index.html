@@ -1650,9 +1650,16 @@ navigateTo("login");
         alert("Something went wrong. Please try again.");
     }
         }
-        // Website load hone ke baad Home page open hoga
+        // Website load hone ke baad correct page open hoga
 document.addEventListener('DOMContentLoaded', () => {
-    navigateTo('home');
+    const initialPage = window.location.hash.substring(1);
+
+    if (initialPage) {
+        navigateTo(initialPage);
+    } else {
+        navigateTo('home');
+    }
+
     updateHeaderAuth();
 });
     </script>
