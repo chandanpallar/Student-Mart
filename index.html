@@ -1656,7 +1656,14 @@ navigateTo("login");
         }
         // Website load hone ke baad correct page open hoga
 document.addEventListener('DOMContentLoaded', () => {
-    navigateTo('home');
+    const hash = window.location.hash;
+
+    if (hash.includes("type=recovery")) {
+        navigateTo("reset-password");
+    } else {
+        navigateTo("home");
+    }
+
     updateHeaderAuth();
 });
     </script>
