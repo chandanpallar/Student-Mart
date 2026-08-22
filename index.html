@@ -1453,10 +1453,10 @@ navigateTo("login");
             });
 
         if (error) {
-            console.error(error);
-            alert("Could not submit your suggestion. Please try again.");
-            return;
-        }
+    console.error(error);
+    alert("ERROR: " + error.message);
+    return;
+}
 
         alert("Thank you! Your suggestion has been submitted.");
 
