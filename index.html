@@ -1444,6 +1444,33 @@ pendingPage = "home";
         console.error(error);
     }
         }
+        async function sendPasswordReset(event) {
+    event.preventDefault();
+
+    const email = document.getElementById("resetEmail").value.trim();
+
+    if (!email) {
+        alert("Please enter your email address.");
+        return;
+    }
+
+    try {
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+            redirectTo: "https://chandanpallar.github.io/Student-Mart/"
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Password reset link has been sent to your email. Please check your inbox.");
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+    }
+        }
 
 async function fakeSignup() {
     const name = document.getElementById("signupName").value.trim();
