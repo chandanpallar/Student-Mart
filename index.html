@@ -871,6 +871,14 @@
                         <a class="flex items-center gap-sm p-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-colors font-label-md text-label-md cursor-pointer">
                             <span class="material-symbols-outlined">favorite</span> Saved Items
                         </a>
+                        <button
+    type="button"
+    onclick="logoutUser()"
+    class="flex items-center gap-sm p-sm rounded-lg text-secondary hover:bg-surface-container hover:text-primary transition-colors font-label-md text-label-md cursor-pointer"
+>
+    <span class="material-symbols-outlined">logout</span>
+    Logout
+                        </button>
                     </nav>
                 </aside>
 
@@ -1333,6 +1341,21 @@ function requireLogin(page) {
         profileCollege.textContent =
             user.user_metadata?.college || "Student";
     }
+        }
+        async function logoutUser() {
+    const { error } = await supabaseClient.auth.signOut();
+
+    if (error) {
+        alert("Could not log out. Please try again.");
+        console.error(error);
+        return;
+    }
+
+    await updateHeaderAuth();
+
+    navigateTo("home");
+
+    alert("Logged out successfully.");
         }
         async function fakeLogin() {
     const email = document.getElementById("loginEmail").value.trim();
