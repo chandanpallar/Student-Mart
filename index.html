@@ -1058,6 +1058,52 @@
         </div>
     </div>
 </section>
+        <!-- ================= PAGE: RESET PASSWORD ================= -->
+<section id="view-reset-password" class="page-view hidden">
+    <div class="max-w-md mx-auto px-gutter py-xl">
+
+        <div class="bg-surface rounded-xl p-lg shadow-sm border border-outline-variant/30">
+
+            <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+                Set New Password
+            </h1>
+
+            <p class="text-secondary text-sm mb-lg">
+                Enter your new password below.
+            </p>
+
+            <form onsubmit="updatePassword(event)" class="flex flex-col gap-md">
+
+                <input
+                    id="newPassword"
+                    type="password"
+                    required
+                    minlength="6"
+                    placeholder="New password"
+                    class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                >
+
+                <input
+                    id="confirmNewPassword"
+                    type="password"
+                    required
+                    minlength="6"
+                    placeholder="Confirm new password"
+                    class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                >
+
+                <button
+                    type="submit"
+                    class="bg-primary text-on-primary py-3 rounded-xl font-semibold hover:opacity-90"
+                >
+                    Update Password
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
     <!-- ================= PAGE: SIGN UP ================= -->
 <section id="view-signup" class="page-view">
     <div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-gutter py-xl">
