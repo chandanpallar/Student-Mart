@@ -1517,7 +1517,36 @@ pendingPage = "home";
         alert("Something went wrong. Please try again.");
     }
         }
+        async function updatePassword(event) {
+    event.preventDefault();
 
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmNewPassword").value;
+
+    if (newPassword !== confirmPassword) {
+        alert("Passwords do not match.");
+        return;
+    }
+
+    try {
+        const { error } = await supabaseClient.auth.updateUser({
+            password: newPassword
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Password updated successfully!");
+
+        navigateTo("login");
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong. Please try again.");
+    }
+            }
 async function fakeSignup() {
     const name = document.getElementById("signupName").value.trim();
     let college = document.getElementById("signupCollege").value;
