@@ -1284,7 +1284,9 @@ function requireLogin(page) {
     alert("Login system will be connected later.");
 }
 
-function fakeSignup() {
+async function fakeSignup() {
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
     const password = document.getElementById("signupPassword").value;
     const confirmPassword = document.getElementById("signupConfirmPassword").value;
 
@@ -1293,7 +1295,30 @@ function fakeSignup() {
         return;
     }
 
-    alert("Account created successfully!");
+    try {
+        const { data, error } = await supabaseClient.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    full_name: name
+                }
+            }
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Account created successfully!");
+
+        navigateTo("login");
+
+    } catch (error) {
+        alert("Something went wrong. Please try again.");
+        console.error(error);
+    }
 }
 
         function submitFeedback(event){
