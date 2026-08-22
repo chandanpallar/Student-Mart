@@ -1386,11 +1386,12 @@ if (college === "Other") {
             email: email,
             password: password,
             options: {
-                data: {
-    full_name: name,
-    college: college
-                }
-            }
+    data: {
+        full_name: name,
+        college: college
+    },
+    emailRedirectTo: "https://chandanpallar.github.io/Student-Mart/"
+}
         });
 
         if (error) {
