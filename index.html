@@ -1289,6 +1289,36 @@ function requireLogin(page) {
 
     });
 }
+        async function updateHeaderAuth() {
+    const { data } = await supabaseClient.auth.getSession();
+
+    const button = document.getElementById("auth-header-button");
+
+    if (!button) return;
+
+    if (data.session) {
+        const name =
+            data.session.user.user_metadata?.full_name ||
+            data.session.user.email ||
+            "User";
+
+        const initials = name
+            .split(" ")
+            .map(word => word[0])
+            .join("")
+            .substring(0, 2)
+            .toUpperCase();
+
+        button.textContent = initials;
+        button.onclick = () => navigateTo("profile");
+
+        button.classList.remove("rounded-lg");
+        button.classList.add("rounded-full");
+    } else {
+        button.textContent = "Login / Sign Up";
+        button.onclick = () => navigateTo("login");
+    }
+        }
         async function fakeLogin() {
     const email = document.getElementById("loginEmail").value.trim();
     const password = document.getElementById("loginPassword").value;
@@ -1308,6 +1338,8 @@ function requireLogin(page) {
     return;
         }
         alert("Login successful!");
+
+await updateHeaderAuth();
 
 navigateTo(pendingPage);
 pendingPage = "home";
@@ -1394,6 +1426,7 @@ navigateTo("login");
         // Website load hone ke baad Home page open hoga
 document.addEventListener('DOMContentLoaded', () => {
     navigateTo('home');
+    updateHeaderAuth();
 });
     </script>
 </body>
