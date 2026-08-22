@@ -172,6 +172,7 @@
             font-weight: 700;
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
 
@@ -1205,6 +1206,14 @@
 
     <!-- SPA JavaScript Router & Interactivity -->
     <script>
+        const SUPABASE_URL = "https://sebjcwhssphiupbbdqrt.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_3S77nGMPZ9oQ0m2cjxAeyA_Uf70pxMz";
+
+const supabaseClient = supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
         function changeMainImage(src) {
             const mainImg = document.getElementById('product-main-img');
             if (mainImg) {
