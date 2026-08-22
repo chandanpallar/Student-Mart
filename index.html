@@ -1502,7 +1502,7 @@ pendingPage = "home";
 
     try {
         const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
-            redirectTo: "https://chandanpallar.github.io/Student-Mart/"
+            redirectTo: "https://chandanpallar.github.io/Student-Mart/#reset-password"
         });
 
         if (error) {
