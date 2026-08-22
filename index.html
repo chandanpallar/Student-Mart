@@ -1256,6 +1256,7 @@ const supabaseClient = supabase.createClient(
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
+        let pendingPage = "home";
         function navigateTo(page) {
     const pages = document.querySelectorAll(".page-view");
 
@@ -1276,9 +1277,29 @@ const supabaseClient = supabase.createClient(
         behavior: "smooth"
     });
 }
+        function openSell() {
+    supabaseClient.auth.getSession().then(({ data }) => {
+
+        if (data.session) {
+            navigateTo("sell");
+        } else {
+            pendingPage = "sell";
+            navigateTo("login");
+        }
+
+    });
+        }
 function requireLogin(page) {
-    alert("Please login or sign up to continue.");
-    navigateTo("login");
+    supabaseClient.auth.getSession().then(({ data }) => {
+
+        if (data.session) {
+            navigateTo(page);
+        } else {
+            pendingPage = page;
+            navigateTo("login");
+        }
+
+    });
 }
         async function fakeLogin() {
     const email = document.getElementById("loginEmail").value.trim();
