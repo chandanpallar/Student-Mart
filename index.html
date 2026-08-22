@@ -110,54 +110,6 @@
         }
     </script>
     <style>
-        .feedback-section{
-  padding:70px 5%;
-  text-align:center;
-  background:#fff;
-}
-
-.feedback-subtitle{
-  color:#666;
-  margin-bottom:30px;
-  font-size:16px;
-}
-
-.feedback-form{
-  max-width:600px;
-  margin:auto;
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-
-.feedback-form input,
-.feedback-form select,
-.feedback-form textarea{
-  width:100%;
-  box-sizing:border-box;
-  padding:14px;
-  border:1px solid #ddd;
-  border-radius:12px;
-  font-family:'Inter',sans-serif;
-  font-size:15px;
-  outline:none;
-  background:#fff;
-}
-
-.feedback-form textarea{
-  resize:vertical;
-}
-
-.feedback-form input:focus,
-.feedback-form select:focus,
-.feedback-form textarea:focus{
-  border-color:#f9bc4d;
-}
-
-.feedback-form button{
-  align-self:center;
-  padding:12px 25px;
-        }
         body { background-color: #fcf8ff; color: #1b1b24; }
         .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
         .material-symbols-outlined.filled { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
@@ -285,52 +237,6 @@
                     </div>
                 </section>
             </div>
-            <section class="feedback-section" id="feedback">
-
-  <h2 class="menu-title center">Share Your Feedback</h2>
-
-  <p class="feedback-subtitle">
-    We'd love to hear about your experience at StudentMart.
-  </p>
-
-  <form
-    class="feedback-form"
-    onsubmit="submitFeedback(event)"
-  >
-
-    <input
-      type="text"
-      id="feedbackName"
-      placeholder="Your Name"
-      required
-    >
-
-    <select id="feedbackRating" required>
-      <option value="">Rate Your Experience</option>
-      <option value="5">★★★★★ Excellent</option>
-      <option value="4">★★★★☆ Very Good</option>
-      <option value="3">★★★☆☆ Good</option>
-      <option value="2">★★☆☆☆ Average</option>
-      <option value="1">★☆☆☆☆ Poor</option>
-    </select>
-
-    <textarea
-      id="feedbackMessage"
-      placeholder="Write your feedback..."
-      rows="5"
-      required
-    ></textarea>
-
-    <button
-      type="submit"
-      class="btn-primary"
-    >
-      Submit Feedback
-    </button>
-
-  </form>
-
-            </section>
         </section>
                     
 
@@ -1469,44 +1375,6 @@ navigateTo("login");
         console.error(error);
     }
 }
-
-        function submitFeedback(event){
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("feedbackName")
-    .value
-    .trim();
-
-  const rating =
-    document.getElementById("feedbackRating")
-    .value;
-
-  const feedback =
-    document.getElementById("feedbackMessage")
-    .value
-    .trim();
-
-  const message =
-    "🍽️ FOOD HEAVEN - CUSTOMER FEEDBACK\n\n" +
-    "👤 Name: " + name + "\n" +
-    "⭐ Rating: " + rating + "/5\n" +
-    "💬 Feedback: " + feedback;
-
-  const whatsappURL =
-    "https://wa.me/916372618475?text=" +
-    encodeURIComponent(message);
-
-  window.open(
-    whatsappURL,
-    "_blank"
-  );
-
-  document
-    .querySelector(".feedback-form")
-    .reset();
-                    }
         function toggleOtherCollege() {
     const collegeSelect = document.getElementById("signupCollege");
     const otherField = document.getElementById("otherCollegeField");
