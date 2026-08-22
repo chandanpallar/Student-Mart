@@ -1299,10 +1299,16 @@ function requireLogin(page) {
         button.classList.remove("rounded-lg");
         button.classList.add("rounded-full");
     } else {
-        button.textContent = "Login / Sign Up";
-        button.onclick = () => navigateTo("login");
+    button.textContent = "Login / Sign Up";
+    button.onclick = () => navigateTo("login");
+
+    button.classList.remove("rounded-full");
+    button.classList.add("rounded-lg");
     }
         }
+        supabaseClient.auth.onAuthStateChange((event, session) => {
+    updateHeaderAuth();
+});
         async function updateProfile() {
     const { data, error } = await supabaseClient.auth.getUser();
 
