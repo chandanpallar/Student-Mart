@@ -1280,9 +1280,30 @@ function requireLogin(page) {
     alert("Please login or sign up to continue.");
     navigateTo("login");
 }
-        function fakeLogin() {
-    alert("Login system will be connected later.");
-}
+        async function fakeLogin() {
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value;
+
+    try {
+        const { data, error } = await supabaseClient.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            alert(error.message);
+            return;
+        }
+
+        alert("Login successful!");
+
+        navigateTo("home");
+
+    } catch (error) {
+        alert("Something went wrong. Please try again.");
+        console.error(error);
+    }
+        }
 
 async function fakeSignup() {
     const name = document.getElementById("signupName").value.trim();
