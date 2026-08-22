@@ -1014,6 +1014,50 @@
         </div>
     </div>
     </section>
+        <!-- ================= PAGE: FORGOT PASSWORD ================= -->
+<section id="view-forgot-password" class="page-view hidden">
+    <div class="max-w-md mx-auto px-gutter py-xl">
+
+        <div class="bg-surface rounded-xl p-lg shadow-sm border border-outline-variant/30">
+
+            <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">
+                Forgot Password
+            </h1>
+
+            <p class="text-secondary text-sm mb-lg">
+                Enter your registered email and we'll send you a password reset link.
+            </p>
+
+            <form onsubmit="sendPasswordReset(event)" class="flex flex-col gap-md">
+
+                <input
+                    id="resetEmail"
+                    type="email"
+                    required
+                    placeholder="Enter your email"
+                    class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+                >
+
+                <button
+                    type="submit"
+                    class="bg-primary text-on-primary py-3 rounded-xl font-semibold hover:opacity-90"
+                >
+                    Send Reset Link
+                </button>
+
+                <button
+                    type="button"
+                    onclick="navigateTo('login')"
+                    class="text-primary text-sm font-semibold hover:underline"
+                >
+                    Back to Login
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</section>
     <!-- ================= PAGE: SIGN UP ================= -->
 <section id="view-signup" class="page-view">
     <div class="min-h-[calc(100vh-80px)] flex items-center justify-center px-gutter py-xl">
