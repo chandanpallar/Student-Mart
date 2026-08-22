@@ -1094,21 +1094,42 @@
                         class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
                     >
                 </div>
-                <!-- College -->
+                <!-- College / University -->
 <div>
     <label class="block font-label-md text-label-md text-on-surface mb-2">
         College / University
     </label>
 
-    <input
+    <select
         id="signupCollege"
-        type="text"
         required
+        onchange="toggleOtherCollege()"
+        class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
+    >
+        <option value="">Select your college</option>
+        <option value="BPUT Rourkela">BPUT Rourkela</option>
+        <option value="GCEK Bhawanipatna">GCEK Bhawanipatna</option>
+        <option value="GCE Keonjhar">GCE Keonjhar</option>
+        <option value="IGIT Sarang">IGIT Sarang</option>
+        <option value="OUTR Bhubaneswar">OUTR Bhubaneswar</option>
+        <option value="PMEC Brahmapur">PMEC Brahmapur</option>
+        <option value="VSSUT Burla">VSSUT Burla</option>
+        <option value="Other">Other</option>
+    </select>
+</div>
+
+<div id="otherCollegeField" class="hidden">
+    <label class="block font-label-md text-label-md text-on-surface mb-2">
+        Enter College / University Name
+    </label>
+
+    <input
+        id="otherCollege"
+        type="text"
         placeholder="Enter your college or university"
         class="w-full bg-surface-container-low border-none rounded-xl px-4 py-3 focus:ring-2 focus:ring-primary"
     >
 </div>
-
                 <!-- Email -->
                 <div>
                     <label class="block font-label-md text-label-md text-on-surface mb-2">
