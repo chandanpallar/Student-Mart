@@ -1311,9 +1311,8 @@ async function fakeSignup() {
             return;
         }
 
-        alert("Account created successfully!");
-
-        navigateTo("login");
+        alert("Account created! Please check your email and verify your account.");
+navigateTo("login");
 
     } catch (error) {
         alert("Something went wrong. Please try again.");
