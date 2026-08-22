@@ -1277,18 +1277,6 @@ const supabaseClient = supabase.createClient(
         behavior: "smooth"
     });
 }
-        function openSell() {
-    supabaseClient.auth.getSession().then(({ data }) => {
-
-        if (data.session) {
-            navigateTo("sell");
-        } else {
-            pendingPage = "sell";
-            navigateTo("login");
-        }
-
-    });
-        }
 function requireLogin(page) {
     supabaseClient.auth.getSession().then(({ data }) => {
 
