@@ -575,6 +575,33 @@
                             <div>
     <label
         class="block font-label-md text-label-md text-on-surface mb-2"
+        for="productPhotos"
+    >
+        Photos *
+    </label>
+
+    <input
+        id="productPhotos"
+        name="productPhotos"
+        type="file"
+        accept="image/jpeg,image/png,image/webp"
+        multiple
+        required
+        class="w-full bg-[#F1F5F9] border-none rounded-[12px] px-4 py-3 text-on-surface focus:ring-2 focus:ring-primary focus:bg-surface transition-all"
+    />
+
+    <p class="text-sm text-on-surface-variant mt-2">
+        Add up to 5 photos. JPG, PNG or WebP.
+    </p>
+
+    <div
+        id="photoPreview"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 mt-4"
+    ></div>
+                            </div>
+                            <div>
+    <label
+        class="block font-label-md text-label-md text-on-surface mb-2"
         for="category"
     >
         Category *
