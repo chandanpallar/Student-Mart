@@ -2421,13 +2421,7 @@ if (productPhotos && photoPreview) {
 
                     ${
     listing.status === "sold"
-        ? `<button
-                type="button"
-                disabled
-                class="bg-surface-container text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg cursor-not-allowed"
-           >
-                Sold
-           </button>`
+        ? ""
         : `<button
                 type="button"
                 onclick="markListingSold('${listing.id}')"
