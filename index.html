@@ -1967,14 +1967,18 @@ document.addEventListener('DOMContentLoaded', () => {
             branchSelect.innerHTML =
                 '<option value="">Select branch / stream</option>';
 
-            const branches = branchesByCourse[selectedCourse] || [];
+            let branches = branchesByCourse[selectedCourse] || [];
 
-            branches.forEach(branch => {
-                const option = document.createElement("option");
-                option.value = branch;
-                option.textContent = branch;
-                branchSelect.appendChild(option);
-            });
+if (selectedCourse === "Other") {
+    branches = ["Other"];
+}
+
+branches.forEach(branch => {
+    const option = document.createElement("option");
+    option.value = branch;
+    option.textContent = branch;
+    branchSelect.appendChild(option);
+});
 
         });
     }
