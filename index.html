@@ -2217,6 +2217,48 @@ if (productPhotos && photoPreview) {
 
     return uploadedImages;
         }
+        async function handleProductSubmit(event) {
+    event.preventDefault();
+
+    const submitButton = event.target.querySelector(
+        'button[type="submit"]'
+    );
+
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = "Uploading...";
+    }
+
+    try {
+        const imageUrls = await uploadProductImages();
+
+        if (imageUrls.length === 0) {
+            if (submitButton) {
+                submitButton.disabled = false;
+                submitButton.textContent = "Submit";
+            }
+            return;
+        }
+
+        console.log("Uploaded images:", imageUrls);
+
+        alert("Photos uploaded successfully!");
+
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+
+    } catch (error) {
+        console.error(error);
+        alert("Something went wrong.");
+
+        if (submitButton) {
+            submitButton.disabled = false;
+            submitButton.textContent = "Submit";
+        }
+    }
+            }
     </script>
 </body>
                         </html>
