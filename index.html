@@ -1763,6 +1763,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     }
+        const courseSelect = document.getElementById("course");
+    const otherCourseWrapper = document.getElementById("otherCourseWrapper");
+    const courseOther = document.getElementById("courseOther");
+
+    if (courseSelect) {
+        courseSelect.addEventListener("change", () => {
+
+            if (courseSelect.value === "Other") {
+                otherCourseWrapper.classList.remove("hidden");
+                courseOther.required = true;
+            } else {
+                otherCourseWrapper.classList.add("hidden");
+                courseOther.required = false;
+                courseOther.value = "";
+            }
+
+        });
+    }
 });
     </script>
 </body>
