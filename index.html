@@ -2382,6 +2382,11 @@ if (productPhotos && photoPreview) {
         }
 
         if (!listings || listings.length === 0)
+        {
+            listingsGrid.innerHTML =
+                '<p class="text-secondary">You have no listings yet.</p>';
+            return;
+        }
         listings.sort((a, b) => {
     if (a.status === "sold" && b.status !== "sold") {
         return 1;
@@ -2393,11 +2398,6 @@ if (productPhotos && photoPreview) {
 
     return 0;
 });
-        {
-            listingsGrid.innerHTML =
-                '<p class="text-secondary">You have no listings yet.</p>';
-            return;
-        }
 
         listingsGrid.innerHTML = "";
 
