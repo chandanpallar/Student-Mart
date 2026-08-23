@@ -2101,6 +2101,38 @@ function updateCategoryFields() {
 
 categorySelect.addEventListener("change", updateCategoryFields);
 updateCategoryFields();
+    const productPhotos = document.getElementById("productPhotos");
+const photoPreview = document.getElementById("photoPreview");
+
+if (productPhotos && photoPreview) {
+    productPhotos.addEventListener("change", () => {
+        photoPreview.innerHTML = "";
+
+        const files = Array.from(productPhotos.files);
+
+        if (files.length > 5) {
+            alert("You can upload a maximum of 5 photos.");
+            productPhotos.value = "";
+            return;
+        }
+
+        files.forEach((file) => {
+            const reader = new FileReader();
+
+            reader.onload = (event) => {
+                const img = document.createElement("img");
+
+                img.src = event.target.result;
+                img.className =
+                    "w-full h-28 object-cover rounded-xl border border-outline-variant";
+
+                photoPreview.appendChild(img);
+            };
+
+            reader.readAsDataURL(file);
+        });
+    });
+                          }
 });
     </script>
 </body>
