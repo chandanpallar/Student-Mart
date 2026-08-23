@@ -2445,14 +2445,10 @@ if (productPhotos && photoPreview) {
 
     if (!confirmed) return;
 
-    const { data, error } = await supabaseClient
+    const { error } = await supabaseClient
         .from("listings")
-        .update({
-            status: "sold"
-        })
-        .eq("id", listingId)
-        .select()
-        .single();
+        .update({ status: "sold" })
+        .eq("id", listingId);
 
     if (error) {
         console.error("Mark sold error:", error);
@@ -2460,12 +2456,10 @@ if (productPhotos && photoPreview) {
         return;
     }
 
-    console.log("Updated listing:", data);
-
     alert("Listing marked as sold.");
 
     loadMyListings();
-}
+        }
     </script>
 </body>
                         </html>
