@@ -2104,35 +2104,68 @@ updateCategoryFields();
     const productPhotos = document.getElementById("productPhotos");
 const photoPreview = document.getElementById("photoPreview");
 
+let selectedPhotos = [];
+
 if (productPhotos && photoPreview) {
+
     productPhotos.addEventListener("change", () => {
-        photoPreview.innerHTML = "";
 
-        const files = Array.from(productPhotos.files);
+        const newFiles = Array.from(productPhotos.files);
 
-        if (files.length > 5) {
+        if (selectedPhotos.length + newFiles.length > 5) {
             alert("You can upload a maximum of 5 photos.");
             productPhotos.value = "";
             return;
         }
 
-        files.forEach((file) => {
+        selectedPhotos = [...selectedPhotos, ...newFiles];
+
+        renderPhotoPreview();
+
+        productPhotos.value = "";
+    });
+
+    function renderPhotoPreview() {
+
+        photoPreview.innerHTML = "";
+
+        selectedPhotos.forEach((file, index) => {
+
+            const wrapper = document.createElement("div");
+            wrapper.className = "relative";
+
+            const img = document.createElement("img");
+
+            img.className =
+                "w-full h-28 object-cover rounded-xl border border-outline-variant";
+
+            const removeButton = document.createElement("button");
+
+            removeButton.type = "button";
+            removeButton.textContent = "×";
+
+            removeButton.className =
+                "absolute top-1 right-1 w-7 h-7 rounded-full bg-black/70 text-white text-lg flex items-center justify-center hover:bg-black";
+
+            removeButton.onclick = () => {
+                selectedPhotos.splice(index, 1);
+                renderPhotoPreview();
+            };
+
+            wrapper.appendChild(img);
+            wrapper.appendChild(removeButton);
+            photoPreview.appendChild(wrapper);
+
             const reader = new FileReader();
 
             reader.onload = (event) => {
-                const img = document.createElement("img");
-
                 img.src = event.target.result;
-                img.className =
-                    "w-full h-28 object-cover rounded-xl border border-outline-variant";
-
-                photoPreview.appendChild(img);
             };
 
             reader.readAsDataURL(file);
         });
-    });
-                          }
+    }
+}
 });
     </script>
 </body>
