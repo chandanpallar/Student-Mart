@@ -1702,6 +1702,25 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     updateHeaderAuth();
+
+    const categorySelect = document.getElementById("category");
+    const otherCategoryWrapper = document.getElementById("otherCategoryWrapper");
+    const categoryOther = document.getElementById("categoryOther");
+
+    if (categorySelect) {
+        categorySelect.addEventListener("change", () => {
+
+            if (categorySelect.value === "Other") {
+                otherCategoryWrapper.classList.remove("hidden");
+                categoryOther.required = true;
+            } else {
+                otherCategoryWrapper.classList.add("hidden");
+                categoryOther.required = false;
+                categoryOther.value = "";
+            }
+
+        });
+    }
 });
     </script>
 </body>
