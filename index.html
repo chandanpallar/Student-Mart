@@ -2251,7 +2251,7 @@ if (productPhotos && photoPreview) {
 
     } catch (error) {
         console.error(error);
-        alert("Something went wrong.");
+        alert("ERROR: " + error.message);
 
         if (submitButton) {
             submitButton.disabled = false;
