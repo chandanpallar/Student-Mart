@@ -2445,10 +2445,15 @@ if (productPhotos && photoPreview) {
 
     if (!confirmed) return;
 
-    const { error } = await supabaseClient
-        .from("listings")
-        .update({ status: "sold" })
-        .eq("id", listingId);
+    const { data: updatedListing, error } = await supabaseClient
+    .from("listings")
+    .update({ status: "sold" })
+    .eq("id", listingId)
+    .select()
+    .single();
+
+console.log("Updated listing:", updatedListing);
+console.log("Update error:", error);
 
     if (error) {
         console.error("Mark sold error:", error);
