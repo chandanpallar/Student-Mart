@@ -2347,6 +2347,95 @@ if (productPhotos && photoPreview) {
         }
     }
 }
+        async function loadMyListings() {
+    const listingsGrid = document.getElementById("myListingsGrid");
+
+    if (!listingsGrid) return;
+
+    listingsGrid.innerHTML =
+        '<p class="text-secondary">Loading your listings...</p>';
+
+    try {
+        const { data: userData, error: userError } =
+            await supabaseClient.auth.getUser();
+
+        if (userError || !userData.user) {
+            listingsGrid.innerHTML =
+                '<p class="text-secondary">Please login to view your listings.</p>';
+            return;
+        }
+
+        const userId = userData.user.id;
+
+        const { data: listings, error } = await supabaseClient
+            .from("listings")
+            .select("*")
+            .eq("user_id", userId)
+            .order("created_at", { ascending: false });
+
+        if (error) {
+            console.error("Listings fetch error:", error);
+            listingsGrid.innerHTML =
+                '<p class="text-secondary">Unable to load listings.</p>';
+            return;
+        }
+
+        if (!listings || listings.length === 0) {
+            listingsGrid.innerHTML =
+                '<p class="text-secondary">You have no listings yet.</p>';
+            return;
+        }
+
+        listingsGrid.innerHTML = "";
+
+        listings.forEach((listing) => {
+            const card = document.createElement("div");
+
+            card.className =
+                "border border-surface-variant rounded-xl overflow-hidden flex flex-col bg-surface";
+
+            const imageUrl =
+                listing.image_url ||
+                "https://via.placeholder.com/600x400?text=No+Image";
+
+            card.innerHTML = `
+                <img
+                    class="w-full h-40 object-cover"
+                    src="${imageUrl}"
+                    alt="${listing.title || "Product"}"
+                />
+
+                <div class="p-md flex flex-col flex-grow">
+                    <h3 class="font-headline-md text-headline-md text-on-surface mb-1">
+                        ${listing.title || "Untitled"}
+                    </h3>
+
+                    <p class="font-price-display text-price-display text-primary mb-2">
+                        ₹${Number(listing.price).toLocaleString("en-IN")}
+                    </p>
+
+                    <p class="text-sm text-secondary mb-md">
+                        ${listing.status || "available"}
+                    </p>
+
+                    <button
+                        type="button"
+                        class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors"
+                    >
+                        Mark Sold
+                    </button>
+                </div>
+            `;
+
+            listingsGrid.appendChild(card);
+        });
+
+    } catch (error) {
+        console.error(error);
+        listingsGrid.innerHTML =
+            '<p class="text-secondary">Something went wrong.</p>';
+    }
+        }
     </script>
 </body>
                         </html>
