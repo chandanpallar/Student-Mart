@@ -2175,6 +2175,48 @@ if (productPhotos && photoPreview) {
     }
 }
 });
+        async function uploadProductImages() {
+    if (!selectedPhotos || selectedPhotos.length === 0) {
+        alert("Please select at least one photo.");
+        return [];
+    }
+
+    const uploadedImages = [];
+
+    for (const file of selectedPhotos) {
+
+        const fileExtension =
+            file.name.split(".").pop().toLowerCase();
+
+        const fileName =
+            `${crypto.randomUUID()}.${fileExtension}`;
+
+        const filePath = fileName;
+
+        const { error } = await supabaseClient
+            .storage
+            .from("product-images")
+            .upload(filePath, file, {
+                cacheControl: "3600",
+                upsert: false
+            });
+
+        if (error) {
+            console.error("Image upload error:", error);
+            alert("Failed to upload image: " + error.message);
+            return [];
+        }
+
+        const { data } = supabaseClient
+            .storage
+            .from("product-images")
+            .getPublicUrl(filePath);
+
+        uploadedImages.push(data.publicUrl);
+    }
+
+    return uploadedImages;
+        }
     </script>
 </body>
                         </html>
