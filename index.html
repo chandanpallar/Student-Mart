@@ -2050,6 +2050,26 @@ function updateCategoryFields() {
             category !== "Notes & Study Material"
         );
     }
+
+    const courseField = document.getElementById("course");
+    const branchField = document.getElementById("branch");
+    const subjectField = document.getElementById("subject");
+
+    const academicCategory =
+        category === "Books & Textbooks" ||
+        category === "Notes & Study Material";
+
+    if (courseField) {
+        courseField.required = academicCategory;
+    }
+
+    if (branchField) {
+        branchField.required = academicCategory;
+    }
+
+    if (subjectField) {
+        subjectField.required = academicCategory;
+    }
 }
 
 categorySelect.addEventListener("change", updateCategoryFields);
