@@ -2420,11 +2420,12 @@ if (productPhotos && photoPreview) {
                     </p>
 
                     <button
-                        type="button"
-                        class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors"
-                    >
-                        Mark Sold
-                    </button>
+    type="button"
+    onclick="markListingSold('${listing.id}')"
+    class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors"
+>
+    Mark Sold
+</button>
                 </div>
             `;
 
