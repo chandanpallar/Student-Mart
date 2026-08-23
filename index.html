@@ -2024,6 +2024,33 @@ branches.forEach(branch => {
 
         });
     }
+    const bookDetailsFields =
+    document.getElementById("bookDetailsFields");
+
+const academicDetailsFields =
+    document.getElementById("academicDetailsFields");
+
+function updateCategoryFields() {
+    const category = categorySelect.value;
+
+    if (bookDetailsFields) {
+        bookDetailsFields.classList.toggle(
+            "hidden",
+            category !== "Books & Textbooks"
+        );
+    }
+
+    if (academicDetailsFields) {
+        academicDetailsFields.classList.toggle(
+            "hidden",
+            category !== "Books & Textbooks" &&
+            category !== "Notes & Study Material"
+        );
+    }
+}
+
+categorySelect.addEventListener("change", updateCategoryFields);
+updateCategoryFields();
 });
     </script>
 </body>
