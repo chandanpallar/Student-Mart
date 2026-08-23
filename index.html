@@ -1796,6 +1796,182 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     }
+        const courseSelect = document.getElementById("course");
+    const branchSelect = document.getElementById("branch");
+
+    const branchesByCourse = {
+        "B.Tech": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Chemical Engineering",
+            "Biotechnology",
+            "Aerospace Engineering",
+            "Other"
+        ],
+        "B.E.": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Chemical Engineering",
+            "Other"
+        ],
+        "BCA": [
+            "Computer Applications",
+            "Computer Science",
+            "Data Science",
+            "Other"
+        ],
+        "B.Sc": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Biology",
+            "Computer Science",
+            "Statistics",
+            "Geology",
+            "Other"
+        ],
+        "B.Com": [
+            "Accounting",
+            "Finance",
+            "Banking",
+            "Taxation",
+            "Other"
+        ],
+        "BBA": [
+            "Finance",
+            "Marketing",
+            "Human Resources",
+            "International Business",
+            "Operations",
+            "Other"
+        ],
+        "BA": [
+            "English",
+            "History",
+            "Political Science",
+            "Economics",
+            "Geography",
+            "Psychology",
+            "Sociology",
+            "Other"
+        ],
+        "B.Pharm": [
+            "Pharmaceutics",
+            "Pharmacology",
+            "Pharmaceutical Chemistry",
+            "Pharmacognosy",
+            "Other"
+        ],
+        "LLB": [
+            "Corporate Law",
+            "Criminal Law",
+            "Constitutional Law",
+            "Other"
+        ],
+        "M.Tech": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Other"
+        ],
+        "MCA": [
+            "Computer Applications",
+            "Data Science",
+            "Artificial Intelligence",
+            "Other"
+        ],
+        "M.Sc": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Computer Science",
+            "Biotechnology",
+            "Statistics",
+            "Other"
+        ],
+        "M.Com": [
+            "Accounting",
+            "Finance",
+            "Banking",
+            "Taxation",
+            "Other"
+        ],
+        "MBA": [
+            "Finance",
+            "Marketing",
+            "Human Resources",
+            "Operations",
+            "Business Analytics",
+            "International Business",
+            "Other"
+        ],
+        "MA": [
+            "English",
+            "History",
+            "Political Science",
+            "Economics",
+            "Psychology",
+            "Sociology",
+            "Other"
+        ],
+        "M.Pharm": [
+            "Pharmaceutics",
+            "Pharmacology",
+            "Pharmaceutical Chemistry",
+            "Pharmacognosy",
+            "Other"
+        ],
+        "Diploma": [
+            "Computer Engineering",
+            "Electrical Engineering",
+            "Electronics Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Automobile Engineering",
+            "Other"
+        ],
+        "Ph.D": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Computer Science",
+            "Engineering",
+            "Management",
+            "Commerce",
+            "Other"
+        ]
+    };
+
+    if (courseSelect && branchSelect) {
+        courseSelect.addEventListener("change", () => {
+
+            const selectedCourse = courseSelect.value;
+
+            branchSelect.innerHTML =
+                '<option value="">Select branch / stream</option>';
+
+            const branches = branchesByCourse[selectedCourse] || [];
+
+            branches.forEach(branch => {
+                const option = document.createElement("option");
+                option.value = branch;
+                option.textContent = branch;
+                branchSelect.appendChild(option);
+            });
+
+        });
+    }
 });
     </script>
 </body>
