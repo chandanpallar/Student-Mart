@@ -2419,13 +2419,23 @@ if (productPhotos && photoPreview) {
                         ${listing.status || "available"}
                     </p>
 
-                    <button
-    type="button"
-    onclick="markListingSold('${listing.id}')"
-    class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors"
->
-    Mark Sold
-</button>
+                    ${
+    listing.status === "sold"
+        ? `<button
+                type="button"
+                disabled
+                class="bg-surface-container text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg cursor-not-allowed"
+           >
+                Sold
+           </button>`
+        : `<button
+                type="button"
+                onclick="markListingSold('${listing.id}')"
+                class="bg-surface text-secondary border border-outline-variant font-label-md text-xs py-2 rounded-lg hover:bg-surface-container transition-colors"
+           >
+                Mark Sold
+           </button>`
+}
                 </div>
             `;
 
