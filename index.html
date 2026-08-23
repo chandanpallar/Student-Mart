@@ -2147,9 +2147,18 @@ if (productPhotos && photoPreview) {
                 "absolute top-1 right-1 w-7 h-7 rounded-full bg-black/70 text-white text-lg flex items-center justify-center hover:bg-black";
 
             removeButton.onclick = () => {
-                selectedPhotos.splice(index, 1);
-                renderPhotoPreview();
-            };
+    selectedPhotos.splice(index, 1);
+
+    const dataTransfer = new DataTransfer();
+
+    selectedPhotos.forEach((file) => {
+        dataTransfer.items.add(file);
+    });
+
+    productPhotos.files = dataTransfer.files;
+
+    renderPhotoPreview();
+};
 
             wrapper.appendChild(img);
             wrapper.appendChild(removeButton);
