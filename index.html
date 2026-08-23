@@ -1987,6 +1987,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
         });
     }
+        const otherBranchWrapper = document.getElementById("otherBranchWrapper");
+    const branchOther = document.getElementById("branchOther");
+
+    if (branchSelect) {
+        branchSelect.addEventListener("change", () => {
+
+            if (branchSelect.value === "Other") {
+                otherBranchWrapper.classList.remove("hidden");
+                branchOther.required = true;
+            } else {
+                otherBranchWrapper.classList.add("hidden");
+                branchOther.required = false;
+                branchOther.value = "";
+            }
+
+        });
+    }
 });
     </script>
 </body>
