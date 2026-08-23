@@ -2229,35 +2229,126 @@ if (productPhotos && photoPreview) {
     }
 
     try {
-        const imageUrls = await uploadProductImages();
+        // Logged-in user
+        const { data: userData, error: userError } =
+            await supabaseClient.auth.getUser();
 
-        if (imageUrls.length === 0) {
-            if (submitButton) {
-                submitButton.disabled = false;
-                submitButton.textContent = "Submit";
-            }
+        if (userError || !userData.user) {
+            alert("Please login before submitting a listing.");
+            navigateTo("login");
             return;
         }
 
-        console.log("Uploaded images:", imageUrls);
+        const user = userData.user;
 
-        alert("Photos uploaded successfully!");
+        // Form values
+        const title =
+            document.getElementById("productTitle")?.value.trim() || "";
 
-        if (submitButton) {
-            submitButton.disabled = false;
-            submitButton.textContent = "Submit";
+        const description =
+            document.getElementById("description")?.value.trim() || "";
+
+        const price =
+            document.getElementById("price")?.value || "";
+
+        const category =
+            document.getElementById("category")?.value || "";
+
+        const author =
+            document.getElementById("author")?.value.trim() || null;
+
+        const edition =
+            document.getElementById("edition")?.value.trim() || null;
+
+        const courseSelect =
+            document.getElementById("course");
+
+        const branchSelect =
+            document.getElementById("branch");
+
+        const subject =
+            document.getElementById("subject")?.value.trim() || null;
+
+        let course =
+            courseSelect?.value || null;
+
+        let branch =
+            branchSelect?.value || null;
+
+        // Other Course
+        if (course === "Other") {
+            course =
+                document.getElementById("courseOther")
+                    ?.value.trim() || null;
         }
+
+        // Other Branch
+        if (branch === "Other") {
+            branch =
+                document.getElementById("branchOther")
+                    ?.value.trim() || null;
+        }
+
+        // Basic validation
+        if (!title) {
+            alert("Please enter Product Title.");
+            return;
+        }
+
+        if (!price || Number(price) <= 0) {
+            alert("Please enter a valid price.");
+            return;
+        }
+
+        // Upload photos
+        const imageUrls = await uploadProductImages();
+
+        if (imageUrls.length === 0) {
+            return;
+        }
+
+        // Save listing
+        const { data, error } = await supabaseClient
+            .from("listings")
+            .insert({
+                user_id: user.id,
+                title: title,
+                description: description || null,
+                price: Number(price),
+                category: category || null,
+                image_url: imageUrls[0],
+                image_urls: imageUrls,
+                author: author,
+                edition: edition,
+                course: course,
+                subject: subject
+            })
+            .select()
+            .single();
+
+        if (error) {
+            console.error("Listing insert error:", error);
+            alert("ERROR: " + error.message);
+            return;
+        }
+
+        console.log("Listing created:", data);
+
+        alert("Product listed successfully!");
+
+        navigateTo("profile");
 
     } catch (error) {
         console.error(error);
         alert("ERROR: " + error.message);
 
+    } finally {
         if (submitButton) {
             submitButton.disabled = false;
             submitButton.textContent = "Submit";
         }
     }
-            }
+}
     </script>
 </body>
                         </html>
