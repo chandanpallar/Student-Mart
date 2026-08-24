@@ -3115,11 +3115,20 @@ const otherCollege =
 
 
         // College filter
-        if (college && college !== "All Colleges") {
+        if (college && college !== "Other" && college !== "All Colleges") {
 
-            query = query.eq("college", college);
+    query = query.eq("college", college);
 
-        }
+}
+
+if (college === "Other" && otherCollege) {
+
+    query = query.ilike(
+        "college",
+        `%${otherCollege}%`
+    );
+
+}
 
 
         // Category filter
