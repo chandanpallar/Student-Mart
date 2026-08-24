@@ -3125,9 +3125,34 @@ let query = supabaseClient
 
             const description =
                 (listing.description || "").toLowerCase();
+            // ==========================================
+// SELECTED FILTER MATCHING
+// ==========================================
 
+// Selected Course → 25 points
+if (
+    selectedCourse &&
+    listingCourse.includes(selectedCourse.toLowerCase())
+) {
+    score += 25;
+}
 
-            // Title → 50 points
+// Selected Branch / Stream → 20 points
+if (
+    selectedBranch &&
+    listingBranch.includes(selectedBranch.toLowerCase())
+) {
+    score += 20;
+}
+
+// Selected Subject → 15 points
+if (
+    subject &&
+    listingSubject.includes(subject.toLowerCase())
+) {
+    score += 15;
+}
+ // Title → 50 points
             if (
                 searchQuery &&
                 title.includes(searchQuery)
