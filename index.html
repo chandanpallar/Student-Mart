@@ -3056,41 +3056,6 @@ let query = supabaseClient
             );
 
         }
-
-
-        // Course filter
-        if (selectedCourse) {
-
-            query = query.ilike(
-                "course",
-                `%${selectedCourse}%`
-            );
-
-        }
-
-
-        // Branch filter
-        if (selectedBranch) {
-
-            query = query.ilike(
-                "branch",
-                `%${selectedBranch}%`
-            );
-
-        }
-
-
-        // Subject filter
-        if (subject) {
-
-            query = query.ilike(
-                "subject",
-                `%${subject}%`
-            );
-
-        }
-
-
         // IMPORTANT:
         // Search query ko database filter nahi bana rahe.
         // Search sirf relevance score ke liye use hoga.
