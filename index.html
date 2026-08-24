@@ -1889,6 +1889,34 @@ let selectedPhotos = [];
     }
 
     updateHeaderAuth();
+                // Buyer college - Other option
+    const buyerCollege =
+        document.getElementById("buyerCollege");
+
+    const buyerOtherCollegeWrapper =
+        document.getElementById("buyerOtherCollegeWrapper");
+
+    const buyerOtherCollege =
+        document.getElementById("buyerOtherCollege");
+
+    if (buyerCollege) {
+        buyerCollege.addEventListener("change", () => {
+
+            if (buyerCollege.value === "Other") {
+
+                buyerOtherCollegeWrapper.classList.remove("hidden");
+                buyerOtherCollege.required = true;
+
+            } else {
+
+                buyerOtherCollegeWrapper.classList.add("hidden");
+                buyerOtherCollege.required = false;
+                buyerOtherCollege.value = "";
+
+            }
+
+        });
+            }
 
     const categorySelect = document.getElementById("category");
     const otherCategoryWrapper = document.getElementById("otherCategoryWrapper");
