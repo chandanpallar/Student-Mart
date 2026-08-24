@@ -561,7 +561,7 @@
                      <!-- Form Card -->
                     <div class="bg-surface rounded-xl shadow-sm border border-surface-variant p-lg md:p-xl">
                         <h1 class="font-headline-lg text-headline-lg text-on-surface mb-8">Enter Product Information</h1>
-                        <form onsubmit="handleProductSubmit(event)" class="space-y-6">
+                        <form id="productForm" onsubmit="handleProductSubmit(event)" class="space-y-6">
                             <div>
                                 <label class="block font-label-md text-label-md text-on-surface mb-2" for="title">Product Title *</label>
                                 <input
@@ -2342,7 +2342,23 @@ if (productPhotos && photoPreview) {
 
         alert("Product listed successfully!");
 
-        navigateTo("profile");
+const productForm = document.getElementById("productForm");
+
+if (productForm) {
+    productForm.reset();
+}
+
+selectedPhotos = [];
+
+if (productPhotos) {
+    productPhotos.value = "";
+}
+
+if (photoPreview) {
+    photoPreview.innerHTML = "";
+}
+
+navigateTo("profile");
 
     } catch (error) {
         console.error(error);
