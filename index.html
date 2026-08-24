@@ -2042,6 +2042,361 @@ let selectedPhotos = [];
 
         });
         }
+                // ================= BUYER ACADEMIC FILTERS =================
+
+    const buyerAcademicFilters =
+        document.getElementById("buyerAcademicFilters");
+
+    const buyerCourse =
+        document.getElementById("buyerCourse");
+
+    const buyerBranch =
+        document.getElementById("buyerBranch");
+
+    const buyerSubject =
+        document.getElementById("buyerSubject");
+
+    const buyerOtherCourseWrapper =
+        document.getElementById("buyerOtherCourseWrapper");
+
+    const buyerOtherCourse =
+        document.getElementById("buyerOtherCourse");
+
+    const buyerOtherBranchWrapper =
+        document.getElementById("buyerOtherBranchWrapper");
+
+    const buyerOtherBranch =
+        document.getElementById("buyerOtherBranch");
+
+
+    // Branch options according to course
+    const buyerBranchesByCourse = {
+
+        "B.Tech": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Chemical Engineering",
+            "Biotechnology",
+            "Aerospace Engineering",
+            "Other"
+        ],
+
+        "B.E.": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Chemical Engineering",
+            "Other"
+        ],
+
+        "BCA": [
+            "Computer Applications",
+            "Computer Science",
+            "Data Science",
+            "Other"
+        ],
+
+        "B.Sc": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Biology",
+            "Computer Science",
+            "Statistics",
+            "Geology",
+            "Other"
+        ],
+
+        "B.Com": [
+            "Accounting",
+            "Finance",
+            "Banking",
+            "Taxation",
+            "Other"
+        ],
+
+        "BBA": [
+            "Finance",
+            "Marketing",
+            "Human Resources",
+            "International Business",
+            "Operations",
+            "Other"
+        ],
+
+        "BA": [
+            "English",
+            "History",
+            "Political Science",
+            "Economics",
+            "Geography",
+            "Psychology",
+            "Sociology",
+            "Other"
+        ],
+
+        "B.Pharm": [
+            "Pharmaceutics",
+            "Pharmacology",
+            "Pharmaceutical Chemistry",
+            "Pharmacognosy",
+            "Other"
+        ],
+
+        "LLB": [
+            "Corporate Law",
+            "Criminal Law",
+            "Constitutional Law",
+            "Other"
+        ],
+
+        "MBBS": [
+            "None"
+        ],
+
+        "M.Tech": [
+            "Computer Science & Engineering",
+            "Information Technology",
+            "Electronics & Communication",
+            "Electrical Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Other"
+        ],
+
+        "MCA": [
+            "Computer Applications",
+            "Data Science",
+            "Artificial Intelligence",
+            "Other"
+        ],
+
+        "M.Sc": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Computer Science",
+            "Biotechnology",
+            "Statistics",
+            "Other"
+        ],
+
+        "M.Com": [
+            "Accounting",
+            "Finance",
+            "Banking",
+            "Taxation",
+            "Other"
+        ],
+
+        "MBA": [
+            "Finance",
+            "Marketing",
+            "Human Resources",
+            "Operations",
+            "Business Analytics",
+            "International Business",
+            "Other"
+        ],
+
+        "MA": [
+            "English",
+            "History",
+            "Political Science",
+            "Economics",
+            "Psychology",
+            "Sociology",
+            "Other"
+        ],
+
+        "M.Pharm": [
+            "Pharmaceutics",
+            "Pharmacology",
+            "Pharmaceutical Chemistry",
+            "Pharmacognosy",
+            "Other"
+        ],
+
+        "Diploma": [
+            "Computer Engineering",
+            "Electrical Engineering",
+            "Electronics Engineering",
+            "Mechanical Engineering",
+            "Civil Engineering",
+            "Automobile Engineering",
+            "Other"
+        ],
+
+        "Ph.D": [
+            "Physics",
+            "Chemistry",
+            "Mathematics",
+            "Computer Science",
+            "Engineering",
+            "Management",
+            "Commerce",
+            "Other"
+        ]
+
+    };
+
+
+    // Category change
+    if (buyerCategory) {
+
+        buyerCategory.addEventListener("change", () => {
+
+            const category = buyerCategory.value;
+
+            const isAcademic =
+                category === "Books & Textbooks" ||
+                category === "Notes & Study Material";
+
+            if (isAcademic) {
+
+                buyerAcademicFilters
+                    .classList.remove("hidden");
+
+            } else {
+
+                buyerAcademicFilters
+                    .classList.add("hidden");
+
+                buyerCourse.value = "";
+                buyerBranch.innerHTML =
+                    '<option value="">All Branches / Streams</option>';
+
+                buyerSubject.value = "";
+
+                buyerOtherCourseWrapper
+                    ?.classList.add("hidden");
+
+                buyerOtherBranchWrapper
+                    ?.classList.add("hidden");
+
+                if (buyerOtherCourse) {
+                    buyerOtherCourse.value = "";
+                }
+
+                if (buyerOtherBranch) {
+                    buyerOtherBranch.value = "";
+                }
+            }
+
+        });
+
+    }
+
+
+    // Course change
+    if (buyerCourse) {
+
+        buyerCourse.addEventListener("change", () => {
+
+            const selectedCourse =
+                buyerCourse.value;
+
+            buyerBranch.innerHTML =
+                '<option value="">All Branches / Streams</option>';
+
+            if (buyerOtherCourseWrapper) {
+                buyerOtherCourseWrapper
+                    .classList.add("hidden");
+            }
+
+            if (buyerOtherCourse) {
+                buyerOtherCourse.required = false;
+                buyerOtherCourse.value = "";
+            }
+
+            if (buyerOtherBranchWrapper) {
+                buyerOtherBranchWrapper
+                    .classList.add("hidden");
+            }
+
+            if (buyerOtherBranch) {
+                buyerOtherBranch.required = false;
+                buyerOtherBranch.value = "";
+            }
+
+
+            // Course = Other
+            if (selectedCourse === "Other") {
+
+                buyerOtherCourseWrapper
+                    ?.classList.remove("hidden");
+
+                if (buyerOtherCourse) {
+                    buyerOtherCourse.required = true;
+                }
+
+                return;
+            }
+
+
+            // All Courses
+            if (!selectedCourse) {
+                return;
+            }
+
+
+            // Load branches
+            const branches =
+                buyerBranchesByCourse[selectedCourse] || [];
+
+            branches.forEach((branch) => {
+
+                const option =
+                    document.createElement("option");
+
+                option.value = branch;
+                option.textContent = branch;
+
+                buyerBranch.appendChild(option);
+
+            });
+
+        });
+
+    }
+
+
+    // Branch change
+    if (buyerBranch) {
+
+        buyerBranch.addEventListener("change", () => {
+
+            if (buyerBranch.value === "Other") {
+
+                buyerOtherBranchWrapper
+                    ?.classList.remove("hidden");
+
+                if (buyerOtherBranch) {
+                    buyerOtherBranch.required = true;
+                }
+
+            } else {
+
+                buyerOtherBranchWrapper
+                    ?.classList.add("hidden");
+
+                if (buyerOtherBranch) {
+                    buyerOtherBranch.required = false;
+                    buyerOtherBranch.value = "";
+                }
+
+            }
+
+        });
+
+        }
 
     const categorySelect = document.getElementById("category");
     const otherCategoryWrapper = document.getElementById("otherCategoryWrapper");
