@@ -3193,14 +3193,14 @@ if (college === "Other" && otherCollege) {
 
 
         // Search title
-        if (searchQuery) {
+        // Search product
+if (searchQuery) {
 
-            query = query.ilike(
-                "title",
-                `%${searchQuery}%`
-            );
+    query = query.or(
+        `title.ilike.%${searchQuery}%,category.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%,subject.ilike.%${searchQuery}%,course.ilike.%${searchQuery}%,branch.ilike.%${searchQuery}%`
+    );
 
-        }
+}
 
 
         // Newest first
