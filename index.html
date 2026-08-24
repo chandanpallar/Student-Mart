@@ -2513,6 +2513,30 @@ navigateTo("profile");
 
     loadMyListings();
         }
+        async function handleHomeSearch() {
+    const searchInput = document.getElementById("homeSearchInput");
+    const searchQuery = searchInput?.value.trim() || "";
+
+    if (!searchQuery) {
+        alert("Please enter what you are looking for.");
+        return;
+    }
+
+    const { data: userData, error } =
+        await supabaseClient.auth.getUser();
+
+    if (error || !userData.user) {
+        alert("Please login or sign up to search products.");
+        navigateTo("login");
+        return;
+    }
+
+    // Save search query for the next step
+    window.buyerSearchQuery = searchQuery;
+
+    // Next step: college selection
+    navigateTo("browse");
+        }
     </script>
 </body>
                         </html>
