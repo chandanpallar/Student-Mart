@@ -3028,14 +3028,15 @@ navigateTo("profile");
     try {
 
         const searchQuery =
-            window.buyerSearchQuery?.trim() || "";
+            window.buyerSearchQuery?.trim().toLowerCase() || "";
 
         const college =
-    document.getElementById("buyerCollege")?.value || "";
+            document.getElementById("buyerCollege")?.value || "";
 
-const otherCollege =
-    document.getElementById("buyerOtherCollege")
-        ?.value.trim() || "";
+        const otherCollege =
+            document.getElementById("buyerOtherCollege")
+                ?.value.trim() || "";
+
         const category =
             document.getElementById("buyerCategory")?.value || "";
 
@@ -3062,6 +3063,28 @@ const otherCollege =
                 ?.value.trim() || "";
 
 
+        // Actual selected values
+        const selectedCollege =
+            college === "Other"
+                ? otherCollege
+                : college;
+
+        const selectedCategory =
+            category === "Other"
+                ? otherCategory
+                : category;
+
+        const selectedCourse =
+            course === "Other"
+                ? otherCourse
+                : course;
+
+        const selectedBranch =
+            branch === "Other"
+                ? otherBranch
+                : branch;
+
+
         // Start query
         let query = supabaseClient
             .from("listings")
@@ -3070,46 +3093,31 @@ const otherCollege =
 
 
         // College filter
-        if (college && college !== "Other" && college !== "All Colleges") {
+        if (
+            selectedCollege &&
+            college !== "All Colleges"
+        ) {
 
-    query = query.eq("college", college);
-
-}
-
-if (college === "Other" && otherCollege) {
-
-    query = query.ilike(
-        "college",
-        `%${otherCollege}%`
-    );
-
-}
-
-
-        // Category filter
-        if (category && category !== "Other") {
-
-            query = query.eq("category", category);
+            query = query.ilike(
+                "college",
+                `%${selectedCollege}%`
+            );
 
         }
 
-        // Other category
-        if (category === "Other" && otherCategory) {
+
+        // Category filter
+        if (selectedCategory) {
 
             query = query.ilike(
                 "category",
-                `%${otherCategory}%`
+                `%${selectedCategory}%`
             );
 
         }
 
 
         // Course filter
-        const selectedCourse =
-            course === "Other"
-                ? otherCourse
-                : course;
-
         if (selectedCourse) {
 
             query = query.ilike(
@@ -3121,11 +3129,6 @@ if (college === "Other" && otherCollege) {
 
 
         // Branch filter
-        const selectedBranch =
-            branch === "Other"
-                ? otherBranch
-                : branch;
-
         if (selectedBranch) {
 
             query = query.ilike(
@@ -3147,18 +3150,14 @@ if (college === "Other" && otherCollege) {
         }
 
 
-        // Search title
-        // Search product
-if (searchQuery) {
-
-    query = query.or(
-        `title.ilike.%${searchQuery}%,category.ilike.%${searchQuery}%,description.ilike.%${searchQuery}%,subject.ilike.%${searchQuery}%,course.ilike.%${searchQuery}%,branch.ilike.%${searchQuery}%`
-    );
-
-}
+        // IMPORTANT:
+        // Search query ko database filter nahi bana rahe.
+        // Search sirf relevance score ke liye use hoga.
+        // Isliye exact search match na hone wale products
+        // bhi college/category ke andar dikh sakenge.
 
 
-        // Newest first
+        // Newest first from database
         query = query.order(
             "created_at",
             { ascending: false }
@@ -3183,27 +3182,147 @@ if (searchQuery) {
         }
 
 
-        // No results
         if (!listings || listings.length === 0) {
 
             listingsGrid.innerHTML = `
                 <div class="col-span-full text-center py-xl">
                     <p class="text-secondary">
-                        No products found matching your search.
+                        No products found for the selected filters.
                     </p>
                 </div>
             `;
 
             return;
         }
+                // ==========================================
+        // RELEVANCE SCORING
+        // ==========================================
+
+        const scoredListings = listings.map((listing) => {
+
+            let score = 0;
+
+            const title =
+                (listing.title || "").toLowerCase();
+
+            const listingCategory =
+                (listing.category || "").toLowerCase();
+
+            const listingSubject =
+                (listing.subject || "").toLowerCase();
+
+            const listingCourse =
+                (listing.course || "").toLowerCase();
+
+            const listingBranch =
+                (listing.branch || "").toLowerCase();
+
+            const description =
+                (listing.description || "").toLowerCase();
+
+
+            // Title → 50 points
+            if (
+                searchQuery &&
+                title.includes(searchQuery)
+            ) {
+                score += 50;
+            }
+
+
+            // Category → 30 points
+            if (
+                searchQuery &&
+                listingCategory.includes(searchQuery)
+            ) {
+                score += 30;
+            }
+
+
+            // Subject → 15 points
+            if (
+                searchQuery &&
+                listingSubject.includes(searchQuery)
+            ) {
+                score += 15;
+            }
+
+
+            // Course → 25 points
+            if (
+                searchQuery &&
+                listingCourse.includes(searchQuery)
+            ) {
+                score += 25;
+            }
+
+
+            // Branch / Stream → 20 points
+            if (
+                searchQuery &&
+                listingBranch.includes(searchQuery)
+            ) {
+                score += 20;
+            }
+
+
+            // Description → 10 points
+            if (
+                searchQuery &&
+                description.includes(searchQuery)
+            ) {
+                score += 10;
+            }
+
+
+            return {
+                ...listing,
+                relevanceScore: score
+            };
+
+        });
+
+
+        // ==========================================
+        // SORT BY RELEVANCE
+        // Same score → Newest first
+        // ==========================================
+
+        scoredListings.sort((a, b) => {
+
+            // Higher relevance first
+            if (
+                b.relevanceScore !==
+                a.relevanceScore
+            ) {
+                return (
+                    b.relevanceScore -
+                    a.relevanceScore
+                );
+            }
+
+
+            // Same score → newest first
+            const dateA =
+                new Date(a.created_at || 0).getTime();
+
+            const dateB =
+                new Date(b.created_at || 0).getTime();
+
+            return dateB - dateA;
+
+        });
 
 
         // Clear grid
         listingsGrid.innerHTML = "";
 
 
-        // Create product cards
-        listings.forEach((listing) => {
+        // ==========================================
+        // CREATE PRODUCT CARDS
+        // ==========================================
+
+        scoredListings.forEach((listing) => {
 
             const card =
                 document.createElement("div");
@@ -3260,7 +3379,6 @@ if (searchQuery) {
             `;
 
 
-            // Open product detail
             card.addEventListener(
                 "click",
                 () => {
@@ -3277,9 +3395,7 @@ if (searchQuery) {
             listingsGrid.appendChild(card);
 
         });
-
-
-    } catch (error) {
+            } catch (error) {
 
         console.error(
             "Buyer search error:",
