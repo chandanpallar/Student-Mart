@@ -186,12 +186,26 @@
                     <p class="font-body-lg text-body-lg text-secondary mb-lg max-w-2xl">Buy &amp; Sell textbooks, calculators, drafters, and hostel gear securely with peers on your campus.</p>
                     
                     <div class="w-full max-w-3xl flex bg-surface p-base rounded-full shadow-[0px_10px_30px_rgba(15,23,42,0.1)] border border-outline-variant">
-                        <div class="flex-1 flex items-center pl-lg">
-                            <span class="material-symbols-outlined text-secondary mr-sm">search</span>
-                            <input class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface p-0 placeholder-secondary" placeholder="What are you looking for? (e.g. Scientific Calculator)" type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
-                        </div>
-                        <button onclick="navigateTo('browse')" class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-full ml-sm hover:bg-surface-tint transition-colors">Search</button>
-                    </div>
+    <div class="flex-1 flex items-center pl-lg">
+        <span class="material-symbols-outlined text-secondary mr-sm">search</span>
+
+        <input
+            id="homeSearchInput"
+            class="w-full bg-transparent border-none focus:ring-0 font-body-lg text-body-lg text-on-surface p-0 placeholder-secondary"
+            placeholder="What are you looking for? (e.g. Scientific Calculator)"
+            type="text"
+            onkeydown="if(event.key==='Enter') handleHomeSearch()"
+        />
+    </div>
+
+    <button
+        type="button"
+        onclick="handleHomeSearch()"
+        class="bg-primary text-on-primary font-label-md text-label-md px-xl py-sm rounded-full ml-sm hover:bg-surface-tint transition-colors"
+    >
+        Search
+    </button>
+</div>
   </section>
 <!-- Category Section -->
                 <section class="max-w-container-max mx-auto px-gutter py-xl">
