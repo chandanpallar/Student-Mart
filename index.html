@@ -3086,10 +3086,23 @@ navigateTo("profile");
 
 
         // Start query
-        let query = supabaseClient
-            .from("listings")
-            .select("*")
-            .eq("status", "available");
+        const { data: userData, error: userError } =
+    await supabaseClient.auth.getUser();
+
+if (userError || !userData.user) {
+    listingsGrid.innerHTML =
+        '<p class="text-secondary col-span-full">Please login to search products.</p>';
+    return;
+}
+
+const currentUserId = userData.user.id;
+
+
+let query = supabaseClient
+    .from("listings")
+    .select("*")
+    .eq("status", "available")
+    .neq("user_id", currentUserId);
 
 
         // College filter
