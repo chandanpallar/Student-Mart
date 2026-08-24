@@ -3060,6 +3060,271 @@ navigateTo("profile");
     // Next step: college selection
     navigateTo("browse");
         }
+        async function searchBuyerListings() {
+
+    const listingsGrid =
+        document.getElementById("buyerListingsGrid");
+
+    if (!listingsGrid) return;
+
+    listingsGrid.innerHTML =
+        '<p class="text-secondary col-span-full">Searching products...</p>';
+
+    try {
+
+        const searchQuery =
+            window.buyerSearchQuery?.trim() || "";
+
+        const college =
+            document.getElementById("buyerCollege")?.value || "";
+
+        const category =
+            document.getElementById("buyerCategory")?.value || "";
+
+        const otherCategory =
+            document.getElementById("buyerOtherCategory")
+                ?.value.trim() || "";
+
+        const course =
+            document.getElementById("buyerCourse")?.value || "";
+
+        const otherCourse =
+            document.getElementById("buyerOtherCourse")
+                ?.value.trim() || "";
+
+        const branch =
+            document.getElementById("buyerBranch")?.value || "";
+
+        const otherBranch =
+            document.getElementById("buyerOtherBranch")
+                ?.value.trim() || "";
+
+        const subject =
+            document.getElementById("buyerSubject")
+                ?.value.trim() || "";
+
+
+        // Start query
+        let query = supabaseClient
+            .from("listings")
+            .select("*")
+            .eq("status", "available");
+
+
+        // College filter
+        if (college && college !== "All Colleges") {
+
+            query = query.eq("college", college);
+
+        }
+
+
+        // Category filter
+        if (category && category !== "Other") {
+
+            query = query.eq("category", category);
+
+        }
+
+        // Other category
+        if (category === "Other" && otherCategory) {
+
+            query = query.ilike(
+                "category",
+                `%${otherCategory}%`
+            );
+
+        }
+
+
+        // Course filter
+        const selectedCourse =
+            course === "Other"
+                ? otherCourse
+                : course;
+
+        if (selectedCourse) {
+
+            query = query.ilike(
+                "course",
+                `%${selectedCourse}%`
+            );
+
+        }
+
+
+        // Branch filter
+        const selectedBranch =
+            branch === "Other"
+                ? otherBranch
+                : branch;
+
+        if (selectedBranch) {
+
+            query = query.ilike(
+                "branch",
+                `%${selectedBranch}%`
+            );
+
+        }
+
+
+        // Subject filter
+        if (subject) {
+
+            query = query.ilike(
+                "subject",
+                `%${subject}%`
+            );
+
+        }
+
+
+        // Search title
+        if (searchQuery) {
+
+            query = query.ilike(
+                "title",
+                `%${searchQuery}%`
+            );
+
+        }
+
+
+        // Newest first
+        query = query.order(
+            "created_at",
+            { ascending: false }
+        );
+
+
+        const { data: listings, error } =
+            await query;
+
+
+        if (error) {
+
+            console.error(
+                "Buyer listings search error:",
+                error
+            );
+
+            listingsGrid.innerHTML =
+                '<p class="text-secondary col-span-full">Unable to load products.</p>';
+
+            return;
+        }
+
+
+        // No results
+        if (!listings || listings.length === 0) {
+
+            listingsGrid.innerHTML = `
+                <div class="col-span-full text-center py-xl">
+                    <p class="text-secondary">
+                        No products found matching your search.
+                    </p>
+                </div>
+            `;
+
+            return;
+        }
+
+
+        // Clear grid
+        listingsGrid.innerHTML = "";
+
+
+        // Create product cards
+        listings.forEach((listing) => {
+
+            const card =
+                document.createElement("div");
+
+            card.className =
+                "bg-surface rounded-2xl shadow-sm overflow-hidden flex flex-col group cursor-pointer hover:-translate-y-1 transition-all duration-200 border border-outline-variant/30";
+
+
+            const imageUrl =
+                listing.image_url ||
+                "https://via.placeholder.com/600x400?text=No+Image";
+
+
+            card.innerHTML = `
+
+                <div class="relative aspect-[4/3] bg-surface-container-low overflow-hidden">
+
+                    <img
+                        class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        src="${imageUrl}"
+                        alt="${listing.title || "Product"}"
+                    />
+
+                </div>
+
+
+                <div class="p-4 flex flex-col gap-xs flex-1">
+
+                    <h3 class="font-body-lg text-body-lg font-semibold text-on-surface line-clamp-2">
+                        ${listing.title || "Untitled"}
+                    </h3>
+
+
+                    <div class="font-price-display text-price-display text-primary mt-auto pt-2">
+                        ₹${Number(listing.price || 0).toLocaleString("en-IN")}
+                    </div>
+
+
+                    <div class="flex items-center justify-between mt-2 pt-2 border-t border-surface-variant">
+
+                        <div class="flex items-center gap-1 text-secondary font-label-md text-xs">
+
+                            <span class="material-symbols-outlined text-xs">
+                                location_on
+                            </span>
+
+                            ${listing.college || "College"}
+
+                        </div>
+
+                    </div>
+
+                </div>
+            `;
+
+
+            // Open product detail
+            card.addEventListener(
+                "click",
+                () => {
+
+                    window.selectedListing =
+                        listing;
+
+                    navigateTo("product-detail");
+
+                }
+            );
+
+
+            listingsGrid.appendChild(card);
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Buyer search error:",
+            error
+        );
+
+        listingsGrid.innerHTML =
+            '<p class="text-secondary col-span-full">Something went wrong.</p>';
+
+    }
+
+        }
     </script>
 </body>
                         </html>
