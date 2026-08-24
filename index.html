@@ -1934,6 +1934,34 @@ let selectedPhotos = [];
 
         });
             }
+                // Buyer category - Other option
+    const buyerCategory =
+        document.getElementById("buyerCategory");
+
+    const buyerOtherCategoryWrapper =
+        document.getElementById("buyerOtherCategoryWrapper");
+
+    const buyerOtherCategory =
+        document.getElementById("buyerOtherCategory");
+
+    if (buyerCategory) {
+        buyerCategory.addEventListener("change", () => {
+
+            if (buyerCategory.value === "Other") {
+
+                buyerOtherCategoryWrapper.classList.remove("hidden");
+                buyerOtherCategory.required = true;
+
+            } else {
+
+                buyerOtherCategoryWrapper.classList.add("hidden");
+                buyerOtherCategory.required = false;
+                buyerOtherCategory.value = "";
+
+            }
+
+        });
+        }
 
     const categorySelect = document.getElementById("category");
     const otherCategoryWrapper = document.getElementById("otherCategoryWrapper");
