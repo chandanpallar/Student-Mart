@@ -3047,21 +3047,13 @@ navigateTo("profile");
             `₹${Number(listing.price || 0).toLocaleString("en-IN")}`;
     }
                 // Description
-    const descriptionText =
-        document.querySelector(
-            "#view-product-detail .font-body-md.text-body-md"
-        );
+    const descriptionElement =
+    document.getElementById("product-description");
 
-    if (descriptionText) {
-        descriptionText.innerHTML = "";
-
-        const description = document.createElement("p");
-
-        description.textContent =
-            listing.description || "No description provided.";
-
-        descriptionText.appendChild(description);
-    }
+if (descriptionElement) {
+    descriptionElement.textContent =
+        listing.description || "No description provided.";
+}
 
     // Product academic / book details
     const detailsGrid =
