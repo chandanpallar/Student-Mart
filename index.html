@@ -1653,6 +1653,138 @@ async function loadChatMessages() {
     container.scrollTop =
         container.scrollHeight;
         }
+        async function loadChatList() {
+    const container =
+        document.getElementById("chat-list-container");
+
+    if (!container) return;
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) return;
+
+    const { data: messages, error } =
+        await supabaseClient
+            .from("messages")
+            .select(`
+                id,
+                listing_id,
+                sender_id,
+                receiver_id,
+                content,
+                created_at,
+                listings (
+                    id,
+                    title,
+                    price,
+                    seller_name,
+                    image_url
+                )
+            `)
+            .or(
+                `sender_id.eq.${user.id},receiver_id.eq.${user.id}`
+            )
+            .order("created_at", {
+                ascending: false
+            });
+
+    if (error) {
+        console.error(
+            "Chat list error:",
+            error
+        );
+        return;
+    }
+
+    container.innerHTML = "";
+
+    const conversations = new Map();
+
+    messages.forEach(message => {
+        const otherUserId =
+            message.sender_id === user.id
+                ? message.receiver_id
+                : message.sender_id;
+
+        if (!conversations.has(otherUserId)) {
+            conversations.set(
+                otherUserId,
+                message
+            );
+        }
+    });
+
+    conversations.forEach(message => {
+        const listing =
+            message.listings || {};
+
+        const isMine =
+            message.sender_id === user.id;
+
+        const otherUserName =
+            isMine
+                ? "Buyer"
+                : listing.seller_name || "Seller";
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "p-md border-b border-outline-variant cursor-pointer hover:bg-surface-container-low transition-colors flex gap-sm";
+
+        item.innerHTML = `
+            <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold">
+                ${otherUserName
+                    .substring(0, 2)
+                    .toUpperCase()}
+            </div>
+
+            <div class="flex-grow min-w-0">
+
+                <div class="flex justify-between items-baseline mb-base">
+                    <h3 class="font-label-md text-label-md text-on-surface truncate">
+                        ${otherUserName}
+                    </h3>
+
+                    <span class="text-xs text-secondary whitespace-nowrap ml-2">
+                        ${new Date(
+                            message.created_at
+                        ).toLocaleDateString("en-IN")}
+                    </span>
+                </div>
+
+                <p class="font-label-md text-xs text-on-surface-variant truncate">
+                    ${listing.title || "Product"}
+                </p>
+
+                <p class="font-body-md text-secondary truncate text-sm">
+                    ${message.content || ""}
+                </p>
+
+            </div>
+        `;
+
+        item.onclick = () => {
+            window.selectedChatListing =
+                listing;
+
+            loadChatMessages();
+        };
+
+        container.appendChild(item);
+    });
+
+    if (conversations.size === 0) {
+        container.innerHTML = `
+            <div class="p-6 text-center text-secondary">
+                No messages yet.
+            </div>
+        `;
+    }
+        }
         function subscribeToChatMessages() {
     const listing = window.selectedChatListing;
 
