@@ -1661,6 +1661,32 @@ async function loadChatMessages() {
     container.scrollTop =
         container.scrollHeight;
         }
+        function subscribeToChatMessages() {
+    const listing = window.selectedChatListing;
+
+    if (!listing) return;
+
+    const channel =
+        supabaseClient
+            .channel(
+                `chat-${listing.id}-${Date.now()}`
+            )
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+                    schema: "public",
+                    table: "messages",
+                    filter: `listing_id=eq.${listing.id}`
+                },
+                () => {
+                    loadChatMessages();
+                }
+            )
+            .subscribe();
+
+    window.activeChatChannel = channel;
+        }
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
