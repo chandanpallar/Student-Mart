@@ -3145,22 +3145,28 @@ navigateTo("profile");
         }
     }
                 // ==========================================
-    // MEETUP LOCATION
-    // ==========================================
+// SELLER LOCATION
+// ==========================================
 
-    const meetupText =
-        document.querySelector(
-            "#view-product-detail .font-body-md.text-body-md.text-secondary"
-        );
+const locationText =
+    document.getElementById("product-location-text");
 
-    if (meetupText) {
-        meetupText.innerHTML = `
-            <span class="material-symbols-outlined text-outline">
-                location_on
-            </span>
-            Approximate area: ${listing.college || "College not specified"}
-        `;
-    }
+if (locationText) {
+
+    const college =
+        listing.college ||
+        "College not specified";
+
+    locationText.innerHTML = `
+        <span class="material-symbols-outlined text-outline">
+            location_on
+        </span>
+
+        <span>
+            ${college}
+        </span>
+    `;
+}
 
 
     // ==========================================
