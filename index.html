@@ -2668,7 +2668,13 @@ if (productPhotos && photoPreview) {
         const user = userData.user;
 
         // Form values
-        const college = user.user_metadata?.college || null;
+        const sellerName =
+    user.user_metadata?.full_name ||
+    "Seller";
+
+const college =
+    user.user_metadata?.college ||
+    null;
         const title =
             document.getElementById("title")?.value.trim() || "";
 
@@ -2738,9 +2744,10 @@ if (productPhotos && photoPreview) {
         const { data, error } = await supabaseClient
             .from("listings")
             .insert({
-                user_id: user.id,
-                college: college,
-                title: title,
+    user_id: user.id,
+    seller_name: sellerName,
+    college: college,
+    title: title,
                 description: description || null,
                 price: Number(price),
                 category: category || null,
