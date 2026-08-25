@@ -3047,6 +3047,44 @@ navigateTo("profile");
         priceElement.textContent =
             `₹${Number(listing.price || 0).toLocaleString("en-IN")}`;
     }
+            // Posted time
+const postedTimeElement =
+    document.getElementById("product-posted-time");
+
+if (postedTimeElement) {
+
+    const createdAt = listing.created_at;
+
+    if (createdAt) {
+
+        const postedDate = new Date(createdAt);
+        const now = new Date();
+
+        const diffMs = now - postedDate;
+        const diffMinutes = Math.floor(diffMs / (1000 * 60));
+        const diffHours = Math.floor(diffMinutes / 60);
+        const diffDays = Math.floor(diffHours / 24);
+
+        if (diffMinutes < 1) {
+            postedTimeElement.textContent = "Posted just now";
+        } else if (diffMinutes < 60) {
+            postedTimeElement.textContent =
+                `Posted ${diffMinutes} minute${diffMinutes === 1 ? "" : "s"} ago`;
+        } else if (diffHours < 24) {
+            postedTimeElement.textContent =
+                `Posted ${diffHours} hour${diffHours === 1 ? "" : "s"} ago`;
+        } else if (diffDays < 30) {
+            postedTimeElement.textContent =
+                `Posted ${diffDays} day${diffDays === 1 ? "" : "s"} ago`;
+        } else {
+            postedTimeElement.textContent =
+                `Posted on ${postedDate.toLocaleDateString("en-IN")}`;
+        }
+
+    } else {
+        postedTimeElement.textContent = "Posted recently";
+    }
+    }
                 // Description
     const descriptionElement =
     document.getElementById("product-description");
