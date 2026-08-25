@@ -3319,8 +3319,52 @@ if (sellerAvatarElement) {
 
     window.selectedChatListing = listing;
 
+    const sellerName =
+        listing.seller_name || "Seller";
+
+    const sellerAvatar =
+        document.getElementById("chat-seller-avatar");
+
+    const sellerNameElement =
+        document.getElementById("chat-seller-name");
+
+    const productTitleElement =
+        document.getElementById("chat-product-title");
+
+    const productPriceElement =
+        document.getElementById("chat-product-price");
+
+    if (sellerNameElement) {
+        sellerNameElement.textContent =
+            sellerName;
+    }
+
+    if (sellerAvatar) {
+        const initials =
+            sellerName
+                .split(" ")
+                .filter(Boolean)
+                .map(word => word[0])
+                .join("")
+                .substring(0, 2)
+                .toUpperCase();
+
+        sellerAvatar.textContent =
+            initials || "S";
+    }
+
+    if (productTitleElement) {
+        productTitleElement.textContent =
+            listing.title || "Product";
+    }
+
+    if (productPriceElement) {
+        productPriceElement.textContent =
+            `₹${Number(listing.price || 0).toLocaleString("en-IN")}`;
+    }
+
     navigateTo("messages");
-            }
+}
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
     const searchQuery = searchInput?.value.trim() || "";
