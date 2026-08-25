@@ -1583,6 +1583,7 @@ container.scrollTop =
 }
 async function loadChatMessages() {
     const listing = window.selectedChatListing;
+const chatUserId = window.selectedChatUserId;
 
     const container =
         document.getElementById("chat-messages-container");
@@ -1608,8 +1609,8 @@ async function loadChatMessages() {
             .select("*")
             .eq("listing_id", listing.id)
             .or(
-                `and(sender_id.eq.${user.id},receiver_id.eq.${listing.user_id}),and(sender_id.eq.${listing.user_id},receiver_id.eq.${user.id})`
-            )
+    `and(sender_id.eq.${user.id},receiver_id.eq.${chatUserId}),and(sender_id.eq.${chatUserId},receiver_id.eq.${user.id})`
+)
             .order("created_at", {
                 ascending: true
             });
