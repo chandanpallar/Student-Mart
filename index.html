@@ -3595,6 +3595,7 @@ if (sellerAvatarElement) {
     navigateTo("messages");
 
 setTimeout(() => {
+    loadChatList();
     loadChatMessages();
     subscribeToChatMessages();
 }, 100);
