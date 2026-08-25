@@ -1585,15 +1585,17 @@ container.scrollTop =
 async function loadChatMessages() {
     const listing = window.selectedChatListing;
 const chatUserId = window.selectedChatUserId;
-    const headerName =
-    document.getElementById("chat-header-name");
+    const chatPartnerName =
+    document.getElementById("chat-seller-name");
 
-const headerAvatar =
-    document.getElementById("chat-header-avatar");
+const chatPartnerAvatar =
+    document.getElementById("chat-seller-avatar");
 
-const headerProduct =
-    document.getElementById("chat-header-product");
+const chatProductTitle =
+    document.getElementById("chat-product-title");
 
+const chatProductPrice =
+    document.getElementById("chat-product-price");
     const container =
         document.getElementById("chat-messages-container");
 
