@@ -1584,22 +1584,12 @@ container.scrollTop =
 }
 async function loadChatMessages() {
     const listing = window.selectedChatListing;
-const chatUserId = window.selectedChatUserId;
-    const chatPartnerName =
-    document.getElementById("chat-seller-name");
+    const chatUserId = window.selectedChatUserId;
 
-const chatPartnerAvatar =
-    document.getElementById("chat-seller-avatar");
-
-const chatProductTitle =
-    document.getElementById("chat-product-title");
-
-const chatProductPrice =
-    document.getElementById("chat-product-price");
     const container =
         document.getElementById("chat-messages-container");
 
-    if (!listing || !container) {
+    if (!listing || !container || !chatUserId) {
         return;
     }
 
@@ -1612,6 +1602,66 @@ const chatProductPrice =
         return;
     }
 
+    // ==========================================
+    // CHAT PARTNER HEADER
+    // ==========================================
+
+    const chatPartnerName =
+        document.getElementById("chat-seller-name");
+
+    const chatPartnerAvatar =
+        document.getElementById("chat-seller-avatar");
+
+    const chatProductTitle =
+        document.getElementById("chat-product-title");
+
+    const chatProductPrice =
+        document.getElementById("chat-product-price");
+
+    const { data: partner, error: partnerError } =
+        await supabaseClient
+            .from("users")
+            .select("name")
+            .eq("id", chatUserId)
+            .single();
+
+    if (!partnerError && partner) {
+
+        const name =
+            partner.name || "User";
+
+        if (chatPartnerName) {
+            chatPartnerName.textContent =
+                name;
+        }
+
+        if (chatPartnerAvatar) {
+            chatPartnerAvatar.textContent =
+                name
+                    .split(" ")
+                    .filter(Boolean)
+                    .map(word => word[0])
+                    .join("")
+                    .substring(0, 2)
+                    .toUpperCase();
+        }
+    }
+
+    // Product details
+    if (chatProductTitle) {
+        chatProductTitle.textContent =
+            listing.title || "Product";
+    }
+
+    if (chatProductPrice) {
+        chatProductPrice.textContent =
+            `₹${Number(listing.price || 0).toLocaleString("en-IN")}`;
+    }
+
+    // ==========================================
+    // LOAD MESSAGES
+    // ==========================================
+
     container.innerHTML = "";
 
     const { data: messages, error } =
@@ -1620,8 +1670,8 @@ const chatProductPrice =
             .select("*")
             .eq("listing_id", listing.id)
             .or(
-    `and(sender_id.eq.${user.id},receiver_id.eq.${chatUserId}),and(sender_id.eq.${chatUserId},receiver_id.eq.${user.id})`
-)
+                `and(sender_id.eq.${user.id},receiver_id.eq.${chatUserId}),and(sender_id.eq.${chatUserId},receiver_id.eq.${user.id})`
+            )
             .order("created_at", {
                 ascending: true
             });
@@ -1635,6 +1685,7 @@ const chatProductPrice =
     }
 
     messages.forEach(message => {
+
         const bubble =
             document.createElement("div");
 
@@ -1652,7 +1703,9 @@ const chatProductPrice =
                     ? "bg-primary text-on-primary rounded-2xl rounded-tr-sm"
                     : "bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm border border-outline-variant/30"
             } px-4 py-3 shadow-sm">
+
                 <p class="font-body-md text-body-md"></p>
+
             </div>
         `;
 
@@ -1664,7 +1717,7 @@ const chatProductPrice =
 
     container.scrollTop =
         container.scrollHeight;
-        }
+}
         async function loadChatList() {
     const container =
         document.getElementById("chat-list-container");
