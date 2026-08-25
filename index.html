@@ -1539,13 +1539,17 @@ const supabaseClient = supabase.createClient(
             .single();
 
     if (error) {
-        console.error(
-            "Message send error:",
-            error
-        );
+    console.error("Message send error:", error);
 
-        alert("Message could not be sent.");
-        return;
+    alert(
+        "ERROR:\n" +
+        "Code: " + (error.code || "") +
+        "\nMessage: " + (error.message || "") +
+        "\nDetails: " + (error.details || "") +
+        "\nHint: " + (error.hint || "")
+    );
+
+    return;
     }
 
     // Show sent message immediately
