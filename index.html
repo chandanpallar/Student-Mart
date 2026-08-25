@@ -1520,7 +1520,8 @@ const supabaseClient = supabase.createClient(
             .insert({
                 listing_id: listing.id,
                 sender_id: user.id,
-                receiver_id: listing.user_id,
+                receiver_id:
+    window.selectedChatUserId || listing.user_id,
                 content: messageText
             })
             .select()
@@ -1769,11 +1770,15 @@ const chatUserId = window.selectedChatUserId;
         `;
 
         item.onclick = () => {
-            window.selectedChatListing =
-                listing;
+    window.selectedChatListing = listing;
 
-            loadChatMessages();
-        };
+    window.selectedChatUserId =
+        message.sender_id === user.id
+            ? message.receiver_id
+            : message.sender_id;
+
+    loadChatMessages();
+};
 
         container.appendChild(item);
     });
