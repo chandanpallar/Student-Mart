@@ -550,23 +550,38 @@
                             </div>
 
                             <!-- Seller Info Snippet -->
-                            <div class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl mb-6 border border-outline-variant/30">
-                                <div class="w-12 h-12 bg-primary-container text-on-primary rounded-full flex items-center justify-center font-bold text-lg">AS</div>
-                                <div class="flex-grow">
-                                    <div class="flex items-center gap-2">
-                                        <span class="font-label-md text-label-md text-on-surface">Aditya S.</span>
-                                        <span class="px-2 py-0.5 bg-[#ECFDF5] text-[#10B981] text-xs font-bold rounded-full flex items-center gap-1">
-                                            <span class="material-symbols-outlined text-[14px] filled">verified</span> Verified
-                                        </span>
-                                    </div>
-                                    <div class="flex items-center gap-1 text-sm text-secondary mt-1">
-                                        <span class="material-symbols-outlined text-[16px] text-[#F59E0B] filled">star</span>
-                                        <span class="font-medium">4.8</span>
-                                        <span>· OUTR Bhubaneswar</span>
-                                    </div>
-                                </div>
-                            </div>
+                            <div
+    id="product-seller-info"
+    class="flex items-center gap-4 p-4 bg-surface-container-low rounded-xl mb-6 border border-outline-variant/30"
+>
+    <div
+        id="product-seller-avatar"
+        class="w-12 h-12 bg-primary-container text-on-primary rounded-full flex items-center justify-center font-bold text-lg"
+    >
+        S
+    </div>
 
+    <div class="flex-grow">
+        <div class="flex items-center gap-2">
+            <span
+                id="product-seller-name"
+                class="font-label-md text-label-md text-on-surface"
+            >
+                Seller
+            </span>
+        </div>
+
+        <div class="flex items-center gap-1 text-sm text-secondary mt-1">
+            <span class="material-symbols-outlined text-[16px]">
+                location_on
+            </span>
+
+            <span id="product-seller-college">
+                College
+            </span>
+        </div>
+    </div>
+</div>
                             <!-- Action Buttons -->
                             <div class="flex flex-col gap-3">
                                 <button onclick="navigateTo('messages')" class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl shadow-sm hover:bg-surface-tint transition-all flex justify-center items-center gap-2">
