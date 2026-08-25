@@ -1587,7 +1587,78 @@ const supabaseClient = supabase.createClient(
     container.scrollTop =
         container.scrollHeight;
 }
+async function loadChatMessages() {
+    const listing = window.selectedChatListing;
 
+    const container =
+        document.getElementById("chat-messages-container");
+
+    if (!listing || !container) {
+        return;
+    }
+
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    const { data: messages, error } =
+        await supabaseClient
+            .from("messages")
+            .select("*")
+            .eq("listing_id", listing.id)
+            .or(
+                `and(sender_id.eq.${user.id},receiver_id.eq.${listing.user_id}),and(sender_id.eq.${listing.user_id},receiver_id.eq.${user.id})`
+            )
+            .order("created_at", {
+                ascending: true
+            });
+
+    if (error) {
+        console.error(
+            "Load messages error:",
+            error
+        );
+        return;
+    }
+
+    messages.forEach(message => {
+        const bubble =
+            document.createElement("div");
+
+        const isMine =
+            message.sender_id === user.id;
+
+        bubble.className =
+            isMine
+                ? "flex justify-end max-w-[85%] self-end mt-2"
+                : "flex justify-start max-w-[85%] self-start mt-2";
+
+        bubble.innerHTML = `
+            <div class="${
+                isMine
+                    ? "bg-primary text-on-primary rounded-2xl rounded-tr-sm"
+                    : "bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm border border-outline-variant/30"
+            } px-4 py-3 shadow-sm">
+                <p class="font-body-md text-body-md"></p>
+            </div>
+        `;
+
+        bubble.querySelector("p").textContent =
+            message.content;
+
+        container.appendChild(bubble);
+    });
+
+    container.scrollTop =
+        container.scrollHeight;
+        }
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
