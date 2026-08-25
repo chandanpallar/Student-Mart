@@ -3016,6 +3016,102 @@ navigateTo("profile");
         priceElement.textContent =
             `₹${Number(listing.price || 0).toLocaleString("en-IN")}`;
     }
+                // Description
+    const descriptionText =
+        document.querySelector(
+            "#view-product-detail .font-body-md.text-body-md"
+        );
+
+    if (descriptionText) {
+        descriptionText.innerHTML = "";
+
+        const description = document.createElement("p");
+
+        description.textContent =
+            listing.description || "No description provided.";
+
+        descriptionText.appendChild(description);
+    }
+
+    // Product academic / book details
+    const detailsGrid =
+        document.querySelector(
+            "#view-product-detail .grid.grid-cols-2.gap-4"
+        );
+
+    if (detailsGrid) {
+        detailsGrid.innerHTML = "";
+
+        const details = [];
+
+        if (listing.author) {
+            details.push({
+                label: "Author",
+                value: listing.author
+            });
+        }
+
+        if (listing.edition) {
+            details.push({
+                label: "Edition",
+                value: listing.edition
+            });
+        }
+
+        if (listing.course) {
+            details.push({
+                label: "Course",
+                value: listing.course
+            });
+        }
+
+        if (listing.branch) {
+            details.push({
+                label: "Branch / Stream",
+                value: listing.branch
+            });
+        }
+
+        if (listing.subject) {
+            details.push({
+                label: "Subject",
+                value: listing.subject
+            });
+        }
+
+        if (listing.category) {
+            details.push({
+                label: "Category",
+                value: listing.category
+            });
+        }
+
+        if (details.length === 0) {
+            detailsGrid.innerHTML = `
+                <div class="col-span-2">
+                    <span class="text-on-surface font-medium">
+                        No additional details provided.
+                    </span>
+                </div>
+            `;
+        } else {
+            details.forEach(detail => {
+                const item = document.createElement("div");
+
+                item.innerHTML = `
+                    <span class="block font-label-md text-xs text-outline uppercase tracking-wider mb-1">
+                        ${detail.label}
+                    </span>
+
+                    <span class="text-on-surface font-medium">
+                        ${detail.value}
+                    </span>
+                `;
+
+                detailsGrid.appendChild(item);
+            });
+        }
+    }
         }
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
