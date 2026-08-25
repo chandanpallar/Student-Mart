@@ -3154,75 +3154,49 @@ navigateTo("profile");
 
 
     // ==========================================
-    // SELLER INFORMATION
-    // ==========================================
+// SELLER INFORMATION
+// ==========================================
 
-    const sellerNameElement =
-        document.querySelector(
-            "#view-product-detail .font-label-md.text-label-md.text-on-surface"
-        );
+const sellerNameElement =
+    document.getElementById("product-seller-name");
 
-    const sellerAvatar =
-        document.querySelector(
-            "#view-product-detail .w-12.h-12.bg-primary-container"
-        );
+const sellerCollegeElement =
+    document.getElementById("product-seller-college");
 
-    if (sellerNameElement) {
-        sellerNameElement.textContent = "Seller";
-    }
+const sellerAvatarElement =
+    document.getElementById("product-seller-avatar");
 
-    if (sellerAvatar) {
-        sellerAvatar.textContent = "S";
-    }
+const sellerName =
+    listing.seller_name ||
+    "Seller";
 
+const sellerCollege =
+    listing.college ||
+    "College not specified";
 
-    // Get seller profile from Supabase Auth
-    if (listing.user_id) {
+const sellerInitials =
+    sellerName
+        .split(" ")
+        .filter(word => word.trim() !== "")
+        .map(word => word[0])
+        .join("")
+        .substring(0, 2)
+        .toUpperCase();
 
-        try {
+if (sellerNameElement) {
+    sellerNameElement.textContent =
+        sellerName;
+}
 
-            const { data: sellerData, error: sellerError } =
-                await supabaseClient
-                    .from("profiles")
-                    .select("*")
-                    .eq("id", listing.user_id)
-                    .maybeSingle();
+if (sellerCollegeElement) {
+    sellerCollegeElement.textContent =
+        sellerCollege;
+}
 
-            if (!sellerError && sellerData) {
-
-                const sellerName =
-                    sellerData.full_name ||
-                    sellerData.name ||
-                    sellerData.email ||
-                    "Seller";
-
-                const sellerInitials =
-                    sellerName
-                        .split(" ")
-                        .map(word => word[0])
-                        .join("")
-                        .substring(0, 2)
-                        .toUpperCase();
-
-                if (sellerNameElement) {
-                    sellerNameElement.textContent = sellerName;
-                }
-
-                if (sellerAvatar) {
-                    sellerAvatar.textContent = sellerInitials;
-                }
-
-            }
-
-        } catch (sellerError) {
-
-            console.error(
-                "Seller profile error:",
-                sellerError
-            );
-
-        }
-    }
+if (sellerAvatarElement) {
+    sellerAvatarElement.textContent =
+        sellerInitials || "S";
+}
         }
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
