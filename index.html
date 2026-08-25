@@ -1512,7 +1512,7 @@ const supabaseClient = supabase.createClient(
 
     // Current listing
     const listing =
-        window.selectedListing;
+    window.selectedChatListing || window.selectedListing;
 
     if (!listing || !listing.id || !listing.user_id) {
         alert("Seller information not available.");
@@ -1584,8 +1584,10 @@ const supabaseClient = supabase.createClient(
 
     input.value = "";
 
-    container.scrollTop =
-        container.scrollHeight;
+await loadChatMessages();
+
+container.scrollTop =
+    container.scrollHeight;
 }
 async function loadChatMessages() {
     const listing = window.selectedChatListing;
