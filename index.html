@@ -3112,6 +3112,95 @@ navigateTo("profile");
             });
         }
     }
+                // ==========================================
+    // MEETUP LOCATION
+    // ==========================================
+
+    const meetupText =
+        document.querySelector(
+            "#view-product-detail .font-body-md.text-body-md.text-secondary"
+        );
+
+    if (meetupText) {
+        meetupText.innerHTML = `
+            <span class="material-symbols-outlined text-outline">
+                location_on
+            </span>
+            Approximate area: ${listing.college || "College not specified"}
+        `;
+    }
+
+
+    // ==========================================
+    // SELLER INFORMATION
+    // ==========================================
+
+    const sellerNameElement =
+        document.querySelector(
+            "#view-product-detail .font-label-md.text-label-md.text-on-surface"
+        );
+
+    const sellerAvatar =
+        document.querySelector(
+            "#view-product-detail .w-12.h-12.bg-primary-container"
+        );
+
+    if (sellerNameElement) {
+        sellerNameElement.textContent = "Seller";
+    }
+
+    if (sellerAvatar) {
+        sellerAvatar.textContent = "S";
+    }
+
+
+    // Get seller profile from Supabase Auth
+    if (listing.user_id) {
+
+        try {
+
+            const { data: sellerData, error: sellerError } =
+                await supabaseClient
+                    .from("profiles")
+                    .select("*")
+                    .eq("id", listing.user_id)
+                    .maybeSingle();
+
+            if (!sellerError && sellerData) {
+
+                const sellerName =
+                    sellerData.full_name ||
+                    sellerData.name ||
+                    sellerData.email ||
+                    "Seller";
+
+                const sellerInitials =
+                    sellerName
+                        .split(" ")
+                        .map(word => word[0])
+                        .join("")
+                        .substring(0, 2)
+                        .toUpperCase();
+
+                if (sellerNameElement) {
+                    sellerNameElement.textContent = sellerName;
+                }
+
+                if (sellerAvatar) {
+                    sellerAvatar.textContent = sellerInitials;
+                }
+
+            }
+
+        } catch (sellerError) {
+
+            console.error(
+                "Seller profile error:",
+                sellerError
+            );
+
+        }
+    }
         }
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
