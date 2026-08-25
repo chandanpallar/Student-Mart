@@ -1670,11 +1670,17 @@ async function loadChatMessages() {
 
     if (!listing) return;
 
+    if (window.activeChatChannel) {
+        supabaseClient.removeChannel(
+            window.activeChatChannel
+        );
+
+        window.activeChatChannel = null;
+    }
+
     const channel =
         supabaseClient
-            .channel(
-                `chat-${listing.id}-${Date.now()}`
-            )
+            .channel(`chat-${listing.id}`)
             .on(
                 "postgres_changes",
                 {
@@ -1690,7 +1696,7 @@ async function loadChatMessages() {
             .subscribe();
 
     window.activeChatChannel = channel;
-        }
+}
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
         });
