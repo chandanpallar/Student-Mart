@@ -1488,37 +1488,109 @@ const supabaseClient = supabase.createClient(
             }
         }
 
-        function sendMessage(event) {
-            event.preventDefault();
-            const input = document.getElementById('chat-input-field');
-            const container = document.getElementById('chat-messages-container');
-            
-            if (input && input.value.trim() !== '' && container) {
-                const messageText = input.value.trim();
-                const msgBubble = document.createElement('div');
-                msgBubble.className = 'flex justify-end max-w-[85%] self-end mt-2';
-                msgBubble.innerHTML = `
-                    <div class="bg-primary text-on-primary rounded-2xl rounded-tr-sm px-4 py-3 shadow-sm">
-                        <p class="font-body-md text-body-md">${messageText}</p>
-                    </div>
-                `;
-                container.appendChild(msgBubble);
-                input.value = '';
-                container.scrollTop = container.scrollHeight;
+        async function sendMessage(event) {
+    event.preventDefault();
 
-                setTimeout(() => {
-                    const replyBubble = document.createElement('div');
-                    replyBubble.className = 'flex justify-start max-w-[85%] self-start mt-2';
-                    replyBubble.innerHTML = `
-                        <div class="bg-surface-container-highest text-on-surface rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm border border-outline-variant/30">
-                            <p class="font-body-md text-body-md">Sounds good! Let's meet near the central library.</p>
-                        </div>
-                    `;
-                    container.appendChild(replyBubble);
-                    container.scrollTop = container.scrollHeight;
-                }, 1000);
-            }
-        }
+    const input =
+        document.getElementById("chat-input-field");
+
+    const container =
+        document.getElementById("chat-messages-container");
+
+    if (!input || !container) return;
+
+    const messageText = input.value.trim();
+
+    if (!messageText) return;
+
+    // Current logged-in user
+    const {
+        data: { user },
+        error: userError
+    } = await supabaseClient.auth.getUser();
+
+    if (userError || !user) {
+        alert("Please login first.");
+        return;
+    }
+
+    // Current listing
+    const listing =
+        window.selectedListing;
+
+    if (!listing || !listing.id || !listing.user_id) {
+        alert("Seller information not available.");
+        return;
+    }
+
+    // Prevent messaging yourself
+    if (listing.user_id === user.id) {
+        alert("You cannot message yourself.");
+        return;
+    }
+
+    // Save message to Supabase
+    const { data, error } =
+        await supabaseClient
+            .from("messages")
+            .insert({
+                listing_id: listing.id,
+                sender_id: user.id,
+                receiver_id: listing.user_id,
+                content: messageText
+            })
+            .select()
+            .single();
+
+    if (error) {
+        console.error(
+            "Message send error:",
+            error
+        );
+
+        alert("Message could not be sent.");
+        return;
+    }
+
+    // Show sent message immediately
+    const msgBubble =
+        document.createElement("div");
+
+    msgBubble.className =
+        "flex justify-end max-w-[85%] self-end mt-2";
+
+    const messageDiv =
+        document.createElement("div");
+
+    messageDiv.className =
+        "bg-primary text-on-primary rounded-2xl rounded-tr-sm px-4 py-3 shadow-sm";
+
+    const messageParagraph =
+        document.createElement("p");
+
+    messageParagraph.className =
+        "font-body-md text-body-md";
+
+    messageParagraph.textContent =
+        data.content;
+
+    messageDiv.appendChild(
+        messageParagraph
+    );
+
+    msgBubble.appendChild(
+        messageDiv
+    );
+
+    container.appendChild(
+        msgBubble
+    );
+
+    input.value = "";
+
+    container.scrollTop =
+        container.scrollHeight;
+}
 
         document.addEventListener('DOMContentLoaded', () => {
             navigateTo('home');
