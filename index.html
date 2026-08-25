@@ -3313,6 +3313,18 @@ if (sellerAvatarElement) {
         sellerInitials || "S";
 }
         }
+        function openSellerChat() {
+    const listing = window.selectedListing;
+
+    if (!listing) {
+        alert("Product information not found.");
+        return;
+    }
+
+    window.selectedChatListing = listing;
+
+    navigateTo("messages");
+            }
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
     const searchQuery = searchInput?.value.trim() || "";
