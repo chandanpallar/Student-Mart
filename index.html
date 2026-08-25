@@ -3435,6 +3435,10 @@ if (sellerAvatarElement) {
     }
 
     navigateTo("messages");
+
+setTimeout(() => {
+    loadChatMessages();
+}, 100);
 }
         async function handleHomeSearch() {
     const searchInput = document.getElementById("homeSearchInput");
