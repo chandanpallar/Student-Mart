@@ -1777,6 +1777,27 @@ const chatUserId = window.selectedChatUserId;
             ? message.receiver_id
             : message.sender_id;
 
+    const sidebar =
+        document.getElementById("chat-list-container")
+            ?.closest("aside");
+
+    const chatCanvas =
+        document.getElementById(
+            "chat-messages-container"
+        )?.closest("section");
+
+    if (window.innerWidth < 768) {
+        if (sidebar) {
+            sidebar.classList.add("hidden");
+            sidebar.classList.remove("flex");
+        }
+
+        if (chatCanvas) {
+            chatCanvas.classList.remove("hidden");
+            chatCanvas.classList.add("flex");
+        }
+    }
+
     loadChatMessages();
 };
 
