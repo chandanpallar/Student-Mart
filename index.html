@@ -1838,13 +1838,31 @@ async function loadChatMessages() {
         let otherUserName = "User";
 
         const {
-            data: partner,
-            error: partnerError
-        } = await supabaseClient
-            .from("users")
-            .select("name")
-            .eq("id", otherUserId)
-            .single();
+    data: partner,
+    error: partnerError
+} = await supabaseClient
+    .from("users")
+    .select("name")
+    .eq("id", otherUserId)
+    .maybeSingle();
+
+if (partnerError) {
+    console.error(
+        "Chat partner lookup error:",
+        partnerError
+    );
+}
+
+if (!partner) {
+    console.error(
+        "No user found for chat partner:",
+        otherUserId
+    );
+}
+
+const otherUserName =
+    partner?.name ||
+    "User";
 
         if (!partnerError && partner?.name) {
             otherUserName = partner.name;
