@@ -1736,7 +1736,7 @@ async function loadChatMessages() {
     container.scrollTop =
         container.scrollHeight;
 }
-        async function loadChatList() {
+            async function loadChatList() {
     const container =
         document.getElementById("chat-list-container");
 
@@ -1776,24 +1776,29 @@ async function loadChatMessages() {
             });
 
     if (error) {
-        console.error("Chat list error:", error);
+        console.error(
+            "Chat list error:",
+            error
+        );
         return;
     }
 
     container.innerHTML = "";
 
-    const conversations = new Map();
+    const conversations =
+        new Map();
 
     messages.forEach(message => {
-        const listing = message.listings;
+
+        const listing =
+            message.listings;
 
         if (!listing) return;
 
         const isSeller =
             listing.user_id === user.id;
 
-        // Buying = current user is NOT seller
-        // Selling = current user IS seller
+        // BUYING
         if (
             activeMessageTab === "buying" &&
             isSeller
@@ -1801,6 +1806,7 @@ async function loadChatMessages() {
             return;
         }
 
+        // SELLING
         if (
             activeMessageTab === "selling" &&
             !isSeller
@@ -1813,11 +1819,16 @@ async function loadChatMessages() {
                 ? message.receiver_id
                 : message.sender_id;
 
-        // One conversation per product + person
+        // One conversation =
+        // one product + one other user
         const conversationKey =
             `${message.listing_id}_${otherUserId}`;
 
-        if (!conversations.has(conversationKey)) {
+        if (
+            !conversations.has(
+                conversationKey
+            )
+        ) {
             conversations.set(
                 conversationKey,
                 message
@@ -1825,7 +1836,10 @@ async function loadChatMessages() {
         }
     });
 
-    for (const message of conversations.values()) {
+    for (
+        const message
+        of conversations.values()
+    ) {
 
         const listing =
             message.listings || {};
@@ -1835,47 +1849,50 @@ async function loadChatMessages() {
                 ? message.receiver_id
                 : message.sender_id;
 
-        let otherUserName = "User";
+        // =====================================
+        // GET OTHER USER NAME
+        // =====================================
 
         const {
-    data: partner,
-    error: partnerError
-} = await supabaseClient
-    .from("users")
-    .select("name")
-    .eq("id", otherUserId)
-    .maybeSingle();
+            data: partner,
+            error: partnerError
+        } = await supabaseClient
+            .from("users")
+            .select("name")
+            .eq("id", otherUserId)
+            .maybeSingle();
 
-if (partnerError) {
-    console.error(
-        "Chat partner lookup error:",
-        partnerError
-    );
-}
-
-if (!partner) {
-    console.error(
-        "No user found for chat partner:",
-        otherUserId
-    );
-}
-
-const otherUserName =
-    partner?.name ||
-    "User";
-
-        if (!partnerError && partner?.name) {
-            otherUserName = partner.name;
+        if (partnerError) {
+            console.error(
+                "Chat partner lookup error:",
+                partnerError
+            );
         }
+
+        if (!partner) {
+            console.error(
+                "No user found for chat partner:",
+                otherUserId
+            );
+        }
+
+        const otherUserName =
+            partner?.name || "User";
 
         const initials =
             otherUserName
                 .split(" ")
                 .filter(Boolean)
-                .map(word => word[0])
+                .map(
+                    word => word[0]
+                )
                 .join("")
                 .substring(0, 2)
                 .toUpperCase();
+
+        // =====================================
+        // CHAT ITEM
+        // =====================================
 
         const item =
             document.createElement("div");
@@ -1884,36 +1901,54 @@ const otherUserName =
             "p-md border-b border-outline-variant cursor-pointer hover:bg-surface-container-low transition-colors flex gap-sm";
 
         item.innerHTML = `
-            <div class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold">
+            <div
+                class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold"
+            >
                 ${initials || "U"}
             </div>
 
             <div class="flex-grow min-w-0">
 
-                <div class="flex justify-between items-baseline mb-base">
+                <div
+                    class="flex justify-between items-baseline mb-base"
+                >
 
-                    <h3 class="font-label-md text-label-md text-on-surface truncate">
+                    <h3
+                        class="font-label-md text-label-md text-on-surface truncate"
+                    >
                         ${otherUserName}
                     </h3>
 
-                    <span class="text-xs text-secondary whitespace-nowrap ml-2">
+                    <span
+                        class="text-xs text-secondary whitespace-nowrap ml-2"
+                    >
                         ${new Date(
                             message.created_at
-                        ).toLocaleDateString("en-IN")}
+                        ).toLocaleDateString(
+                            "en-IN"
+                        )}
                     </span>
 
                 </div>
 
-                <p class="font-label-md text-xs text-on-surface-variant truncate">
+                <p
+                    class="font-label-md text-xs text-on-surface-variant truncate"
+                >
                     ${listing.title || "Product"}
                 </p>
 
-                <p class="font-body-md text-secondary truncate text-sm">
+                <p
+                    class="font-body-md text-secondary truncate text-sm"
+                >
                     ${message.content || ""}
                 </p>
 
             </div>
         `;
+
+        // =====================================
+        // OPEN CONVERSATION
+        // =====================================
 
         item.onclick = () => {
 
@@ -1925,24 +1960,40 @@ const otherUserName =
 
             const sidebar =
                 document
-                    .getElementById("chat-list-container")
+                    .getElementById(
+                        "chat-list-container"
+                    )
                     ?.closest("aside");
 
             const chatCanvas =
                 document
-                    .getElementById("chat-messages-container")
+                    .getElementById(
+                        "chat-messages-container"
+                    )
                     ?.closest("section");
 
-            if (window.innerWidth < 768) {
+            if (
+                window.innerWidth < 768
+            ) {
 
                 if (sidebar) {
-                    sidebar.classList.add("hidden");
-                    sidebar.classList.remove("flex");
+                    sidebar.classList.add(
+                        "hidden"
+                    );
+
+                    sidebar.classList.remove(
+                        "flex"
+                    );
                 }
 
                 if (chatCanvas) {
-                    chatCanvas.classList.remove("hidden");
-                    chatCanvas.classList.add("flex");
+                    chatCanvas.classList.remove(
+                        "hidden"
+                    );
+
+                    chatCanvas.classList.add(
+                        "flex"
+                    );
                 }
             }
 
@@ -1952,14 +2003,17 @@ const otherUserName =
         container.appendChild(item);
     }
 
-    if (conversations.size === 0) {
+    if (
+        conversations.size === 0
+    ) {
+
         container.innerHTML = `
             <div class="p-6 text-center text-secondary">
                 No ${activeMessageTab} messages yet.
             </div>
         `;
     }
-        }
+            }
         let activeMessageTab = "buying";
 
 function switchMessageTab(tab) {
