@@ -2077,15 +2077,15 @@ function switchMessageTab(tab) {
 
     if (page === "messages") {
 
-        if (
-            window.selectedChatListing &&
-            window.selectedChatUserId
-        ) {
-            loadChatMessages();
-        } else {
-            activeMessageTab = "buying";
-            loadChatList();
-        }
+    if (
+        window.selectedChatListing &&
+        window.selectedChatUserId
+    ) {
+        loadChatMessages();
+    } else {
+        activeMessageTab = "buying";
+        loadChatList();
+    }
     }
 
     window.scrollTo({
