@@ -1466,16 +1466,72 @@
         </div>
     </footer>
 
-    <!-- Mobile Bottom Navigation Bar -->
-    <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 bg-surface border-t border-outline-variant md:hidden shadow-lg">
-        <button onclick="navigateTo('home')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">home</span><span class="font-label-md text-[10px]">Home</span></button>
-        <button onclick="requireLogin('sell')" class="flex flex-col items-center text-secondary hover:text-primary">
-    <span class="material-symbols-outlined text-[20px]">add_circle</span>
-    <span class="font-label-md text-[10px]">Sell</span>
+    <!-- Responsive Bottom Navigation -->
+<nav
+    class="fixed bottom-0 left-0 w-full z-50 flex justify-center items-center bg-surface border-t border-outline-variant shadow-lg"
+>
+    <div
+        class="w-full max-w-2xl flex justify-around items-center px-4 sm:px-8 py-2"
+    >
+
+        <!-- Home -->
+        <button
+            onclick="navigateTo('home')"
+            class="flex flex-col items-center justify-center min-w-[64px] px-3 py-1 text-secondary hover:text-primary transition-colors"
+        >
+            <span class="material-symbols-outlined text-[22px]">
+                home
+            </span>
+
+            <span class="font-label-md text-[10px] sm:text-xs">
+                Home
+            </span>
         </button>
-        <button onclick="navigateTo('wanted')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">format_list_bulleted</span><span class="font-label-md text-[10px]">Wanted</span></button>
-        <button onclick="navigateTo('profile')" class="flex flex-col items-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-[20px]">person</span><span class="font-label-md text-[10px]">Profile</span></button>
-    </nav>
+
+        <!-- Sell -->
+        <button
+            onclick="requireLogin('sell')"
+            class="flex flex-col items-center justify-center min-w-[64px] px-3 py-1 text-secondary hover:text-primary transition-colors"
+        >
+            <span class="material-symbols-outlined text-[22px]">
+                add_circle
+            </span>
+
+            <span class="font-label-md text-[10px] sm:text-xs">
+                Sell
+            </span>
+        </button>
+
+        <!-- Wanted -->
+        <button
+            onclick="navigateTo('wanted')"
+            class="flex flex-col items-center justify-center min-w-[64px] px-3 py-1 text-secondary hover:text-primary transition-colors"
+        >
+            <span class="material-symbols-outlined text-[22px]">
+                format_list_bulleted
+            </span>
+
+            <span class="font-label-md text-[10px] sm:text-xs">
+                Wanted
+            </span>
+        </button>
+
+        <!-- Profile -->
+        <button
+            onclick="navigateTo('profile')"
+            class="flex flex-col items-center justify-center min-w-[64px] px-3 py-1 text-secondary hover:text-primary transition-colors"
+        >
+            <span class="material-symbols-outlined text-[22px]">
+                person
+            </span>
+
+            <span class="font-label-md text-[10px] sm:text-xs">
+                Profile
+            </span>
+        </button>
+
+    </div>
+</nav>
 
     <!-- SPA JavaScript Router & Interactivity -->
     <script>
