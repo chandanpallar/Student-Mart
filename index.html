@@ -1493,8 +1493,7 @@ const supabaseClient = supabase.createClient(
                 mainImg.src = src;
             }
         }
-
-        async function sendMessage(event) {
+async function sendMessage(event) {
     event.preventDefault();
 
     const input =
@@ -1505,11 +1504,11 @@ const supabaseClient = supabase.createClient(
 
     if (!input || !container) return;
 
-    const messageText = input.value.trim();
+    const messageText =
+        input.value.trim();
 
     if (!messageText) return;
 
-    // Current logged-in user
     const {
         data: { user },
         error: userError
@@ -1520,50 +1519,49 @@ const supabaseClient = supabase.createClient(
         return;
     }
 
-    // Current listing
     const listing =
-    window.selectedChatListing || window.selectedListing;
+        window.selectedChatListing;
 
-    if (!listing || !listing.id || !listing.user_id) {
-        alert("Seller information not available.");
+    const chatUserId =
+        window.selectedChatUserId;
+
+    if (
+        !listing ||
+        !listing.id ||
+        !chatUserId
+    ) {
+        alert("Chat information not available.");
         return;
     }
 
     // Prevent messaging yourself
-    if (listing.user_id === user.id) {
+    if (chatUserId === user.id) {
         alert("You cannot message yourself.");
         return;
     }
 
-    // Save message to Supabase
     const { data, error } =
         await supabaseClient
             .from("messages")
             .insert({
                 listing_id: listing.id,
                 sender_id: user.id,
-                receiver_id:
-    window.selectedChatUserId || listing.user_id,
+                receiver_id: chatUserId,
                 content: messageText
             })
             .select()
             .single();
 
     if (error) {
-    console.error("Message send error:", error);
+        console.error(
+            "Message send error:",
+            error
+        );
 
-    alert(
-        "ERROR:\n" +
-        "Code: " + (error.code || "") +
-        "\nMessage: " + (error.message || "") +
-        "\nDetails: " + (error.details || "") +
-        "\nHint: " + (error.hint || "")
-    );
-
-    return;
+        alert("Message could not be sent.");
+        return;
     }
 
-    // Show sent message immediately
     const msgBubble =
         document.createElement("div");
 
@@ -1599,10 +1597,8 @@ const supabaseClient = supabase.createClient(
 
     input.value = "";
 
-await loadChatMessages();
-
-container.scrollTop =
-    container.scrollHeight;
+    container.scrollTop =
+        container.scrollHeight;
 }
 async function loadChatMessages() {
     const listing = window.selectedChatListing;
