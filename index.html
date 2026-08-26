@@ -1899,11 +1899,21 @@ async function loadChatMessages() {
                     class="flex justify-between items-baseline mb-base"
                 >
 
-                    <h3
-                        class="font-label-md text-label-md text-on-surface truncate"
-                    >
-                        ${otherUserName}
-                    </h3>
+                    <div class="flex items-center gap-2 min-w-0">
+    <h3 class="font-label-md text-label-md text-on-surface truncate">
+        ${otherUserName}
+    </h3>
+
+    ${
+        unreadCount > 0
+            ? `
+                <span class="min-w-5 h-5 px-1.5 rounded-full bg-primary text-on-primary text-[10px] font-bold flex items-center justify-center">
+                    ${unreadCount}
+                </span>
+              `
+            : ""
+    }
+</div>
 
                     <span
                         class="text-xs text-secondary whitespace-nowrap ml-2"
