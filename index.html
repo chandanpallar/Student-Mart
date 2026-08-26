@@ -129,33 +129,105 @@
 <body class="bg-background text-on-background font-body-md antialiased min-h-screen flex flex-col">
 
       <!-- Global Top Header Navigation -->  
-<header class="bg-surface shadow-sm border-b border-outline-variant sticky top-0 z-50">  
-    <div class="flex justify-between items-center w-full px-gutter max-w-container-max mx-auto h-20">  
-        <!-- Brand & Location -->  
-        <div class="flex items-center gap-md">  
-            <a class="font-display-lg text-headline-lg text-primary tracking-tight cursor-pointer" onclick="navigateTo('home')">StudentMart</a> 
+<header class="bg-surface shadow-sm border-b border-outline-variant sticky top-0 z-50">
+    <div class="flex items-center justify-between w-full px-gutter max-w-container-max mx-auto h-20">
+
+        <!-- Brand -->
+        <a
+            class="font-display-lg text-headline-lg text-primary tracking-tight cursor-pointer"
+            onclick="navigateTo('home')"
+        >
+            StudentMart
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center gap-1">
+
+            <button
+                onclick="navigateTo('home')"
+                class="flex items-center gap-2 px-4 py-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-container transition-colors"
+            >
+                <span class="material-symbols-outlined text-[20px]">
+                    home
+                </span>
+                <span class="font-label-md">
+                    Home
+                </span>
+            </button>
+
+            <button
+                onclick="requireLogin('sell')"
+                class="flex items-center gap-2 px-4 py-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-container transition-colors"
+            >
+                <span class="material-symbols-outlined text-[20px]">
+                    add_circle
+                </span>
+                <span class="font-label-md">
+                    Sell
+                </span>
+            </button>
+
+            <button
+                onclick="navigateTo('wanted')"
+                class="flex items-center gap-2 px-4 py-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-container transition-colors"
+            >
+                <span class="material-symbols-outlined text-[20px]">
+                    format_list_bulleted
+                </span>
+                <span class="font-label-md">
+                    Wanted
+                </span>
+            </button>
+
+            <button
+                onclick="navigateTo('profile')"
+                class="flex items-center gap-2 px-4 py-2 rounded-lg text-secondary hover:text-primary hover:bg-surface-container transition-colors"
+            >
+                <span class="material-symbols-outlined text-[20px]">
+                    person
+                </span>
+                <span class="font-label-md">
+                    Profile
+                </span>
+            </button>
+
+        </nav>
+
+        <!-- Right Actions -->
+        <div class="flex items-center gap-sm md:gap-md">
+
+            <!-- Desktop Search -->
+            <div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-md py-xs border border-outline-variant">
+                <span class="material-symbols-outlined text-secondary mr-xs">
+                    search
+                </span>
+
+                <input
+                    class="bg-transparent border-none focus:ring-0 text-body-md p-0 w-36 text-on-surface placeholder-secondary"
+                    placeholder="Search campus..."
+                    type="text"
+                    onkeydown="if(event.key==='Enter') navigateTo('browse')"
+                />
+            </div>
+
+            <!-- Login -->
+            <button
+                id="auth-header-button"
+                onclick="navigateTo('login')"
+                class="bg-primary text-on-primary px-4 md:px-5 py-2 md:py-2.5 rounded-lg font-semibold shadow-sm hover:opacity-90 transition-all cursor-pointer"
+            >
+                <span class="hidden sm:inline">
+                    Login / Sign Up
+                </span>
+                <span class="sm:hidden">
+                    Login
+                </span>
+            </button>
+
         </div>
 
-            <!-- Actions & Search -->
-            <div class="flex items-center gap-md">
-                <div class="hidden lg:flex items-center bg-surface-container-low rounded-full px-md py-xs border border-outline-variant">
-                    <span class="material-symbols-outlined text-secondary mr-xs">search</span>
-                    <input class="bg-transparent border-none focus:ring-0 text-body-md p-0 w-36 text-on-surface placeholder-secondary" placeholder="Search campus..." type="text" onkeydown="if(event.key==='Enter') navigateTo('browse')"/>
-                </div>
-                  <button
-    id="auth-header-button"
-    onclick="navigateTo('login')"
-    class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-semibold shadow-sm hover:opacity-90 transition-all cursor-pointer">
-    Login / Sign Up
-                  </button>
-<button onclick="requireLogin('sell')" 
-    class="font-label-md text-label-md bg-primary text-on-primary px-lg py-sm rounded-xl hover:bg-surface-tint transition-colors shadow-sm flex items-center gap-1">
-    <span class="material-symbols-outlined text-[18px]">add</span>
-    <span>Sell an Item</span>
-</button>
-            </div>
-        </div>
-    </header>
+    </div>
+</header>
 
     <!-- MAIN VIEW CONTAINER -->
     <main class="flex-grow w-full">
