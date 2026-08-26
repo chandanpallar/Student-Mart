@@ -1802,6 +1802,13 @@ async function loadChatMessages() {
         // one product + one other user
         const conversationKey =
             `${message.listing_id}_${otherUserId}`;
+        const unreadCount =
+    messages.filter(msg =>
+        msg.listing_id === message.listing_id &&
+        msg.sender_id === otherUserId &&
+        msg.receiver_id === user.id &&
+        msg.is_read === false
+    ).length;
 
         if (
             !conversations.has(
