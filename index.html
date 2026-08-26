@@ -1950,6 +1950,61 @@ async function loadChatMessages() {
         `;
     }
             }
+        let activeMessageTab = "buying";
+
+function switchMessageTab(tab) {
+    activeMessageTab = tab;
+
+    const buyingTab =
+        document.getElementById("buying-tab");
+
+    const sellingTab =
+        document.getElementById("selling-tab");
+
+    if (tab === "buying") {
+        buyingTab.classList.add(
+            "border-primary",
+            "text-primary"
+        );
+
+        buyingTab.classList.remove(
+            "border-transparent",
+            "text-secondary"
+        );
+
+        sellingTab.classList.remove(
+            "border-primary",
+            "text-primary"
+        );
+
+        sellingTab.classList.add(
+            "border-transparent",
+            "text-secondary"
+        );
+    } else {
+        sellingTab.classList.add(
+            "border-primary",
+            "text-primary"
+        );
+
+        sellingTab.classList.remove(
+            "border-transparent",
+            "text-secondary"
+        );
+
+        buyingTab.classList.remove(
+            "border-primary",
+            "text-primary"
+        );
+
+        buyingTab.classList.add(
+            "border-transparent",
+            "text-secondary"
+        );
+    }
+
+    loadChatList();
+}
         function subscribeToChatMessages() {
     const listing = window.selectedChatListing;
 
