@@ -2038,6 +2038,18 @@ function switchMessageTab(tab) {
         let pendingPage = "home";
         function navigateTo(page) {
 
+    const currentPage =
+        window.location.hash.replace("#", "");
+
+    // Add navigation to browser history
+    if (currentPage !== page) {
+        history.pushState(
+            { page: page },
+            "",
+            "#" + page
+        );
+    }
+
     const pages =
         document.querySelectorAll(".page-view");
 
@@ -2065,15 +2077,12 @@ function switchMessageTab(tab) {
 
     if (page === "messages") {
 
-        // If coming from Product Detail,
-        // keep the selected seller/product chat.
         if (
             window.selectedChatListing &&
             window.selectedChatUserId
         ) {
             loadChatMessages();
         } else {
-            // Messages opened from Profile
             activeMessageTab = "buying";
             loadChatList();
         }
@@ -2084,14 +2093,6 @@ function switchMessageTab(tab) {
         behavior: "smooth"
     });
 }
-        window.addEventListener("hashchange", () => {
-    const page =
-        window.location.hash.replace("#", "");
-
-    if (page) {
-        navigateTo(page);
-    }
-});
         function openMessagesFromProfile() {
     // Clear direct product chat
     window.selectedChatListing = null;
