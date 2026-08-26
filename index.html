@@ -2086,6 +2086,16 @@ function switchMessageTab(tab) {
         behavior: "smooth"
     });
 }
+        function openMessagesFromProfile() {
+    // Clear direct product chat
+    window.selectedChatListing = null;
+    window.selectedChatUserId = null;
+
+    // Always start with Buying
+    activeMessageTab = "buying";
+
+    navigateTo("messages");
+        }
 function requireLogin(page) {
     supabaseClient.auth.getSession().then(({ data }) => {
 
