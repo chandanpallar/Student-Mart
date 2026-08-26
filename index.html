@@ -1746,6 +1746,64 @@ async function loadChatMessages() {
         notification.remove();
     }, 5000);
         }
+        let messageRealtimeChannel = null;
+
+async function startMessageNotifications() {
+    const {
+        data: { user },
+        error
+    } = await supabaseClient.auth.getUser();
+
+    if (error || !user) return;
+
+    // Purana channel ho to remove karo
+    if (messageRealtimeChannel) {
+        await supabaseClient.removeChannel(
+            messageRealtimeChannel
+        );
+    }
+
+    messageRealtimeChannel =
+        supabaseClient
+            .channel("new-message-notifications")
+            .on(
+                "postgres_changes",
+                {
+                    event: "INSERT",
+                    schema: "public",
+                    table: "messages",
+                    filter: `receiver_id=eq.${user.id}`
+                },
+                payload => {
+                    const message =
+                        payload.new;
+
+                    // Agar user isi conversation mein already hai,
+                    // to notification ki zarurat nahi.
+                    if (
+                        window.selectedChatUserId ===
+                        message.sender_id &&
+                        window.selectedChatListing?.id ===
+                        message.listing_id
+                    ) {
+                        return;
+                    }
+
+                    showMessageNotification(
+                        message
+                    );
+
+                    // Chat list refresh
+                    if (
+                        window.location.hash ===
+                        "#messages"
+                    ) {
+                        loadChatList();
+                    }
+                }
+            )
+            .subscribe();
+}
             async function loadChatList() {
     const container =
         document.getElementById("chat-list-container");
