@@ -926,110 +926,6 @@
                 </div>
             </div>
         </section>
-<!-- ================= PAGE 5: WANTED LIST ================= -->
-        <section id="view-wanted" class="page-view">
-            <div class="max-w-container-max mx-auto px-gutter py-xl">
-                <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-lg gap-md">
-                    <div>
-                        <h1 class="font-headline-lg text-headline-lg text-on-surface mb-2">Wanted List</h1>
-                        <p class="font-body-md text-body-md text-on-surface-variant max-w-2xl">Help your fellow students find what they need. Fulfill a wanted ad and earn cash for items you no longer use.</p>
-                    </div>
-                    <button onclick="alert('Post a Wanted Ad modal opened!')" class="bg-primary text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:opacity-90 transition-opacity shadow-sm flex items-center gap-2 whitespace-nowrap">
-                        <span class="material-symbols-outlined filled text-sm">post_add</span> Post a Wanted Ad
-                    </button>
-                </div>
-
-                <!-- Filter Bar -->
-                <div class="bg-surface rounded-xl p-md shadow-sm border border-outline-variant/30 mb-xl flex flex-wrap gap-md items-center">
-                    <div class="flex items-center gap-2 text-on-surface-variant">
-                        <span class="material-symbols-outlined">filter_list</span>
-                        <span class="font-label-md text-label-md">Filters:</span>
-                    </div>
-                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
-                        <option value="">All Colleges</option>
-                        <option value="outr">OUTR Bhubaneswar</option>
-                        <option value="cet">CET Bhubaneswar</option>
-                    </select>
-                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
-                        <option value="">All Categories</option>
-                        <option value="books">Textbooks</option>
-                        <option value="electronics">Electronics</option>
-                    </select>
-                    <select class="bg-surface-container-low border-none rounded-lg font-body-md text-on-surface focus:ring-2 focus:ring-primary py-2 px-4 cursor-pointer">
-                        <option value="">Any Budget</option>
-                        <option value="under500">Under ₹500</option>
-                        <option value="500to1000">₹500 - ₹1000</option>
-                    </select>
-                </div>
-
-                <!-- Wanted Feed -->
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
-                    <!-- Card 1 -->
-                    <article class="bg-surface rounded-xl p-lg shadow-sm flex flex-col justify-between border border-surface-container-low hover:border-primary-fixed transition-colors">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="bg-[#ECFDF5] text-[#10B981] font-label-md text-xs px-3 py-1 rounded-full flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[14px]">school</span> Verified Student
-                                </span>
-                                <span class="text-on-surface-variant font-body-md text-sm">2 hrs ago</span>
-                            </div>
-                            <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Wanted: Engineering Mathematics Book</h2>
-                            <div class="space-y-2 mb-6 text-on-surface-variant font-body-md text-sm">
-                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">menu_book</span> Course: B.Tech (1st Semester)</div>
-                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span> College: OUTR Bhubaneswar</div>
-                            </div>
-                        </div>
-                        <div class="mt-auto pt-4 border-t border-surface-container-low">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">RD</div>
-                                    <span class="font-label-md text-label-md text-on-surface">Rahul D.</span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="block text-xs text-on-surface-variant">Willing to pay</span>
-                                    <span class="font-price-display text-price-display text-primary">₹300</span>
-                                </div>
-                            </div>
-                            <button onclick="navigateTo('messages')" class="w-full bg-white border border-[#E2E8F0] text-slate-700 font-label-md text-label-md py-3 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm flex justify-center items-center gap-2">
-                                <span class="material-symbols-outlined filled text-sm">handshake</span> I Have This
-                            </button>
-                        </div>
-                    </article>
-
-                    <!-- Card 2 -->
-                    <article class="bg-surface rounded-xl p-lg shadow-sm flex flex-col justify-between border border-surface-container-low hover:border-primary-fixed transition-colors">
-                        <div>
-                            <div class="flex justify-between items-start mb-4">
-                                <span class="bg-[#ECFDF5] text-[#10B981] font-label-md text-xs px-3 py-1 rounded-full flex items-center gap-1">
-                                    <span class="material-symbols-outlined text-[14px]">school</span> Verified Student
-                                </span>
-                                <span class="text-on-surface-variant font-body-md text-sm">5 hrs ago</span>
-                            </div>
-                            <h2 class="font-headline-md text-headline-md text-on-surface mb-2">Wanted: Mechanical Drafter Set</h2>
-                            <div class="space-y-2 mb-6 text-on-surface-variant font-body-md text-sm">
-                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">architecture</span> Category: Supplies &amp; Tools</div>
-                                <div class="flex items-center gap-2"><span class="material-symbols-outlined text-[18px]">location_on</span> College: CET Bhubaneswar</div>
-                            </div>
-                        </div>
-                        <div class="mt-auto pt-4 border-t border-surface-container-low">
-                            <div class="flex justify-between items-center mb-4">
-                                <div class="flex items-center gap-2">
-                                    <div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold text-xs">AP</div>
-                                    <span class="font-label-md text-label-md text-on-surface">Ananya P.</span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="block text-xs text-on-surface-variant">Willing to pay</span>
-                                    <span class="font-price-display text-price-display text-primary">₹400</span>
-                                </div>
-                            </div>
-                            <button onclick="navigateTo('messages')" class="w-full bg-white border border-[#E2E8F0] text-slate-700 font-label-md text-label-md py-3 rounded-xl hover:bg-surface-container-low transition-colors shadow-sm flex justify-center items-center gap-2">
-                                <span class="material-symbols-outlined filled text-sm">handshake</span> I Have This
-                            </button>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
 
 
         <!-- ================= PAGE 6: MESSAGES ================= -->
@@ -1162,12 +1058,12 @@
 
                 <main class="flex-grow flex flex-col gap-lg">
                     <div class="bg-surface rounded-xl p-lg shadow-sm border border-outline-variant/30 flex items-center gap-lg">
-                        <div id="profile-avatar" class="w-20 h-20 rounded-full bg-primary-container text-on-primary text-2xl font-bold flex items-center justify-center">SK</div>
+                        <div id="profile-avatar" class="w-20 h-20 rounded-full bg-primary-container text-on-primary text-2xl font-bold flex items-center justify-center">A</div>
                         <div>
                             <div class="flex items-center gap-sm mb-1">
-                                <h1 id="profile-name" class="font-headline-lg text-headline-lg text-on-surface">Sneha K.</h1>
+                                <h1 id="profile-name" class="font-headline-lg text-headline-lg text-on-surface">your name</h1>
                             </div>
-                            <p id="profile-college" class="font-body-md text-body-md text-secondary">OUTR University</p>
+                            <p id="profile-college" class="font-body-md text-body-md text-secondary">College name</p>
                         </div>
                     </div>
 
@@ -1555,18 +1451,6 @@
             </span>
             <span class="font-label-md text-[10px]">
                 Sell
-            </span>
-        </button>
-
-        <button
-            onclick="navigateTo('wanted')"
-            class="flex flex-col items-center justify-center min-w-[64px] px-3 py-1 text-secondary hover:text-primary transition-colors"
-        >
-            <span class="material-symbols-outlined text-[22px]">
-                format_list_bulleted
-            </span>
-            <span class="font-label-md text-[10px]">
-                Wanted
             </span>
         </button>
 
