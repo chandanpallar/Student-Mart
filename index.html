@@ -2101,11 +2101,38 @@ function switchMessageTab(tab) {
     navigateTo(page || "home");
 });
         function openMessagesFromProfile() {
+
     // Clear direct product chat
     window.selectedChatListing = null;
     window.selectedChatUserId = null;
 
-    // Start Messages from Buying section
+    // Show chat list again
+    const sidebar =
+        document
+            .getElementById("chat-list-container")
+            ?.closest("aside");
+
+    const chatCanvas =
+        document
+            .getElementById("chat-messages-container")
+            ?.closest("section");
+
+    if (sidebar) {
+        sidebar.classList.remove("hidden");
+
+        if (window.innerWidth < 768) {
+            sidebar.classList.add("flex");
+        }
+    }
+
+    if (chatCanvas) {
+        if (window.innerWidth < 768) {
+            chatCanvas.classList.add("hidden");
+            chatCanvas.classList.remove("flex");
+        }
+    }
+
+    // Start with Buying
     activeMessageTab = "buying";
 
     navigateTo("messages");
