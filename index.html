@@ -2093,6 +2093,13 @@ function switchMessageTab(tab) {
         behavior: "smooth"
     });
 }
+        window.addEventListener("popstate", (event) => {
+
+    const page =
+        window.location.hash.replace("#", "");
+
+    navigateTo(page || "home");
+});
         function openMessagesFromProfile() {
     // Clear direct product chat
     window.selectedChatListing = null;
