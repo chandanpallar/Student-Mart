@@ -2218,6 +2218,8 @@ function switchMessageTab(tab) {
         window.location.hash.replace("#", "");
 
     navigateTo(page || "home");
+
+    startMessageNotifications();
 });
         let pendingPage = "home";
         function navigateTo(page) {
