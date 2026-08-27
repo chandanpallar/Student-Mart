@@ -2498,6 +2498,23 @@ function switchMessageTab(tab) {
 
     startMessageNotifications();
 });
+        if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("/Student-Mart/sw.js")
+            .then(() => {
+                console.log(
+                    "StudentMart service worker registered."
+                );
+            })
+            .catch(error => {
+                console.error(
+                    "Service worker registration failed:",
+                    error
+                );
+            });
+    });
+        }
         let pendingPage = "home";
         function navigateTo(page) {
 
