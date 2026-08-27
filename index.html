@@ -1965,8 +1965,15 @@ async function startMessageNotifications() {
         );
         return;
     }
-                console.log("Chat list messages:", messages);
-
+                if (!messages || messages.length === 0) {
+    alert("Chat list query returned 0 messages.");
+} else {
+    alert(
+        "Chat list loaded: " +
+        messages.length +
+        " messages."
+    );
+                                }
     container.innerHTML = "";
 
     const conversations =
