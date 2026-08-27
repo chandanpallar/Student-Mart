@@ -2121,61 +2121,40 @@ alert(
 
         alert("Creating chat item HTML");
         item.innerHTML = `
-            <div
-                class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold"
-            >
-                ${initials || "U"}
+    <div
+        class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold"
+    >
+        ${initials || "U"}
+    </div>
+
+    <div class="flex-grow min-w-0">
+
+        <div class="flex justify-between items-baseline mb-base">
+
+            <div class="flex items-center gap-2 min-w-0">
+                <h3 class="font-label-md text-label-md text-on-surface truncate">
+                    ${otherUserName}
+                </h3>
             </div>
 
-            <div class="flex-grow min-w-0">
+            <span class="text-xs text-secondary whitespace-nowrap ml-2">
+                ${new Date(message.created_at).toLocaleDateString("en-IN")}
+            </span>
 
-                <div
-                    class="flex justify-between items-baseline mb-base"
-                >
+        </div>
 
-                    <div class="flex items-center gap-2 min-w-0">
-    <h3 class="font-label-md text-label-md text-on-surface truncate">
-        ${otherUserName}
-    </h3>
+        <p class="font-label-md text-xs text-on-surface-variant truncate">
+            ${listing.title || "Product"}
+        </p>
 
-    ${
-        unreadCount > 0
-            ? `
-                <span class="min-w-5 h-5 px-1.5 rounded-full bg-primary text-on-primary text-[10px] font-bold flex items-center justify-center">
-                    ${unreadCount}
-                </span>
-              `
-            : ""
-    }
-</div>
+        <p class="font-body-md text-secondary truncate text-sm">
+            ${message.content || ""}
+        </p>
 
-                    <span
-                        class="text-xs text-secondary whitespace-nowrap ml-2"
-                    >
-                        ${new Date(
-                            message.created_at
-                        ).toLocaleDateString(
-                            "en-IN"
-                        )}
-                    </span>
+    </div>
+`;
 
-                </div>
-
-                <p
-                    class="font-label-md text-xs text-on-surface-variant truncate"
-                >
-                    ${listing.title || "Product"}
-                </p>
-
-                <p
-                    class="font-body-md text-secondary truncate text-sm"
-                >
-                    ${message.content || ""}
-                </p>
-
-            </div>
-        `;
-        alert("Chat item HTML created");
+alert("Chat item HTML created");
 
         // =====================================
         // OPEN CONVERSATION
