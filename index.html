@@ -2159,6 +2159,59 @@ async function startMessageNotifications() {
         );
     }
         }
+        async function reportChatUser() {
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        alert("Please login first.");
+        return;
+    }
+
+    const reportedUserId =
+        window.selectedChatUserId;
+
+    if (!reportedUserId) {
+        alert("User information not available.");
+        return;
+    }
+
+    const reason =
+        prompt(
+            "Why are you reporting this user?"
+        );
+
+    if (!reason || !reason.trim()) {
+        return;
+    }
+
+    const { error } =
+        await supabaseClient
+            .from("user_reports")
+            .insert({
+                reporter_id: user.id,
+                reported_user_id: reportedUserId,
+                reason: reason.trim()
+            });
+
+    if (error) {
+        console.error(
+            "Report user error:",
+            error
+        );
+
+        alert(
+            "Unable to submit report. Please try again."
+        );
+
+        return;
+    }
+
+    alert(
+        "Report submitted successfully."
+    );
+        }
         let activeMessageTab = "buying";
 
 function switchMessageTab(tab) {
