@@ -977,25 +977,44 @@
     S
                             </div>
                             <div>
-                                <div class="flex items-center gap-2">
-                                    <h2
-    id="chat-seller-name"
-    class="font-label-md text-label-md text-on-surface"
->
-    Seller
-                                    </h2>
-                                    </div>
-                                <p class="text-xs text-secondary font-body-md">
-    <span id="chat-product-title">Product</span>
-    •
-    <span
-        id="chat-product-price"
-        class="font-bold text-on-surface"
-    >
-        ₹0
-    </span>
-</p>
-                                </div>
+    <div class="flex items-center gap-2">
+        <h2
+            id="chat-seller-name"
+            class="font-label-md text-label-md text-on-surface"
+        >
+            Seller
+        </h2>
+    </div>
+
+    <p class="text-xs text-secondary font-body-md">
+        <span id="chat-product-title">Product</span>
+        •
+        <span id="chat-product-price" class="font-bold text-on-surface">
+            ₹0
+        </span>
+    </p>
+
+    <!-- Report / Block -->
+    <div class="flex items-center gap-2 mt-1">
+        <button
+            type="button"
+            onclick="reportChatUser()"
+            class="text-[11px] text-secondary hover:text-error transition-colors"
+        >
+            Report
+        </button>
+
+        <span class="text-outline-variant text-[10px]">•</span>
+
+        <button
+            type="button"
+            onclick="blockChatUser()"
+            class="text-[11px] text-secondary hover:text-error transition-colors"
+        >
+            Block
+        </button>
+    </div>
+</div>
                         </div>
                     </div>
                     <!-- Chat Safety Warning -->
