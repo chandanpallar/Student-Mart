@@ -2360,6 +2360,47 @@ async function startMessageNotifications() {
 
     updateBlockButton();
         }
+        async function updateBlockButton() {
+    const button =
+        document.getElementById("chat-block-button");
+
+    if (!button) return;
+
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user || !window.selectedChatUserId) {
+        return;
+    }
+
+    const { data: blockedUser, error } =
+        await supabaseClient
+            .from("user_blocks")
+            .select("id")
+            .eq("blocker_id", user.id)
+            .eq(
+                "blocked_user_id",
+                window.selectedChatUserId
+            )
+            .maybeSingle();
+
+    if (error) {
+        console.error(
+            "Check block status error:",
+            error
+        );
+        return;
+    }
+
+    if (blockedUser) {
+        button.textContent = "Unblock";
+        button.onclick = unblockChatUser;
+    } else {
+        button.textContent = "Block";
+        button.onclick = blockChatUser;
+    }
+        }
         let activeMessageTab = "buying";
 
 function switchMessageTab(tab) {
