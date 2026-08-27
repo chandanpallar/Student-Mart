@@ -1978,15 +1978,15 @@ async function startMessageNotifications() {
 
     const conversations =
         new Map();
-
-    messages.forEach(message => {
-
-        alert(
+                alert(
     "Active tab: " +
     activeMessageTab +
     "\nMessages: " +
     messages.length
 );
+
+    messages.forEach(message => {
+
 
         const listing =
             message.listings;
