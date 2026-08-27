@@ -2142,6 +2142,13 @@ async function startMessageNotifications() {
 
             window.selectedChatUserId =
                 otherUserId;
+            if (window.innerWidth < 768) {
+    history.pushState(
+        { page: "messages", chatOpen: true },
+        "",
+        "#messages"
+    );
+            }
             updateBlockButton();
             markChatAsRead(
     listing.id,
