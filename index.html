@@ -2024,13 +2024,6 @@ async function startMessageNotifications() {
         const message
         of conversations.values()
     ) {
-        const unreadCount =
-    messages.filter(msg =>
-        msg.listing_id === message.listing_id &&
-        msg.sender_id === otherUserId &&
-        msg.receiver_id === user.id &&
-        msg.is_read === false
-    ).length;
         const listing =
             message.listings || {};
 
@@ -2038,6 +2031,13 @@ async function startMessageNotifications() {
             message.sender_id === user.id
                 ? message.receiver_id
                 : message.sender_id;
+        const unreadCount =
+    messages.filter(msg =>
+        msg.listing_id === message.listing_id &&
+        msg.sender_id === otherUserId &&
+        msg.receiver_id === user.id &&
+        msg.is_read === false
+    ).length;
 
         // =====================================
         // GET OTHER USER NAME
