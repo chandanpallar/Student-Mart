@@ -2142,13 +2142,6 @@ async function startMessageNotifications() {
 
             window.selectedChatUserId =
                 otherUserId;
-            if (window.innerWidth < 768) {
-    history.pushState(
-        { page: "messages", chatOpen: true },
-        "",
-        "#messages"
-    );
-            }
             updateBlockButton();
             markChatAsRead(
     listing.id,
@@ -2614,9 +2607,37 @@ function switchMessageTab(tab) {
     const page =
         window.location.hash.replace("#", "");
 
-    if (page === "messages") {
+    if (
+        page === "messages" &&
+        window.innerWidth < 768
+    ) {
         window.selectedChatListing = null;
         window.selectedChatUserId = null;
+
+        const sidebar =
+            document.getElementById(
+                "chat-list-container"
+            )?.closest("aside");
+
+        const chatCanvas =
+            document.getElementById(
+                "chat-messages-container"
+            )?.closest("section");
+
+        if (sidebar) {
+            sidebar.classList.remove("hidden");
+            sidebar.classList.add("flex");
+        }
+
+        if (chatCanvas) {
+            chatCanvas.classList.add("hidden");
+            chatCanvas.classList.remove("flex");
+        }
+
+        activeMessageTab = "buying";
+        loadChatList();
+
+        return;
     }
 
     navigateTo(page || "home");
