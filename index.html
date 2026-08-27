@@ -4848,12 +4848,17 @@ if (
                     );
 
             if (error) {
-                console.error(
-                    "Push subscription save error:",
-                    error
-                );
-                alert("Could not save notification settings.");
-                return;
+    console.error(
+        "Push subscription save error:",
+        error
+    );
+
+    alert(
+        "Save error: " +
+        (error.message || "Unknown error")
+    );
+
+    return;
             }
 
             alert("Notifications enabled successfully.");
