@@ -2607,6 +2607,11 @@ function switchMessageTab(tab) {
     const page =
         window.location.hash.replace("#", "");
 
+    if (page === "messages") {
+        window.selectedChatListing = null;
+        window.selectedChatUserId = null;
+    }
+
     navigateTo(page || "home");
 });
         function openMessagesFromProfile() {
