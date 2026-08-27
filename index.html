@@ -1987,7 +1987,6 @@ async function startMessageNotifications() {
 
     messages.forEach(message => {
 
-
         const listing =
             message.listings;
         if (!listing) {
@@ -2046,6 +2045,11 @@ async function startMessageNotifications() {
             );
         }
     });
+                alert(
+    "Conversations found: " +
+    conversations.size
+);
+                
 
     for (
         const message
