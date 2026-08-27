@@ -4842,10 +4842,11 @@ if (
                 await Notification.requestPermission();
 
             if (permission !== "granted") {
-                alert("Notification permission was not granted.");
-                return;
-            }
-
+    alert(
+        "Please give chandanpallar.github.io notification permission in your browser settings, then try again."
+    );
+    return;
+}
             const registration =
                 await navigator.serviceWorker.ready;
 
