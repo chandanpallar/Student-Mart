@@ -2515,6 +2515,21 @@ function switchMessageTab(tab) {
             });
     });
         }
+        async function requestNotificationPermission() {
+    if (!("Notification" in window)) {
+        alert("Your browser does not support notifications.");
+        return;
+    }
+
+    const permission =
+        await Notification.requestPermission();
+
+    if (permission === "granted") {
+        console.log("Notification permission granted.");
+    } else {
+        console.log("Notification permission denied.");
+    }
+        }
         let pendingPage = "home";
         function navigateTo(page) {
 
