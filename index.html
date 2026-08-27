@@ -1651,6 +1651,42 @@ if (blockedByUser) {
     container.appendChild(
         msgBubble
     );
+    container.appendChild(
+        msgBubble
+    );
+
+    // Send push notification to the receiver
+    try {
+        const { data: pushResult, error: pushError } =
+            await supabaseClient.functions.invoke(
+                "send-push-notification",
+                {
+                    body: {
+                        receiver_id: chatUserId,
+                        title: "New message on StudentMart",
+                        body: messageText
+                    }
+                }
+            );
+
+        if (pushError) {
+            console.error(
+                "Push notification error:",
+                pushError
+            );
+        } else {
+            console.log(
+                "Push notification sent:",
+                pushResult
+            );
+        }
+
+    } catch (pushError) {
+        console.error(
+            "Push notification request failed:",
+            pushError
+        );
+    }
 
     input.value = "";
 
