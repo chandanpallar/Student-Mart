@@ -2307,6 +2307,59 @@ async function startMessageNotifications() {
         "User blocked successfully."
     );
         }
+        async function unblockChatUser() {
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        alert("Please login first.");
+        return;
+    }
+
+    const blockedUserId =
+        window.selectedChatUserId;
+
+    if (!blockedUserId) {
+        alert("User information not available.");
+        return;
+    }
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to unblock this user?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } =
+        await supabaseClient
+            .from("user_blocks")
+            .delete()
+            .eq("blocker_id", user.id)
+            .eq("blocked_user_id", blockedUserId);
+
+    if (error) {
+        console.error(
+            "Unblock user error:",
+            error
+        );
+
+        alert(
+            "Unable to unblock this user. Please try again."
+        );
+
+        return;
+    }
+
+    alert(
+        "User unblocked successfully."
+    );
+
+    updateBlockButton();
+        }
         let activeMessageTab = "buying";
 
 function switchMessageTab(tab) {
