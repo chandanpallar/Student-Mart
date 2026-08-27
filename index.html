@@ -4810,6 +4810,13 @@ if (
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+        import {
+    getMessaging,
+    getToken,
+    onMessage
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-messaging.js";
+
+const messaging = getMessaging(app);
     </script>
 </body>
                         </html>
