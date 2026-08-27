@@ -2212,6 +2212,64 @@ async function startMessageNotifications() {
         "Report submitted successfully."
     );
         }
+        async function blockChatUser() {
+    const {
+        data: { user }
+    } = await supabaseClient.auth.getUser();
+
+    if (!user) {
+        alert("Please login first.");
+        return;
+    }
+
+    const blockedUserId =
+        window.selectedChatUserId;
+
+    if (!blockedUserId) {
+        alert("User information not available.");
+        return;
+    }
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to block this user?"
+        );
+
+    if (!confirmed) {
+        return;
+    }
+
+    const { error } =
+        await supabaseClient
+            .from("user_blocks")
+            .upsert(
+                {
+                    blocker_id: user.id,
+                    blocked_user_id: blockedUserId
+                },
+                {
+                    onConflict:
+                        "blocker_id,blocked_user_id"
+                }
+            );
+
+    if (error) {
+        console.error(
+            "Block user error:",
+            error
+        );
+
+        alert(
+            "Unable to block this user. Please try again."
+        );
+
+        return;
+    }
+
+    alert(
+        "User blocked successfully."
+    );
+        }
         let activeMessageTab = "buying";
 
 function switchMessageTab(tab) {
