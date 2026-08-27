@@ -1981,6 +1981,13 @@ async function startMessageNotifications() {
 
     messages.forEach(message => {
 
+        alert(
+    "Active tab: " +
+    activeMessageTab +
+    "\nMessages: " +
+    messages.length
+);
+
         const listing =
             message.listings;
         if (!listing) {
