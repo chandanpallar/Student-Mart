@@ -4824,8 +4824,84 @@ if (
     };
 
     const app = initializeApp(firebaseConfig);
-
     const messaging = getMessaging(app);
+
+    window.requestNotificationPermission = async function () {
+        try {
+            const permission =
+                await Notification.requestPermission();
+
+            if (permission !== "granted") {
+                alert("Notification permission was not granted.");
+                return;
+            }
+
+            const registration =
+                await navigator.serviceWorker.ready;
+
+            const token = await getToken(messaging, {
+                vapidKey: "BLFmMr8OY6G1xJJjm6hLS1wlYWhRzhd1VfhZXi5Kcgegc9Rp6kYJa4t89Xqm-MbJL-mEtLgQwMHOf8tgr_dlf4Q",
+                serviceWorkerRegistration: registration
+            });
+
+            if (!token) {
+                alert("Could not create notification token.");
+                return;
+            }
+
+            const {
+                data: { user }
+            } = await supabaseClient.auth.getUser();
+
+            if (!user) {
+                alert("Please login first.");
+                return;
+            }
+
+            const { error } =
+                await supabaseClient
+                    .from("push_subscriptions")
+                    .upsert(
+                        {
+                            user_id: user.id,
+                            subscription: {
+                                fcm_token: token
+                            }
+                        },
+                        {
+                            onConflict: "user_id"
+                        }
+                    );
+
+            if (error) {
+                console.error(
+                    "Push subscription save error:",
+                    error
+                );
+                alert("Could not save notification settings.");
+                return;
+            }
+
+            alert("Notifications enabled successfully.");
+
+        } catch (error) {
+            console.error(
+                "Notification setup error:",
+                error
+            );
+
+            alert(
+                "Unable to enable notifications."
+            );
+        }
+    };
+
+    onMessage(messaging, payload => {
+        console.log(
+            "Foreground notification:",
+            payload
+        );
+    });
     </script>
 </body>
                         </html>
