@@ -1983,6 +1983,12 @@ async function startMessageNotifications() {
 
         const listing =
             message.listings;
+        if (!listing) {
+    alert(
+        "Message found, but listing data is missing. Listing ID: " +
+        message.listing_id
+    );
+        }
 
         if (!listing) return;
 
