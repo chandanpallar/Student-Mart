@@ -2092,8 +2092,12 @@ alert("Rendering chat item");
         }
 
         const otherUserName =
-            partner?.name || "User";
+    partner?.name || "User";
 
+alert(
+    "Partner found: " +
+    otherUserName
+);
         const initials =
             otherUserName
                 .split(" ")
