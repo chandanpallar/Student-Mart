@@ -1530,6 +1530,43 @@ async function sendMessage(event) {
         alert("Please login first.");
         return;
     }
+    const chatPartnerId =
+    window.selectedChatUserId;
+
+if (!chatPartnerId) {
+    alert("Chat user not available.");
+    return;
+}
+
+const { data: blockedUser } =
+    await supabaseClient
+        .from("user_blocks")
+        .select("id")
+        .eq("blocker_id", user.id)
+        .eq("blocked_user_id", chatPartnerId)
+        .maybeSingle();
+
+if (blockedUser) {
+    alert(
+        "You have blocked this user. Unblock them to send messages."
+    );
+    return;
+}
+
+const { data: blockedByUser } =
+    await supabaseClient
+        .from("user_blocks")
+        .select("id")
+        .eq("blocker_id", chatPartnerId)
+        .eq("blocked_user_id", user.id)
+        .maybeSingle();
+
+if (blockedByUser) {
+    alert(
+        "You cannot send messages to this user."
+    );
+    return;
+}
 
     const listing =
         window.selectedChatListing;
