@@ -1974,13 +1974,7 @@ async function startMessageNotifications() {
 
         const listing =
             message.listings;
-        if (!listing) {
-    alert(
-        "Message found, but listing data is missing. Listing ID: " +
-        message.listing_id
-    );
-        }
-
+    
         if (!listing) return;
 
         const isSeller =
@@ -2030,17 +2024,12 @@ async function startMessageNotifications() {
             );
         }
     });
-                alert(
-    "Conversations found: " +
-    conversations.size
-);
                 
 
     for (
         const message
         of conversations.values()
     ) {
-alert("Rendering chat item");
         const listing =
             message.listings || {};
 
@@ -2079,10 +2068,6 @@ alert("Rendering chat item");
         const otherUserName =
     partner?.name || "User";
 
-alert(
-    "Partner found: " +
-    otherUserName
-);
         const initials =
             otherUserName
                 .split(" ")
@@ -2103,8 +2088,6 @@ alert(
 
         item.className =
             "p-md border-b border-outline-variant cursor-pointer hover:bg-surface-container-low transition-colors flex gap-sm";
-
-        alert("Creating chat item HTML");
         item.innerHTML = `
     <div
         class="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0 bg-primary-container text-on-primary flex items-center justify-center font-bold"
@@ -2139,7 +2122,6 @@ alert(
     </div>
 `;
 
-alert("Chat item HTML created");
 
         // =====================================
         // OPEN CONVERSATION
@@ -2201,7 +2183,6 @@ alert("Chat item HTML created");
         };
 
         container.appendChild(item);
-        alert("Chat item appended successfully");
     }
 
     if (
