@@ -1653,6 +1653,19 @@ if (blockedByUser) {
     );
 
     // Send push notification to the receiver
+    const {
+    data: { session },
+    error: sessionError
+} = await supabaseClient.auth.getSession();
+
+alert(
+    "Session: " +
+    (session ? "YES" : "NO") +
+    "\nToken: " +
+    (session?.access_token ? "YES" : "NO") +
+    "\nError: " +
+    (sessionError?.message || "None")
+);
     try {
     const { data: pushResult, error: pushError } =
         await supabaseClient.functions.invoke(
