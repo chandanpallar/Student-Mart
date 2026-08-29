@@ -2221,25 +2221,36 @@ async function startMessageNotifications() {
 
     if (!user) return;
 
-    const { error } = await supabaseClient
+    const {
+        data: updatedMessages,
+        error
+    } = await supabaseClient
         .from("messages")
         .update({
             is_read: true
         })
         .eq("listing_id", listingId)
         .eq("sender_id", otherUserId)
-        .eq("receiver_id", user.id);
+        .eq("receiver_id", user.id)
+        .select("id, is_read");
 
     if (error) {
         console.error(
             "Mark messages as read error:",
             error
         );
+
+        alert(
+            "Mark as read error: " +
+            error.message
+        );
+    } else {
+        alert(
+            "Updated messages: " +
+            JSON.stringify(updatedMessages)
+        );
     }
-            else {
-    console.log("Messages marked as read successfully.");
-            }
-        }
+}
         async function reportChatUser() {
     const {
         data: { user }
