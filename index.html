@@ -1654,41 +1654,40 @@ if (blockedByUser) {
 
     // Send push notification to the receiver
     try {
-        const { data: pushResult, error: pushError } =
-            await supabaseClient.functions.invoke(
-    "clever-api",
-                {
-                    body: {
-                        receiver_id: chatUserId,
-                        title: "New message on StudentMart",
-                        body: messageText
-                    }
+    const { data: pushResult, error: pushError } =
+        await supabaseClient.functions.invoke(
+            "clever-api",
+            {
+                body: {
+                    receiver_id: chatUserId,
+                    title: "New message on StudentMart",
+                    body: messageText
                 }
-            );
+            }
+        );
 
-        if (pushError) {
-    alert(
-        "Push notification error:\n" +
-        pushError.message
-    );
+    if (pushError) {
+        alert(
+            "Push Error:\n" +
+            JSON.stringify(pushError, null, 2)
+        );
 
-    console.error(
-        "Push notification error:",
-        pushError
-    );
-} else {
-    alert(
-        "Push result:\n" +
-        JSON.stringify(pushResult)
-    );
-        }
-
-    } catch (pushError) {
-        console.error(
-            "Push notification request failed:",
-            pushError
+        console.error("Push Error:", pushError);
+    } else {
+        alert(
+            "Push Success:\n" +
+            JSON.stringify(pushResult, null, 2)
         );
     }
+
+} catch (error) {
+    alert(
+        "Push Request Failed:\n" +
+        JSON.stringify(error, null, 2)
+    );
+
+    console.error("Push Request Failed:", error);
+}
 
     input.value = "";
 
