@@ -2214,40 +2214,26 @@ async function startMessageNotifications() {
         `;
     }
             }
-        async function markChatAsRead(listingId, otherUserId) {
+async function markChatAsRead(listingId, otherUserId) {
     const {
         data: { user }
     } = await supabaseClient.auth.getUser();
 
     if (!user) return;
 
-    const {
-        data: updatedMessages,
-        error
-    } = await supabaseClient
+    const { error } = await supabaseClient
         .from("messages")
         .update({
             is_read: true
         })
         .eq("listing_id", listingId)
         .eq("sender_id", otherUserId)
-        .eq("receiver_id", user.id)
-        .select("id, is_read");
+        .eq("receiver_id", user.id);
 
     if (error) {
         console.error(
             "Mark messages as read error:",
             error
-        );
-
-        alert(
-            "Mark as read error: " +
-            error.message
-        );
-    } else {
-        alert(
-            "Updated messages: " +
-            JSON.stringify(updatedMessages)
         );
     }
 }
