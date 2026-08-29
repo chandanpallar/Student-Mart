@@ -1671,10 +1671,20 @@ if (blockedByUser) {
             );
 
         if (pushError) {
-            console.error(
-                "Push notification error:",
-                pushError
-            );
+    alert(
+        "Push notification error:\n" +
+        pushError.message
+    );
+
+    console.error(
+        "Push notification error:",
+        pushError
+    );
+} else {
+    alert(
+        "Push result:\n" +
+        JSON.stringify(pushResult)
+    );
         } else {
             console.log(
                 "Push notification sent:",
