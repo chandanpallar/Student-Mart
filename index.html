@@ -2280,8 +2280,11 @@ async function markChatAsRead(listingId, otherUserId) {
         );
 
         alert(
-            "Unable to submit report. Please try again."
-        );
+    "Report error: " +
+    error.message +
+    "\nCode: " +
+    error.code
+);
 
         return;
     }
