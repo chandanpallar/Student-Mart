@@ -2338,8 +2338,11 @@ async function markChatAsRead(listingId, otherUserId) {
         );
 
         alert(
-            "Unable to block this user. Please try again."
-        );
+    "Block error: " +
+    error.message +
+    "\nCode: " +
+    error.code
+);
 
         return;
     }
