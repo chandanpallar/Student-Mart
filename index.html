@@ -1654,6 +1654,10 @@ if (blockedByUser) {
 
     // Send push notification to the receiver
     try {
+        alert(
+    "Receiver ID:\n" +
+    chatUserId
+);
         const { data: pushResult, error: pushError } =
             await supabaseClient.functions.invoke(
                 "send-push-notification",
