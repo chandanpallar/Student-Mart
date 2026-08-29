@@ -2529,7 +2529,16 @@ function switchMessageTab(tab) {
 
     window.activeChatChannel = channel;
 }
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
+
+    // Wait for Supabase to restore the existing session
+    const {
+        data: { session }
+    } = await supabaseClient.auth.getSession();
+
+    // Update Login/Profile button according to session
+    await updateHeaderAuth();
+
     const page =
         window.location.hash.replace("#", "");
 
