@@ -1656,7 +1656,7 @@ if (blockedByUser) {
     try {
         const { data: pushResult, error: pushError } =
             await supabaseClient.functions.invoke(
-                "send-push-notification",
+    "clever-api",
                 {
                     body: {
                         receiver_id: chatUserId,
