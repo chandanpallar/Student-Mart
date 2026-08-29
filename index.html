@@ -1666,7 +1666,8 @@ alert(
     "\nError: " +
     (sessionError?.message || "None")
 );
-    try {
+    // Send push notification to the receiver
+try {
     const { data: pushResult, error: pushError } =
         await supabaseClient.functions.invoke(
             "clever-api",
@@ -1679,13 +1680,14 @@ alert(
             }
         );
 
+    console.log("Push result:", pushResult);
+    console.log("Push error:", pushError);
+
     if (pushError) {
         alert(
             "Push Error:\n" +
             JSON.stringify(pushError, null, 2)
         );
-
-        console.error("Push Error:", pushError);
     } else {
         alert(
             "Push Success:\n" +
@@ -1699,7 +1701,10 @@ alert(
         JSON.stringify(error, null, 2)
     );
 
-    console.error("Push Request Failed:", error);
+    console.error(
+        "Push Request Failed:",
+        error
+    );
 }
 
     input.value = "";
